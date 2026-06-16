@@ -16,7 +16,7 @@ export function authenticate(
 
   const token = header.split(" ")[1]
   try {
-    const decoded = jwt.verify(token, env.jwtSecret) as AuthRequest["user"]
+    const decoded = jwt.verify(token, env.JWT_SECRET) as AuthRequest["user"]
     req.user = decoded
     next()
   } catch {

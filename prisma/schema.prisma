@@ -17,9 +17,24 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  fincas    Finca[]
+  fincas        Finca[]
+  refreshTokens RefreshToken[]
+  movimientos   MovimientoInventario[]
+  ventas        Venta[]
+  gastos        Gasto[]
 
   @@map("usuarios")
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@map("refresh_tokens")
 }
 
 model Finca {
@@ -32,8 +47,196 @@ model Finca {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  userId      Int
-  user        User     @relation(fields: [userId], references: [id])
+  userId  Int
+  user    User  @relation(fields: [userId], references: [id])
+  lotes   Lote[]
+  gastos  Gasto[]
+  jornales Jornal[]
 
   @@map("fincas")
+}
+
+model Lote {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  area        Float?
+  descripcion String?
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  fincaId  Int
+  finca    Finca    @relation(fields: [fincaId], references: [id])
+  cultivos Cultivo[]
+
+  @@map("lotes")
+}
+
+model Cultivo {
+  id                   Int      @id @default(autoincrement())
+  nombre               String
+  variedad             String?
+  fechaSiembra         DateTime
+  fechaCosechaEstimada DateTime?
+  fechaCosechaReal     DateTime?
+  estado               String   @default("activo")
+  cantidadSembrada     Float?
+  activo               Boolean  @default(true)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  loteId Int
+  lote   Lote    @relation(fields: [loteId], references: [id])
+  gastos Gasto[]
+
+  @@map("cultivos")
+}
+
+model Cliente {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  telefono  String?
+  email     String?
+  direccion String?
+  activo    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ventas Venta[]
+
+  @@map("clientes")
+}
+
+model Proveedor {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  telefono  String?
+  email     String?
+  direccion String?
+  activo    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  gastos Gasto[]
+
+  @@map("proveedores")
+}
+
+model Producto {
+  id            Int      @id @default(autoincrement())
+  nombre        String
+  descripcion   String?
+  categoria     String?
+  unidadMedida  String   @default("unidad")
+  stockActual   Float    @default(0)
+  stockMinimo   Float    @default(0)
+  precioUnitario Float?
+  activo        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  movimientos   MovimientoInventario[]
+  detalleVentas DetalleVenta[]
+
+  @@map("productos")
+}
+
+model MovimientoInventario {
+  id        Int      @id @default(autoincrement())
+  tipo      String
+  cantidad  Float
+  motivo    String?
+  fecha     DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  productoId Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@map("movimientos_inventario")
+}
+
+model Venta {
+  id        Int      @id @default(autoincrement())
+  fecha     DateTime @default(now())
+  total     Float
+  estado    String   @default("pendiente")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clienteId Int
+  cliente   Cliente       @relation(fields: [clienteId], references: [id])
+  userId    Int
+  user      User          @relation(fields: [userId], references: [id])
+  detalles  DetalleVenta[]
+
+  @@map("ventas")
+}
+
+model DetalleVenta {
+  id            Int   @id @default(autoincrement())
+  cantidad      Float
+  precioUnitario Float
+  subtotal      Float
+
+  ventaId    Int
+  venta      Venta    @relation(fields: [ventaId], references: [id], onDelete: Cascade)
+  productoId Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+
+  @@map("detalles_venta")
+}
+
+model Gasto {
+  id          Int      @id @default(autoincrement())
+  descripcion String
+  monto       Float
+  categoria   String?
+  fecha       DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  proveedorId Int?
+  proveedor   Proveedor? @relation(fields: [proveedorId], references: [id])
+  cultivoId   Int?
+  cultivo     Cultivo?   @relation(fields: [cultivoId], references: [id])
+  fincaId     Int?
+  finca       Finca?     @relation(fields: [fincaId], references: [id])
+  userId      Int
+  user        User       @relation(fields: [userId], references: [id])
+
+  @@map("gastos")
+}
+
+model Trabajador {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  telefono    String?
+  direccion   String?
+  tipo        String   @default("temporal")
+  salarioBase Float?
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  jornales Jornal[]
+
+  @@map("trabajadores")
+}
+
+model Jornal {
+  id          Int      @id @default(autoincrement())
+  fecha       DateTime
+  horas       Float?
+  tarea       String?
+  montoPagado Float?
+  createdAt   DateTime @default(now())
+
+  trabajadorId Int
+  trabajador   Trabajador @relation(fields: [trabajadorId], references: [id])
+  fincaId      Int
+  finca        Finca      @relation(fields: [fincaId], references: [id])
+
+  @@map("jornales")
 }

@@ -4,11 +4,12 @@ export declare function registerUser(input: RegisterInput): Promise<{
         nombre: string;
         email: string;
         rol: string;
+        createdAt: Date;
         id: number;
         activo: boolean;
-        createdAt: Date;
     };
-    token: string;
+    accessToken: string;
+    refreshToken: string;
 }>;
 export declare function loginUser(input: LoginInput): Promise<{
     user: {
@@ -17,6 +18,17 @@ export declare function loginUser(input: LoginInput): Promise<{
         email: string;
         rol: string;
     };
-    token: string;
+    accessToken: string;
+    refreshToken: string;
+}>;
+export declare function refreshUserToken(refreshToken: string): Promise<{
+    user: {
+        id: number;
+        nombre: string;
+        email: string;
+        rol: string;
+    };
+    accessToken: string;
+    refreshToken: string;
 }>;
 //# sourceMappingURL=auth.service.d.ts.map

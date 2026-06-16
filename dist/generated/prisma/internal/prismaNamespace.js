@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.FincaScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.JornalScalarFieldEnum = exports.TrabajadorScalarFieldEnum = exports.GastoScalarFieldEnum = exports.DetalleVentaScalarFieldEnum = exports.VentaScalarFieldEnum = exports.MovimientoInventarioScalarFieldEnum = exports.ProductoScalarFieldEnum = exports.ProveedorScalarFieldEnum = exports.ClienteScalarFieldEnum = exports.CultivoScalarFieldEnum = exports.LoteScalarFieldEnum = exports.FincaScalarFieldEnum = exports.RefreshTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -104,7 +104,19 @@ exports.JsonNull = runtime.JsonNull;
 exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
     User: 'User',
-    Finca: 'Finca'
+    RefreshToken: 'RefreshToken',
+    Finca: 'Finca',
+    Lote: 'Lote',
+    Cultivo: 'Cultivo',
+    Cliente: 'Cliente',
+    Proveedor: 'Proveedor',
+    Producto: 'Producto',
+    MovimientoInventario: 'MovimientoInventario',
+    Venta: 'Venta',
+    DetalleVenta: 'DetalleVenta',
+    Gasto: 'Gasto',
+    Trabajador: 'Trabajador',
+    Jornal: 'Jornal'
 };
 /**
  * Enums
@@ -125,6 +137,13 @@ exports.UserScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 };
+exports.RefreshTokenScalarFieldEnum = {
+    id: 'id',
+    token: 'token',
+    userId: 'userId',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
+};
 exports.FincaScalarFieldEnum = {
     id: 'id',
     nombre: 'nombre',
@@ -135,6 +154,125 @@ exports.FincaScalarFieldEnum = {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
+};
+exports.LoteScalarFieldEnum = {
+    id: 'id',
+    nombre: 'nombre',
+    area: 'area',
+    descripcion: 'descripcion',
+    activo: 'activo',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    fincaId: 'fincaId'
+};
+exports.CultivoScalarFieldEnum = {
+    id: 'id',
+    nombre: 'nombre',
+    variedad: 'variedad',
+    fechaSiembra: 'fechaSiembra',
+    fechaCosechaEstimada: 'fechaCosechaEstimada',
+    fechaCosechaReal: 'fechaCosechaReal',
+    estado: 'estado',
+    cantidadSembrada: 'cantidadSembrada',
+    activo: 'activo',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    loteId: 'loteId'
+};
+exports.ClienteScalarFieldEnum = {
+    id: 'id',
+    nombre: 'nombre',
+    telefono: 'telefono',
+    email: 'email',
+    direccion: 'direccion',
+    activo: 'activo',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.ProveedorScalarFieldEnum = {
+    id: 'id',
+    nombre: 'nombre',
+    telefono: 'telefono',
+    email: 'email',
+    direccion: 'direccion',
+    activo: 'activo',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.ProductoScalarFieldEnum = {
+    id: 'id',
+    nombre: 'nombre',
+    descripcion: 'descripcion',
+    categoria: 'categoria',
+    unidadMedida: 'unidadMedida',
+    stockActual: 'stockActual',
+    stockMinimo: 'stockMinimo',
+    precioUnitario: 'precioUnitario',
+    activo: 'activo',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.MovimientoInventarioScalarFieldEnum = {
+    id: 'id',
+    tipo: 'tipo',
+    cantidad: 'cantidad',
+    motivo: 'motivo',
+    fecha: 'fecha',
+    createdAt: 'createdAt',
+    productoId: 'productoId',
+    userId: 'userId'
+};
+exports.VentaScalarFieldEnum = {
+    id: 'id',
+    fecha: 'fecha',
+    total: 'total',
+    estado: 'estado',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    clienteId: 'clienteId',
+    userId: 'userId'
+};
+exports.DetalleVentaScalarFieldEnum = {
+    id: 'id',
+    cantidad: 'cantidad',
+    precioUnitario: 'precioUnitario',
+    subtotal: 'subtotal',
+    ventaId: 'ventaId',
+    productoId: 'productoId'
+};
+exports.GastoScalarFieldEnum = {
+    id: 'id',
+    descripcion: 'descripcion',
+    monto: 'monto',
+    categoria: 'categoria',
+    fecha: 'fecha',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    proveedorId: 'proveedorId',
+    cultivoId: 'cultivoId',
+    fincaId: 'fincaId',
+    userId: 'userId'
+};
+exports.TrabajadorScalarFieldEnum = {
+    id: 'id',
+    nombre: 'nombre',
+    telefono: 'telefono',
+    direccion: 'direccion',
+    tipo: 'tipo',
+    salarioBase: 'salarioBase',
+    activo: 'activo',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+exports.JornalScalarFieldEnum = {
+    id: 'id',
+    fecha: 'fecha',
+    horas: 'horas',
+    tarea: 'tarea',
+    montoPagado: 'montoPagado',
+    createdAt: 'createdAt',
+    trabajadorId: 'trabajadorId',
+    fincaId: 'fincaId'
 };
 exports.SortOrder = {
     asc: 'asc',

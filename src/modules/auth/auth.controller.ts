@@ -10,3 +10,8 @@ export async function login(req: Request, res: Response) {
   const result = await authService.loginUser(req.body)
   res.json({ success: true, data: result })
 }
+
+export async function refresh(req: Request, res: Response) {
+  const result = await authService.refreshUserToken(req.body.refreshToken)
+  res.json({ success: true, data: result })
+}

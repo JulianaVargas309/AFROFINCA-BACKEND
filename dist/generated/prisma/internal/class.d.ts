@@ -129,6 +129,17 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
         omit: OmitOpts;
     }>;
     /**
+     * `prisma.refreshToken`: Exposes CRUD operations for the **RefreshToken** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more RefreshTokens
+      * const refreshTokens = await prisma.refreshToken.findMany()
+      * ```
+      */
+    get refreshToken(): Prisma.RefreshTokenDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
      * `prisma.finca`: Exposes CRUD operations for the **Finca** model.
       * Example usage:
       * ```ts
@@ -137,6 +148,127 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
       * ```
       */
     get finca(): Prisma.FincaDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.lote`: Exposes CRUD operations for the **Lote** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Lotes
+      * const lotes = await prisma.lote.findMany()
+      * ```
+      */
+    get lote(): Prisma.LoteDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.cultivo`: Exposes CRUD operations for the **Cultivo** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Cultivos
+      * const cultivos = await prisma.cultivo.findMany()
+      * ```
+      */
+    get cultivo(): Prisma.CultivoDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.cliente`: Exposes CRUD operations for the **Cliente** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Clientes
+      * const clientes = await prisma.cliente.findMany()
+      * ```
+      */
+    get cliente(): Prisma.ClienteDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.proveedor`: Exposes CRUD operations for the **Proveedor** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Proveedors
+      * const proveedors = await prisma.proveedor.findMany()
+      * ```
+      */
+    get proveedor(): Prisma.ProveedorDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.producto`: Exposes CRUD operations for the **Producto** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Productos
+      * const productos = await prisma.producto.findMany()
+      * ```
+      */
+    get producto(): Prisma.ProductoDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.movimientoInventario`: Exposes CRUD operations for the **MovimientoInventario** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more MovimientoInventarios
+      * const movimientoInventarios = await prisma.movimientoInventario.findMany()
+      * ```
+      */
+    get movimientoInventario(): Prisma.MovimientoInventarioDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.venta`: Exposes CRUD operations for the **Venta** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Ventas
+      * const ventas = await prisma.venta.findMany()
+      * ```
+      */
+    get venta(): Prisma.VentaDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.detalleVenta`: Exposes CRUD operations for the **DetalleVenta** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more DetalleVentas
+      * const detalleVentas = await prisma.detalleVenta.findMany()
+      * ```
+      */
+    get detalleVenta(): Prisma.DetalleVentaDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.gasto`: Exposes CRUD operations for the **Gasto** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Gastos
+      * const gastos = await prisma.gasto.findMany()
+      * ```
+      */
+    get gasto(): Prisma.GastoDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.trabajador`: Exposes CRUD operations for the **Trabajador** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Trabajadors
+      * const trabajadors = await prisma.trabajador.findMany()
+      * ```
+      */
+    get trabajador(): Prisma.TrabajadorDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
+    /**
+     * `prisma.jornal`: Exposes CRUD operations for the **Jornal** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Jornals
+      * const jornals = await prisma.jornal.findMany()
+      * ```
+      */
+    get jornal(): Prisma.JornalDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
 }

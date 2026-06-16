@@ -35,6 +35,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.register = register;
 exports.login = login;
+exports.refresh = refresh;
 const authService = __importStar(require("./auth.service"));
 async function register(req, res) {
     const result = await authService.registerUser(req.body);
@@ -42,6 +43,10 @@ async function register(req, res) {
 }
 async function login(req, res) {
     const result = await authService.loginUser(req.body);
+    res.json({ success: true, data: result });
+}
+async function refresh(req, res) {
+    const result = await authService.refreshUserToken(req.body.refreshToken);
     res.json({ success: true, data: result });
 }
 //# sourceMappingURL=auth.controller.js.map

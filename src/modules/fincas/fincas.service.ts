@@ -1,12 +1,27 @@
 import { prisma } from "../../lib/prisma"
 import { AppError } from "../../types"
+import { getPaginationParams, paginatedResponse } from "../../lib/pagination"
 import { CreateFincaInput, UpdateFincaInput } from "./fincas.schema"
 
-export async function findAll(userId: number) {
-  return prisma.finca.findMany({
-    where: { userId, activo: true },
-    orderBy: { createdAt: "desc" },
-  })
+export async function findAll(userId: number, page?: number, limit?: number) {
+  if (!page && !limit) {
+    return prisma.finca.findMany({
+      where: { userId, activo: true },
+      orderBy: { createdAt: "desc" },
+    })
+  }
+
+  const params = getPaginationParams({ page, limit })
+  const [data, total] = await Promise.all([
+    prisma.finca.findMany({
+      where: { userId, activo: true },
+      orderBy: { createdAt: "desc" },
+      skip: params.skip,
+      take: params.take,
+    }),
+    prisma.finca.count({ where: { userId, activo: true } }),
+  ])
+  return paginatedResponse(data, total, { page, limit })
 }
 
 export async function findById(id: number, userId: number) {

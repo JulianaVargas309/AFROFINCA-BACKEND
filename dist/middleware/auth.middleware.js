@@ -14,7 +14,7 @@ function authenticate(req, res, next) {
     }
     const token = header.split(" ")[1];
     try {
-        const decoded = jsonwebtoken_1.default.verify(token, env_1.env.jwtSecret);
+        const decoded = jsonwebtoken_1.default.verify(token, env_1.env.JWT_SECRET);
         req.user = decoded;
         next();
     }

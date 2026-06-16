@@ -3,8 +3,13 @@ import { AuthRequest } from "../../types"
 import * as fincasService from "./fincas.service"
 
 export async function findAll(req: AuthRequest, res: Response) {
-  const fincas = await fincasService.findAll(req.user!.id)
-  res.json({ success: true, data: fincas })
+  const { page, limit } = req.query
+  const result = await fincasService.findAll(
+    req.user!.id,
+    page ? Number(page) : undefined,
+    limit ? Number(limit) : undefined
+  )
+  res.json({ success: true, data: result })
 }
 
 export async function findById(req: AuthRequest, res: Response) {

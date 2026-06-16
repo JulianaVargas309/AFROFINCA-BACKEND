@@ -7,11 +7,25 @@ exports.updateFinca = updateFinca;
 exports.deactivateFinca = deactivateFinca;
 const prisma_1 = require("../../lib/prisma");
 const types_1 = require("../../types");
-async function findAll(userId) {
-    return prisma_1.prisma.finca.findMany({
-        where: { userId, activo: true },
-        orderBy: { createdAt: "desc" },
-    });
+const pagination_1 = require("../../lib/pagination");
+async function findAll(userId, page, limit) {
+    if (!page && !limit) {
+        return prisma_1.prisma.finca.findMany({
+            where: { userId, activo: true },
+            orderBy: { createdAt: "desc" },
+        });
+    }
+    const params = (0, pagination_1.getPaginationParams)({ page, limit });
+    const [data, total] = await Promise.all([
+        prisma_1.prisma.finca.findMany({
+            where: { userId, activo: true },
+            orderBy: { createdAt: "desc" },
+            skip: params.skip,
+            take: params.take,
+        }),
+        prisma_1.prisma.finca.count({ where: { userId, activo: true } }),
+    ]);
+    return (0, pagination_1.paginatedResponse)(data, total, { page, limit });
 }
 async function findById(id, userId) {
     const finca = await prisma_1.prisma.finca.findFirst({

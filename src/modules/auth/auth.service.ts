@@ -1,9 +1,28 @@
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import crypto from "crypto"
 import { prisma } from "../../lib/prisma"
 import { env } from "../../config/env"
 import { AppError } from "../../types"
 import { RegisterInput, LoginInput } from "./auth.schema"
+
+function generateAccessToken(user: { id: number; email: string; nombre: string; rol: string }) {
+  return jwt.sign(user, env.JWT_SECRET, {
+    expiresIn: env.JWT_EXPIRES_IN as any,
+  })
+}
+
+async function generateRefreshToken(userId: number) {
+  const token = crypto.randomBytes(40).toString("hex")
+  const expiresAt = new Date()
+  expiresAt.setDate(expiresAt.getDate() + env.REFRESH_TOKEN_EXPIRES_IN_DAYS)
+
+  await prisma.refreshToken.create({
+    data: { token, userId, expiresAt },
+  })
+
+  return token
+}
 
 export async function registerUser(input: RegisterInput) {
   const existing = await prisma.user.findUnique({
@@ -26,13 +45,10 @@ export async function registerUser(input: RegisterInput) {
     },
   })
 
-  const token = jwt.sign(
-    { id: user.id, email: user.email, nombre: user.nombre, rol: user.rol },
-    env.jwtSecret,
-    { expiresIn: env.jwtExpiresIn as any }
-  )
+  const accessToken = generateAccessToken(user)
+  const refreshToken = await generateRefreshToken(user.id)
 
-  return { user, token }
+  return { user, accessToken, refreshToken }
 }
 
 export async function loginUser(input: LoginInput) {
@@ -48,11 +64,8 @@ export async function loginUser(input: LoginInput) {
     throw new AppError("Credenciales inválidas", 401)
   }
 
-  const token = jwt.sign(
-    { id: user.id, email: user.email, nombre: user.nombre, rol: user.rol },
-    env.jwtSecret,
-    { expiresIn: env.jwtExpiresIn as any }
-  )
+  const accessToken = generateAccessToken(user)
+  const refreshToken = await generateRefreshToken(user.id)
 
   return {
     user: {
@@ -61,6 +74,44 @@ export async function loginUser(input: LoginInput) {
       email: user.email,
       rol: user.rol,
     },
-    token,
+    accessToken,
+    refreshToken,
+  }
+}
+
+export async function refreshUserToken(refreshToken: string) {
+  const stored = await prisma.refreshToken.findUnique({
+    where: { token: refreshToken },
+    include: { user: true },
+  })
+
+  if (!stored) {
+    throw new AppError("Refresh token inválido", 401)
+  }
+
+  if (stored.expiresAt < new Date()) {
+    await prisma.refreshToken.delete({ where: { id: stored.id } })
+    throw new AppError("Refresh token expirado", 401)
+  }
+
+  if (!stored.user.activo) {
+    await prisma.refreshToken.delete({ where: { id: stored.id } })
+    throw new AppError("Usuario desactivado", 401)
+  }
+
+  await prisma.refreshToken.delete({ where: { id: stored.id } })
+
+  const accessToken = generateAccessToken(stored.user)
+  const newRefreshToken = await generateRefreshToken(stored.user.id)
+
+  return {
+    user: {
+      id: stored.user.id,
+      nombre: stored.user.nombre,
+      email: stored.user.email,
+      rol: stored.user.rol,
+    },
+    accessToken,
+    refreshToken: newRefreshToken,
   }
 }

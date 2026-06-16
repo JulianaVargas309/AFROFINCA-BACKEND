@@ -1,0 +1,72 @@
+import { CreateCultivoInput, UpdateCultivoInput } from "./cultivos.schema";
+export declare function findAll(loteId: number, userId: number): Promise<{
+    nombre: string;
+    createdAt: Date;
+    id: number;
+    activo: boolean;
+    updatedAt: Date;
+    variedad: string | null;
+    fechaSiembra: Date;
+    fechaCosechaEstimada: Date | null;
+    cantidadSembrada: number | null;
+    loteId: number;
+    fechaCosechaReal: Date | null;
+    estado: string;
+}[]>;
+export declare function findById(id: number, userId: number): Promise<{
+    nombre: string;
+    createdAt: Date;
+    id: number;
+    activo: boolean;
+    updatedAt: Date;
+    variedad: string | null;
+    fechaSiembra: Date;
+    fechaCosechaEstimada: Date | null;
+    cantidadSembrada: number | null;
+    loteId: number;
+    fechaCosechaReal: Date | null;
+    estado: string;
+}>;
+export declare function createCultivo(input: CreateCultivoInput, userId: number): Promise<{
+    nombre: string;
+    createdAt: Date;
+    id: number;
+    activo: boolean;
+    updatedAt: Date;
+    variedad: string | null;
+    fechaSiembra: Date;
+    fechaCosechaEstimada: Date | null;
+    cantidadSembrada: number | null;
+    loteId: number;
+    fechaCosechaReal: Date | null;
+    estado: string;
+}>;
+export declare function updateCultivo(id: number, input: UpdateCultivoInput, userId: number): Promise<{
+    nombre: string;
+    createdAt: Date;
+    id: number;
+    activo: boolean;
+    updatedAt: Date;
+    variedad: string | null;
+    fechaSiembra: Date;
+    fechaCosechaEstimada: Date | null;
+    cantidadSembrada: number | null;
+    loteId: number;
+    fechaCosechaReal: Date | null;
+    estado: string;
+}>;
+export declare function deactivateCultivo(id: number, userId: number): Promise<{
+    nombre: string;
+    createdAt: Date;
+    id: number;
+    activo: boolean;
+    updatedAt: Date;
+    variedad: string | null;
+    fechaSiembra: Date;
+    fechaCosechaEstimada: Date | null;
+    cantidadSembrada: number | null;
+    loteId: number;
+    fechaCosechaReal: Date | null;
+    estado: string;
+}>;
+//# sourceMappingURL=cultivos.service.d.ts.map

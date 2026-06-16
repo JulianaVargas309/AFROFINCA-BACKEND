@@ -40,8 +40,9 @@ exports.update = update;
 exports.remove = remove;
 const fincasService = __importStar(require("./fincas.service"));
 async function findAll(req, res) {
-    const fincas = await fincasService.findAll(req.user.id);
-    res.json({ success: true, data: fincas });
+    const { page, limit } = req.query;
+    const result = await fincasService.findAll(req.user.id, page ? Number(page) : undefined, limit ? Number(limit) : undefined);
+    res.json({ success: true, data: result });
 }
 async function findById(req, res) {
     const id = Number(req.params.id);

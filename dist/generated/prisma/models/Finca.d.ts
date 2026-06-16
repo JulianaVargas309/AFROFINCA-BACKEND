@@ -209,6 +209,9 @@ export type FincaWhereInput = {
     updatedAt?: Prisma.DateTimeFilter<"Finca"> | Date | string;
     userId?: Prisma.IntFilter<"Finca"> | number;
     user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
+    lotes?: Prisma.LoteListRelationFilter;
+    gastos?: Prisma.GastoListRelationFilter;
+    jornales?: Prisma.JornalListRelationFilter;
 };
 export type FincaOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -221,6 +224,9 @@ export type FincaOrderByWithRelationInput = {
     updatedAt?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     user?: Prisma.UserOrderByWithRelationInput;
+    lotes?: Prisma.LoteOrderByRelationAggregateInput;
+    gastos?: Prisma.GastoOrderByRelationAggregateInput;
+    jornales?: Prisma.JornalOrderByRelationAggregateInput;
 };
 export type FincaWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -236,6 +242,9 @@ export type FincaWhereUniqueInput = Prisma.AtLeast<{
     updatedAt?: Prisma.DateTimeFilter<"Finca"> | Date | string;
     userId?: Prisma.IntFilter<"Finca"> | number;
     user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
+    lotes?: Prisma.LoteListRelationFilter;
+    gastos?: Prisma.GastoListRelationFilter;
+    jornales?: Prisma.JornalListRelationFilter;
 }, "id">;
 export type FincaOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -276,6 +285,9 @@ export type FincaCreateInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user: Prisma.UserCreateNestedOneWithoutFincasInput;
+    lotes?: Prisma.LoteCreateNestedManyWithoutFincaInput;
+    gastos?: Prisma.GastoCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalCreateNestedManyWithoutFincaInput;
 };
 export type FincaUncheckedCreateInput = {
     id?: number;
@@ -287,6 +299,9 @@ export type FincaUncheckedCreateInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     userId: number;
+    lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutFincaInput;
+    gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalUncheckedCreateNestedManyWithoutFincaInput;
 };
 export type FincaUpdateInput = {
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -297,6 +312,9 @@ export type FincaUpdateInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     user?: Prisma.UserUpdateOneRequiredWithoutFincasNestedInput;
+    lotes?: Prisma.LoteUpdateManyWithoutFincaNestedInput;
+    gastos?: Prisma.GastoUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUpdateManyWithoutFincaNestedInput;
 };
 export type FincaUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -308,6 +326,9 @@ export type FincaUncheckedUpdateInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
+    lotes?: Prisma.LoteUncheckedUpdateManyWithoutFincaNestedInput;
+    gastos?: Prisma.GastoUncheckedUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUncheckedUpdateManyWithoutFincaNestedInput;
 };
 export type FincaCreateManyInput = {
     id?: number;
@@ -391,6 +412,14 @@ export type FincaSumOrderByAggregateInput = {
     hectareas?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
 };
+export type FincaScalarRelationFilter = {
+    is?: Prisma.FincaWhereInput;
+    isNot?: Prisma.FincaWhereInput;
+};
+export type FincaNullableScalarRelationFilter = {
+    is?: Prisma.FincaWhereInput | null;
+    isNot?: Prisma.FincaWhereInput | null;
+};
 export type FincaCreateNestedManyWithoutUserInput = {
     create?: Prisma.XOR<Prisma.FincaCreateWithoutUserInput, Prisma.FincaUncheckedCreateWithoutUserInput> | Prisma.FincaCreateWithoutUserInput[] | Prisma.FincaUncheckedCreateWithoutUserInput[];
     connectOrCreate?: Prisma.FincaCreateOrConnectWithoutUserInput | Prisma.FincaCreateOrConnectWithoutUserInput[];
@@ -439,6 +468,44 @@ export type NullableFloatFieldUpdateOperationsInput = {
     multiply?: number;
     divide?: number;
 };
+export type FincaCreateNestedOneWithoutLotesInput = {
+    create?: Prisma.XOR<Prisma.FincaCreateWithoutLotesInput, Prisma.FincaUncheckedCreateWithoutLotesInput>;
+    connectOrCreate?: Prisma.FincaCreateOrConnectWithoutLotesInput;
+    connect?: Prisma.FincaWhereUniqueInput;
+};
+export type FincaUpdateOneRequiredWithoutLotesNestedInput = {
+    create?: Prisma.XOR<Prisma.FincaCreateWithoutLotesInput, Prisma.FincaUncheckedCreateWithoutLotesInput>;
+    connectOrCreate?: Prisma.FincaCreateOrConnectWithoutLotesInput;
+    upsert?: Prisma.FincaUpsertWithoutLotesInput;
+    connect?: Prisma.FincaWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.FincaUpdateToOneWithWhereWithoutLotesInput, Prisma.FincaUpdateWithoutLotesInput>, Prisma.FincaUncheckedUpdateWithoutLotesInput>;
+};
+export type FincaCreateNestedOneWithoutGastosInput = {
+    create?: Prisma.XOR<Prisma.FincaCreateWithoutGastosInput, Prisma.FincaUncheckedCreateWithoutGastosInput>;
+    connectOrCreate?: Prisma.FincaCreateOrConnectWithoutGastosInput;
+    connect?: Prisma.FincaWhereUniqueInput;
+};
+export type FincaUpdateOneWithoutGastosNestedInput = {
+    create?: Prisma.XOR<Prisma.FincaCreateWithoutGastosInput, Prisma.FincaUncheckedCreateWithoutGastosInput>;
+    connectOrCreate?: Prisma.FincaCreateOrConnectWithoutGastosInput;
+    upsert?: Prisma.FincaUpsertWithoutGastosInput;
+    disconnect?: Prisma.FincaWhereInput | boolean;
+    delete?: Prisma.FincaWhereInput | boolean;
+    connect?: Prisma.FincaWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.FincaUpdateToOneWithWhereWithoutGastosInput, Prisma.FincaUpdateWithoutGastosInput>, Prisma.FincaUncheckedUpdateWithoutGastosInput>;
+};
+export type FincaCreateNestedOneWithoutJornalesInput = {
+    create?: Prisma.XOR<Prisma.FincaCreateWithoutJornalesInput, Prisma.FincaUncheckedCreateWithoutJornalesInput>;
+    connectOrCreate?: Prisma.FincaCreateOrConnectWithoutJornalesInput;
+    connect?: Prisma.FincaWhereUniqueInput;
+};
+export type FincaUpdateOneRequiredWithoutJornalesNestedInput = {
+    create?: Prisma.XOR<Prisma.FincaCreateWithoutJornalesInput, Prisma.FincaUncheckedCreateWithoutJornalesInput>;
+    connectOrCreate?: Prisma.FincaCreateOrConnectWithoutJornalesInput;
+    upsert?: Prisma.FincaUpsertWithoutJornalesInput;
+    connect?: Prisma.FincaWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.FincaUpdateToOneWithWhereWithoutJornalesInput, Prisma.FincaUpdateWithoutJornalesInput>, Prisma.FincaUncheckedUpdateWithoutJornalesInput>;
+};
 export type FincaCreateWithoutUserInput = {
     nombre: string;
     ubicacion?: string | null;
@@ -447,6 +514,9 @@ export type FincaCreateWithoutUserInput = {
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    lotes?: Prisma.LoteCreateNestedManyWithoutFincaInput;
+    gastos?: Prisma.GastoCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalCreateNestedManyWithoutFincaInput;
 };
 export type FincaUncheckedCreateWithoutUserInput = {
     id?: number;
@@ -457,6 +527,9 @@ export type FincaUncheckedCreateWithoutUserInput = {
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
+    lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutFincaInput;
+    gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalUncheckedCreateNestedManyWithoutFincaInput;
 };
 export type FincaCreateOrConnectWithoutUserInput = {
     where: Prisma.FincaWhereUniqueInput;
@@ -493,6 +566,195 @@ export type FincaScalarWhereInput = {
     updatedAt?: Prisma.DateTimeFilter<"Finca"> | Date | string;
     userId?: Prisma.IntFilter<"Finca"> | number;
 };
+export type FincaCreateWithoutLotesInput = {
+    nombre: string;
+    ubicacion?: string | null;
+    hectareas?: number | null;
+    descripcion?: string | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    user: Prisma.UserCreateNestedOneWithoutFincasInput;
+    gastos?: Prisma.GastoCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalCreateNestedManyWithoutFincaInput;
+};
+export type FincaUncheckedCreateWithoutLotesInput = {
+    id?: number;
+    nombre: string;
+    ubicacion?: string | null;
+    hectareas?: number | null;
+    descripcion?: string | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    userId: number;
+    gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalUncheckedCreateNestedManyWithoutFincaInput;
+};
+export type FincaCreateOrConnectWithoutLotesInput = {
+    where: Prisma.FincaWhereUniqueInput;
+    create: Prisma.XOR<Prisma.FincaCreateWithoutLotesInput, Prisma.FincaUncheckedCreateWithoutLotesInput>;
+};
+export type FincaUpsertWithoutLotesInput = {
+    update: Prisma.XOR<Prisma.FincaUpdateWithoutLotesInput, Prisma.FincaUncheckedUpdateWithoutLotesInput>;
+    create: Prisma.XOR<Prisma.FincaCreateWithoutLotesInput, Prisma.FincaUncheckedCreateWithoutLotesInput>;
+    where?: Prisma.FincaWhereInput;
+};
+export type FincaUpdateToOneWithWhereWithoutLotesInput = {
+    where?: Prisma.FincaWhereInput;
+    data: Prisma.XOR<Prisma.FincaUpdateWithoutLotesInput, Prisma.FincaUncheckedUpdateWithoutLotesInput>;
+};
+export type FincaUpdateWithoutLotesInput = {
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    ubicacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    hectareas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: Prisma.UserUpdateOneRequiredWithoutFincasNestedInput;
+    gastos?: Prisma.GastoUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUpdateManyWithoutFincaNestedInput;
+};
+export type FincaUncheckedUpdateWithoutLotesInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    ubicacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    hectareas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    userId?: Prisma.IntFieldUpdateOperationsInput | number;
+    gastos?: Prisma.GastoUncheckedUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUncheckedUpdateManyWithoutFincaNestedInput;
+};
+export type FincaCreateWithoutGastosInput = {
+    nombre: string;
+    ubicacion?: string | null;
+    hectareas?: number | null;
+    descripcion?: string | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    user: Prisma.UserCreateNestedOneWithoutFincasInput;
+    lotes?: Prisma.LoteCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalCreateNestedManyWithoutFincaInput;
+};
+export type FincaUncheckedCreateWithoutGastosInput = {
+    id?: number;
+    nombre: string;
+    ubicacion?: string | null;
+    hectareas?: number | null;
+    descripcion?: string | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    userId: number;
+    lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutFincaInput;
+    jornales?: Prisma.JornalUncheckedCreateNestedManyWithoutFincaInput;
+};
+export type FincaCreateOrConnectWithoutGastosInput = {
+    where: Prisma.FincaWhereUniqueInput;
+    create: Prisma.XOR<Prisma.FincaCreateWithoutGastosInput, Prisma.FincaUncheckedCreateWithoutGastosInput>;
+};
+export type FincaUpsertWithoutGastosInput = {
+    update: Prisma.XOR<Prisma.FincaUpdateWithoutGastosInput, Prisma.FincaUncheckedUpdateWithoutGastosInput>;
+    create: Prisma.XOR<Prisma.FincaCreateWithoutGastosInput, Prisma.FincaUncheckedCreateWithoutGastosInput>;
+    where?: Prisma.FincaWhereInput;
+};
+export type FincaUpdateToOneWithWhereWithoutGastosInput = {
+    where?: Prisma.FincaWhereInput;
+    data: Prisma.XOR<Prisma.FincaUpdateWithoutGastosInput, Prisma.FincaUncheckedUpdateWithoutGastosInput>;
+};
+export type FincaUpdateWithoutGastosInput = {
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    ubicacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    hectareas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: Prisma.UserUpdateOneRequiredWithoutFincasNestedInput;
+    lotes?: Prisma.LoteUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUpdateManyWithoutFincaNestedInput;
+};
+export type FincaUncheckedUpdateWithoutGastosInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    ubicacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    hectareas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    userId?: Prisma.IntFieldUpdateOperationsInput | number;
+    lotes?: Prisma.LoteUncheckedUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUncheckedUpdateManyWithoutFincaNestedInput;
+};
+export type FincaCreateWithoutJornalesInput = {
+    nombre: string;
+    ubicacion?: string | null;
+    hectareas?: number | null;
+    descripcion?: string | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    user: Prisma.UserCreateNestedOneWithoutFincasInput;
+    lotes?: Prisma.LoteCreateNestedManyWithoutFincaInput;
+    gastos?: Prisma.GastoCreateNestedManyWithoutFincaInput;
+};
+export type FincaUncheckedCreateWithoutJornalesInput = {
+    id?: number;
+    nombre: string;
+    ubicacion?: string | null;
+    hectareas?: number | null;
+    descripcion?: string | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    userId: number;
+    lotes?: Prisma.LoteUncheckedCreateNestedManyWithoutFincaInput;
+    gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutFincaInput;
+};
+export type FincaCreateOrConnectWithoutJornalesInput = {
+    where: Prisma.FincaWhereUniqueInput;
+    create: Prisma.XOR<Prisma.FincaCreateWithoutJornalesInput, Prisma.FincaUncheckedCreateWithoutJornalesInput>;
+};
+export type FincaUpsertWithoutJornalesInput = {
+    update: Prisma.XOR<Prisma.FincaUpdateWithoutJornalesInput, Prisma.FincaUncheckedUpdateWithoutJornalesInput>;
+    create: Prisma.XOR<Prisma.FincaCreateWithoutJornalesInput, Prisma.FincaUncheckedCreateWithoutJornalesInput>;
+    where?: Prisma.FincaWhereInput;
+};
+export type FincaUpdateToOneWithWhereWithoutJornalesInput = {
+    where?: Prisma.FincaWhereInput;
+    data: Prisma.XOR<Prisma.FincaUpdateWithoutJornalesInput, Prisma.FincaUncheckedUpdateWithoutJornalesInput>;
+};
+export type FincaUpdateWithoutJornalesInput = {
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    ubicacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    hectareas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    user?: Prisma.UserUpdateOneRequiredWithoutFincasNestedInput;
+    lotes?: Prisma.LoteUpdateManyWithoutFincaNestedInput;
+    gastos?: Prisma.GastoUpdateManyWithoutFincaNestedInput;
+};
+export type FincaUncheckedUpdateWithoutJornalesInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    ubicacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    hectareas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    userId?: Prisma.IntFieldUpdateOperationsInput | number;
+    lotes?: Prisma.LoteUncheckedUpdateManyWithoutFincaNestedInput;
+    gastos?: Prisma.GastoUncheckedUpdateManyWithoutFincaNestedInput;
+};
 export type FincaCreateManyUserInput = {
     id?: number;
     nombre: string;
@@ -511,6 +773,9 @@ export type FincaUpdateWithoutUserInput = {
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    lotes?: Prisma.LoteUpdateManyWithoutFincaNestedInput;
+    gastos?: Prisma.GastoUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUpdateManyWithoutFincaNestedInput;
 };
 export type FincaUncheckedUpdateWithoutUserInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -521,6 +786,9 @@ export type FincaUncheckedUpdateWithoutUserInput = {
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    lotes?: Prisma.LoteUncheckedUpdateManyWithoutFincaNestedInput;
+    gastos?: Prisma.GastoUncheckedUpdateManyWithoutFincaNestedInput;
+    jornales?: Prisma.JornalUncheckedUpdateManyWithoutFincaNestedInput;
 };
 export type FincaUncheckedUpdateManyWithoutUserInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -531,6 +799,46 @@ export type FincaUncheckedUpdateManyWithoutUserInput = {
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+};
+/**
+ * Count Type FincaCountOutputType
+ */
+export type FincaCountOutputType = {
+    lotes: number;
+    gastos: number;
+    jornales: number;
+};
+export type FincaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    lotes?: boolean | FincaCountOutputTypeCountLotesArgs;
+    gastos?: boolean | FincaCountOutputTypeCountGastosArgs;
+    jornales?: boolean | FincaCountOutputTypeCountJornalesArgs;
+};
+/**
+ * FincaCountOutputType without action
+ */
+export type FincaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FincaCountOutputType
+     */
+    select?: Prisma.FincaCountOutputTypeSelect<ExtArgs> | null;
+};
+/**
+ * FincaCountOutputType without action
+ */
+export type FincaCountOutputTypeCountLotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.LoteWhereInput;
+};
+/**
+ * FincaCountOutputType without action
+ */
+export type FincaCountOutputTypeCountGastosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.GastoWhereInput;
+};
+/**
+ * FincaCountOutputType without action
+ */
+export type FincaCountOutputTypeCountJornalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.JornalWhereInput;
 };
 export type FincaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -543,6 +851,10 @@ export type FincaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     updatedAt?: boolean;
     userId?: boolean;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+    lotes?: boolean | Prisma.Finca$lotesArgs<ExtArgs>;
+    gastos?: boolean | Prisma.Finca$gastosArgs<ExtArgs>;
+    jornales?: boolean | Prisma.Finca$jornalesArgs<ExtArgs>;
+    _count?: boolean | Prisma.FincaCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["finca"]>;
 export type FincaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -582,6 +894,10 @@ export type FincaSelectScalar = {
 export type FincaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "ubicacion" | "hectareas" | "descripcion" | "activo" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["finca"]>;
 export type FincaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
+    lotes?: boolean | Prisma.Finca$lotesArgs<ExtArgs>;
+    gastos?: boolean | Prisma.Finca$gastosArgs<ExtArgs>;
+    jornales?: boolean | Prisma.Finca$jornalesArgs<ExtArgs>;
+    _count?: boolean | Prisma.FincaCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type FincaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
@@ -593,6 +909,9 @@ export type $FincaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     name: "Finca";
     objects: {
         user: Prisma.$UserPayload<ExtArgs>;
+        lotes: Prisma.$LotePayload<ExtArgs>[];
+        gastos: Prisma.$GastoPayload<ExtArgs>[];
+        jornales: Prisma.$JornalPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -934,6 +1253,9 @@ export interface FincaDelegate<ExtArgs extends runtime.Types.Extensions.Internal
 export interface Prisma__FincaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    lotes<T extends Prisma.Finca$lotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Finca$lotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    gastos<T extends Prisma.Finca$gastosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Finca$gastosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GastoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    jornales<T extends Prisma.Finca$jornalesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Finca$jornalesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JornalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1350,6 +1672,75 @@ export type FincaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
      * Limit how many Fincas to delete.
      */
     limit?: number;
+};
+/**
+ * Finca.lotes
+ */
+export type Finca$lotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: Prisma.LoteSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: Prisma.LoteOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.LoteInclude<ExtArgs> | null;
+    where?: Prisma.LoteWhereInput;
+    orderBy?: Prisma.LoteOrderByWithRelationInput | Prisma.LoteOrderByWithRelationInput[];
+    cursor?: Prisma.LoteWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.LoteScalarFieldEnum | Prisma.LoteScalarFieldEnum[];
+};
+/**
+ * Finca.gastos
+ */
+export type Finca$gastosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Gasto
+     */
+    select?: Prisma.GastoSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Gasto
+     */
+    omit?: Prisma.GastoOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.GastoInclude<ExtArgs> | null;
+    where?: Prisma.GastoWhereInput;
+    orderBy?: Prisma.GastoOrderByWithRelationInput | Prisma.GastoOrderByWithRelationInput[];
+    cursor?: Prisma.GastoWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.GastoScalarFieldEnum | Prisma.GastoScalarFieldEnum[];
+};
+/**
+ * Finca.jornales
+ */
+export type Finca$jornalesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Jornal
+     */
+    select?: Prisma.JornalSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Jornal
+     */
+    omit?: Prisma.JornalOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.JornalInclude<ExtArgs> | null;
+    where?: Prisma.JornalWhereInput;
+    orderBy?: Prisma.JornalOrderByWithRelationInput | Prisma.JornalOrderByWithRelationInput[];
+    cursor?: Prisma.JornalWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.JornalScalarFieldEnum | Prisma.JornalScalarFieldEnum[];
 };
 /**
  * Finca without action
