@@ -10,6 +10,18 @@ export async function findAll(productoId: number) {
   })
 }
 
+export async function findById(id: number) {
+  const movimiento = await prisma.movimientoInventario.findUnique({
+    where: { id },
+    include: {
+      producto: { select: { id: true, nombre: true } },
+      user: { select: { id: true, nombre: true } },
+    },
+  })
+  if (!movimiento) throw new AppError("Movimiento no encontrado", 404)
+  return movimiento
+}
+
 export async function createMovimiento(input: CreateMovimientoInput, userId: number) {
   const producto = await prisma.producto.findUnique({
     where: { id: input.productoId },
@@ -36,4 +48,23 @@ export async function createMovimiento(input: CreateMovimientoInput, userId: num
   ])
 
   return movimiento
+}
+
+export async function deleteMovimiento(id: number) {
+  const movimiento = await prisma.movimientoInventario.findUnique({ where: { id } })
+  if (!movimiento) throw new AppError("Movimiento no encontrado", 404)
+
+  return prisma.$transaction(async (tx) => {
+    await tx.producto.update({
+      where: { id: movimiento.productoId },
+      data: {
+        stockActual:
+          movimiento.tipo === "salida"
+            ? { increment: movimiento.cantidad }
+            : { decrement: movimiento.cantidad },
+      },
+    })
+
+    return tx.movimientoInventario.delete({ where: { id } })
+  })
 }

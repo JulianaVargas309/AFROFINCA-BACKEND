@@ -3,8 +3,8 @@ import { AuthRequest } from "../../types"
 import * as jornalesService from "./jornales.service"
 
 export async function findAll(req: AuthRequest, res: Response) {
-  const trabajadorId = Number(req.query.trabajadorId)
-  const jornales = await jornalesService.findAll(trabajadorId, req.user!.id)
+  const loteId = Number(req.query.loteId)
+  const jornales = await jornalesService.findAll(loteId, req.user!.id)
   res.json({ success: true, data: jornales })
 }
 

@@ -1,7 +1,8 @@
 import { Response, NextFunction } from "express"
 import { AuthRequest } from "../types"
+import { Rol } from "../types/roles"
 
-export function authorize(...roles: string[]) {
+export function authorize(...roles: Rol[]) {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
     if (!req.user) {
       res.status(401).json({ success: false, error: "No autenticado" })

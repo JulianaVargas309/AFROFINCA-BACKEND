@@ -1,11 +1,12 @@
 import { Request } from "express"
+import { Rol } from "./roles"
 
 export interface AuthRequest extends Request {
   user?: {
     id: number
     email: string
     nombre: string
-    rol: string
+    rol: Rol
   }
 }
 

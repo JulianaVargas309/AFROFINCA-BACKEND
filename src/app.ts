@@ -15,6 +15,7 @@ import ventasRoutes from "./modules/ventas/ventas.routes"
 import gastosRoutes from "./modules/gastos/gastos.routes"
 import trabajadoresRoutes from "./modules/trabajadores/trabajadores.routes"
 import jornalesRoutes from "./modules/jornales/jornales.routes"
+import bitacoraRoutes from "./modules/bitacora/bitacora.routes"
 import { env } from "./config/env"
 import { errorHandler } from "./middleware/error.middleware"
 
@@ -48,6 +49,7 @@ app.use("/api/ventas", ventasRoutes)
 app.use("/api/gastos", gastosRoutes)
 app.use("/api/trabajadores", trabajadoresRoutes)
 app.use("/api/jornales", jornalesRoutes)
+app.use("/api/bitacora", bitacoraRoutes)
 
 app.use(errorHandler)
 

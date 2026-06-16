@@ -6,10 +6,11 @@ export const createJornalSchema = z.object({
   tarea: z.string().max(300).optional(),
   montoPagado: z.number().positive().optional(),
   trabajadorId: z.number().int().positive(),
-  fincaId: z.number().int().positive(),
+  loteId: z.number().int().positive(),
 })
 
 export const updateJornalSchema = z.object({
+  fecha: z.coerce.date().optional(),
   horas: z.number().positive().optional(),
   tarea: z.string().max(300).optional(),
   montoPagado: z.number().positive().optional(),

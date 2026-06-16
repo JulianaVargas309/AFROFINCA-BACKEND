@@ -12,7 +12,7 @@ export const createVentaSchema = z.object({
 })
 
 export const updateVentaSchema = z.object({
-  estado: z.enum(["pendiente", "completada", "anulada"]),
+  estado: z.enum(["PENDIENTE", "COMPLETADA", "ANULADA"]),
 })
 
 export type CreateVentaInput = z.infer<typeof createVentaSchema>

@@ -7,12 +7,59 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─── Enums ───────────────────────────────────────────
+
+enum Rol {
+  ADMIN
+  FAMILIAR
+  CONSULTA
+}
+
+enum TipoCultivo {
+  CAFE
+  CANA_AZUCAR
+}
+
+enum EstadoCultivo {
+  ACTIVO
+  COSECHADO
+  PERDIDO
+}
+
+enum ActividadBitacora {
+  FERTILIZACION
+  FUMIGACION
+  PODA
+  DESHIERBE
+  COSECHA
+  SIEMBRA
+  MANTENIMIENTO
+  OTRO
+}
+
+enum CategoriaGasto {
+  INSUMOS
+  MANO_DE_OBRA
+  MANTENIMIENTO
+  TRANSPORTE
+  ADMINISTRACION
+  OTRO
+}
+
+enum EstadoVenta {
+  PENDIENTE
+  COMPLETADA
+  ANULADA
+}
+
+// ─── Models ──────────────────────────────────────────
+
 model User {
   id        Int      @id @default(autoincrement())
   nombre    String
   email     String   @unique
   password  String
-  rol       String   @default("admin")
+  rol       Rol      @default(FAMILIAR)
   activo    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -22,6 +69,7 @@ model User {
   movimientos   MovimientoInventario[]
   ventas        Venta[]
   gastos        Gasto[]
+  bitacoras     Bitacora[]
 
   @@map("usuarios")
 }
@@ -51,7 +99,6 @@ model Finca {
   user    User  @relation(fields: [userId], references: [id])
   lotes   Lote[]
   gastos  Gasto[]
-  jornales Jornal[]
 
   @@map("fincas")
 }
@@ -65,29 +112,38 @@ model Lote {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  fincaId  Int
-  finca    Finca    @relation(fields: [fincaId], references: [id])
-  cultivos Cultivo[]
+  fincaId   Int
+  finca     Finca      @relation(fields: [fincaId], references: [id])
+  cultivos  Cultivo[]
+  bitacoras Bitacora[]
+  jornales  Jornal[]
+  gastos    Gasto[]
 
   @@map("lotes")
 }
 
 model Cultivo {
-  id                   Int      @id @default(autoincrement())
+  id                   Int            @id @default(autoincrement())
+  tipo                 TipoCultivo
   nombre               String
   variedad             String?
   fechaSiembra         DateTime
   fechaCosechaEstimada DateTime?
   fechaCosechaReal     DateTime?
-  estado               String   @default("activo")
+  estado               EstadoCultivo  @default(ACTIVO)
   cantidadSembrada     Float?
-  activo               Boolean  @default(true)
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  numeroSoca           Int?
+  edadCafetal          Int?
+  plantasPorHectarea   Float?
+  rendimientoEstimado  Float?
+  activo               Boolean        @default(true)
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
 
-  loteId Int
-  lote   Lote    @relation(fields: [loteId], references: [id])
-  gastos Gasto[]
+  loteId    Int
+  lote      Lote        @relation(fields: [loteId], references: [id])
+  gastos    Gasto[]
+  bitacoras Bitacora[]
 
   @@map("cultivos")
 }
@@ -123,20 +179,21 @@ model Proveedor {
 }
 
 model Producto {
-  id            Int      @id @default(autoincrement())
-  nombre        String
-  descripcion   String?
-  categoria     String?
-  unidadMedida  String   @default("unidad")
-  stockActual   Float    @default(0)
-  stockMinimo   Float    @default(0)
+  id             Int      @id @default(autoincrement())
+  nombre         String
+  descripcion    String?
+  categoria      String?
+  unidadMedida   String   @default("unidad")
+  stockActual    Float    @default(0)
+  stockMinimo    Float    @default(0)
   precioUnitario Float?
-  activo        Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  activo         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   movimientos   MovimientoInventario[]
   detalleVentas DetalleVenta[]
+  bitacoras     Bitacora[]
 
   @@map("productos")
 }
@@ -154,16 +211,17 @@ model MovimientoInventario {
   userId     Int
   user       User     @relation(fields: [userId], references: [id])
 
+  @@index([productoId, fecha])
   @@map("movimientos_inventario")
 }
 
 model Venta {
-  id        Int      @id @default(autoincrement())
-  fecha     DateTime @default(now())
+  id        Int         @id @default(autoincrement())
+  fecha     DateTime    @default(now())
   total     Float
-  estado    String   @default("pendiente")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  estado    EstadoVenta @default(PENDIENTE)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 
   clienteId Int
   cliente   Cliente       @relation(fields: [clienteId], references: [id])
@@ -171,14 +229,15 @@ model Venta {
   user      User          @relation(fields: [userId], references: [id])
   detalles  DetalleVenta[]
 
+  @@index([userId, fecha])
   @@map("ventas")
 }
 
 model DetalleVenta {
-  id            Int   @id @default(autoincrement())
-  cantidad      Float
+  id             Int   @id @default(autoincrement())
+  cantidad       Float
   precioUnitario Float
-  subtotal      Float
+  subtotal       Float
 
   ventaId    Int
   venta      Venta    @relation(fields: [ventaId], references: [id], onDelete: Cascade)
@@ -189,13 +248,13 @@ model DetalleVenta {
 }
 
 model Gasto {
-  id          Int      @id @default(autoincrement())
+  id          Int             @id @default(autoincrement())
   descripcion String
   monto       Float
-  categoria   String?
-  fecha       DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  categoria   CategoriaGasto?
+  fecha       DateTime        @default(now())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
 
   proveedorId Int?
   proveedor   Proveedor? @relation(fields: [proveedorId], references: [id])
@@ -203,9 +262,14 @@ model Gasto {
   cultivo     Cultivo?   @relation(fields: [cultivoId], references: [id])
   fincaId     Int?
   finca       Finca?     @relation(fields: [fincaId], references: [id])
+  loteId      Int?
+  lote        Lote?      @relation(fields: [loteId], references: [id])
   userId      Int
   user        User       @relation(fields: [userId], references: [id])
 
+  @@index([userId, fecha])
+  @@index([fincaId])
+  @@index([loteId])
   @@map("gastos")
 }
 
@@ -232,11 +296,41 @@ model Jornal {
   tarea       String?
   montoPagado Float?
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   trabajadorId Int
   trabajador   Trabajador @relation(fields: [trabajadorId], references: [id])
-  fincaId      Int
-  finca        Finca      @relation(fields: [fincaId], references: [id])
+  loteId       Int
+  lote         Lote       @relation(fields: [loteId], references: [id])
 
+  @@index([loteId, fecha])
+  @@index([trabajadorId])
   @@map("jornales")
+}
+
+model Bitacora {
+  id            Int                @id @default(autoincrement())
+  fecha         DateTime           @default(now())
+  actividad     ActividadBitacora
+  descripcion   String
+  cantidad      Float?
+  unidadMedida  String?
+  costo         Float              @default(0)
+  observaciones String?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  loteId     Int
+  lote       Lote       @relation(fields: [loteId], references: [id])
+  cultivoId  Int?
+  cultivo    Cultivo?   @relation(fields: [cultivoId], references: [id])
+  productoId Int?
+  producto   Producto?  @relation(fields: [productoId], references: [id])
+  userId     Int
+  user       User       @relation(fields: [userId], references: [id])
+
+  @@index([loteId, fecha])
+  @@index([cultivoId])
+  @@index([fecha])
+  @@map("bitacoras")
 }

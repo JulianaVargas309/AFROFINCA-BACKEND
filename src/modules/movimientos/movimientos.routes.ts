@@ -9,6 +9,8 @@ const router = Router()
 router.use(authenticate)
 
 router.get("/", movimientosController.findAll)
+router.get("/:id", movimientosController.findById)
 router.post("/", validate(createMovimientoSchema), movimientosController.create)
+router.delete("/:id", movimientosController.remove)
 
 export default router

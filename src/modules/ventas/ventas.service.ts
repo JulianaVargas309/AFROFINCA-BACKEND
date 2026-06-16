@@ -108,11 +108,11 @@ export async function createVenta(input: CreateVentaInput, userId: number) {
 export async function updateVenta(id: number, input: UpdateVentaInput, userId: number) {
   const venta = await prisma.venta.findFirst({ where: { id, userId } })
   if (!venta) throw new AppError("Venta no encontrada", 404)
-  if (venta.estado === "anulada") {
+  if (venta.estado === "ANULADA") {
     throw new AppError("No se puede modificar una venta anulada")
   }
 
-  if (input.estado === "anulada") {
+  if (input.estado === "ANULADA") {
     await prisma.$transaction(async (tx) => {
       const detalles = await tx.detalleVenta.findMany({ where: { ventaId: id } })
       for (const d of detalles) {
@@ -127,6 +127,38 @@ export async function updateVenta(id: number, input: UpdateVentaInput, userId: n
   return prisma.venta.update({
     where: { id },
     data: { estado: input.estado },
+    include: {
+      cliente: { select: { id: true, nombre: true } },
+      detalles: {
+        include: { producto: { select: { id: true, nombre: true } } },
+      },
+    },
+  })
+}
+
+export async function deleteVenta(id: number, userId: number) {
+  const venta = await prisma.venta.findFirst({ where: { id, userId } })
+  if (!venta) throw new AppError("Venta no encontrada", 404)
+  if (venta.estado === "ANULADA") {
+    throw new AppError("La venta ya está anulada")
+  }
+
+  await prisma.$transaction(async (tx) => {
+    const detalles = await tx.detalleVenta.findMany({ where: { ventaId: id } })
+    for (const d of detalles) {
+      await tx.producto.update({
+        where: { id: d.productoId },
+        data: { stockActual: { increment: d.cantidad } },
+      })
+    }
+    await tx.venta.update({
+      where: { id },
+      data: { estado: "ANULADA" },
+    })
+  })
+
+  return prisma.venta.findFirst({
+    where: { id },
     include: {
       cliente: { select: { id: true, nombre: true } },
       detalles: {

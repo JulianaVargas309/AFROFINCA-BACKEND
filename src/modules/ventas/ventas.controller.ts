@@ -28,3 +28,9 @@ export async function update(req: AuthRequest, res: Response) {
   const venta = await ventasService.updateVenta(id, req.body, req.user!.id)
   res.json({ success: true, data: venta })
 }
+
+export async function remove(req: AuthRequest, res: Response) {
+  const id = Number(req.params.id)
+  await ventasService.deleteVenta(id, req.user!.id)
+  res.json({ success: true, message: "Venta anulada" })
+}

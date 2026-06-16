@@ -12,5 +12,6 @@ router.get("/", ventasController.findAll)
 router.get("/:id", ventasController.findById)
 router.post("/", validate(createVentaSchema), ventasController.create)
 router.patch("/:id", validate(updateVentaSchema), ventasController.update)
+router.delete("/:id", ventasController.remove)
 
 export default router
