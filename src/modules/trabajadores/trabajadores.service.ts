@@ -30,3 +30,17 @@ export async function deactivateTrabajador(id: number) {
   if (!trabajador) throw new AppError("Trabajador no encontrado", 404)
   return prisma.trabajador.update({ where: { id }, data: { activo: false } })
 }
+
+export async function search(query: string) {
+  return prisma.trabajador.findMany({
+    where: {
+      activo: true,
+      OR: [
+        { nombre: { contains: query, mode: "insensitive" } },
+        { apellido: { contains: query, mode: "insensitive" } },
+        { documento: { contains: query, mode: "insensitive" } },
+      ],
+    },
+    orderBy: { nombre: "asc" },
+  })
+}

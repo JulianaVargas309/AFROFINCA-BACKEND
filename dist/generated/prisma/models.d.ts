@@ -12,5 +12,6 @@ export type * from './models/DetalleVenta';
 export type * from './models/Gasto';
 export type * from './models/Trabajador';
 export type * from './models/Jornal';
+export type * from './models/Bitacora';
 export type * from './commonInputTypes';
 //# sourceMappingURL=models.d.ts.map

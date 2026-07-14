@@ -4,7 +4,9 @@ import * as movimientosService from "./movimientos.service"
 
 export async function findAll(req: AuthRequest, res: Response) {
   const productoId = Number(req.query.productoId)
-  const movimientos = await movimientosService.findAll(productoId)
+  const movimientos = await movimientosService.findAll(
+    isNaN(productoId) ? 0 : productoId
+  )
   res.json({ success: true, data: movimientos })
 }
 

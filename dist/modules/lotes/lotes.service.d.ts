@@ -1,8 +1,8 @@
 import { CreateLoteInput, UpdateLoteInput } from "./lotes.schema";
 export declare function findAll(fincaId: number, userId: number): Promise<{
+    id: number;
     nombre: string;
     createdAt: Date;
-    id: number;
     activo: boolean;
     updatedAt: Date;
     descripcion: string | null;
@@ -10,9 +10,9 @@ export declare function findAll(fincaId: number, userId: number): Promise<{
     fincaId: number;
 }[]>;
 export declare function findById(id: number, userId: number): Promise<{
+    id: number;
     nombre: string;
     createdAt: Date;
-    id: number;
     activo: boolean;
     updatedAt: Date;
     descripcion: string | null;
@@ -20,9 +20,9 @@ export declare function findById(id: number, userId: number): Promise<{
     fincaId: number;
 }>;
 export declare function createLote(input: CreateLoteInput, userId: number): Promise<{
+    id: number;
     nombre: string;
     createdAt: Date;
-    id: number;
     activo: boolean;
     updatedAt: Date;
     descripcion: string | null;
@@ -30,9 +30,9 @@ export declare function createLote(input: CreateLoteInput, userId: number): Prom
     fincaId: number;
 }>;
 export declare function updateLote(id: number, input: UpdateLoteInput, userId: number): Promise<{
+    id: number;
     nombre: string;
     createdAt: Date;
-    id: number;
     activo: boolean;
     updatedAt: Date;
     descripcion: string | null;
@@ -40,9 +40,9 @@ export declare function updateLote(id: number, input: UpdateLoteInput, userId: n
     fincaId: number;
 }>;
 export declare function deactivateLote(id: number, userId: number): Promise<{
+    id: number;
     nombre: string;
     createdAt: Date;
-    id: number;
     activo: boolean;
     updatedAt: Date;
     descripcion: string | null;

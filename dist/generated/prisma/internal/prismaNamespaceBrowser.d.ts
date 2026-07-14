@@ -40,6 +40,7 @@ export declare const ModelName: {
     readonly Gasto: "Gasto";
     readonly Trabajador: "Trabajador";
     readonly Jornal: "Jornal";
+    readonly Bitacora: "Bitacora";
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -52,7 +53,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export declare const UserScalarFieldEnum: {
     readonly id: "id";
     readonly nombre: "nombre";
-    readonly email: "email";
+    readonly documento: "documento";
     readonly password: "password";
     readonly rol: "rol";
     readonly activo: "activo";
@@ -93,6 +94,7 @@ export declare const LoteScalarFieldEnum: {
 export type LoteScalarFieldEnum = (typeof LoteScalarFieldEnum)[keyof typeof LoteScalarFieldEnum];
 export declare const CultivoScalarFieldEnum: {
     readonly id: "id";
+    readonly tipo: "tipo";
     readonly nombre: "nombre";
     readonly variedad: "variedad";
     readonly fechaSiembra: "fechaSiembra";
@@ -100,6 +102,10 @@ export declare const CultivoScalarFieldEnum: {
     readonly fechaCosechaReal: "fechaCosechaReal";
     readonly estado: "estado";
     readonly cantidadSembrada: "cantidadSembrada";
+    readonly numeroSoca: "numeroSoca";
+    readonly edadCafetal: "edadCafetal";
+    readonly plantasPorHectarea: "plantasPorHectarea";
+    readonly rendimientoEstimado: "rendimientoEstimado";
     readonly activo: "activo";
     readonly createdAt: "createdAt";
     readonly updatedAt: "updatedAt";
@@ -184,6 +190,7 @@ export declare const GastoScalarFieldEnum: {
     readonly proveedorId: "proveedorId";
     readonly cultivoId: "cultivoId";
     readonly fincaId: "fincaId";
+    readonly loteId: "loteId";
     readonly userId: "userId";
 };
 export type GastoScalarFieldEnum = (typeof GastoScalarFieldEnum)[keyof typeof GastoScalarFieldEnum];
@@ -206,10 +213,28 @@ export declare const JornalScalarFieldEnum: {
     readonly tarea: "tarea";
     readonly montoPagado: "montoPagado";
     readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
     readonly trabajadorId: "trabajadorId";
-    readonly fincaId: "fincaId";
+    readonly loteId: "loteId";
 };
 export type JornalScalarFieldEnum = (typeof JornalScalarFieldEnum)[keyof typeof JornalScalarFieldEnum];
+export declare const BitacoraScalarFieldEnum: {
+    readonly id: "id";
+    readonly fecha: "fecha";
+    readonly actividad: "actividad";
+    readonly descripcion: "descripcion";
+    readonly cantidad: "cantidad";
+    readonly unidadMedida: "unidadMedida";
+    readonly costo: "costo";
+    readonly observaciones: "observaciones";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+    readonly loteId: "loteId";
+    readonly cultivoId: "cultivoId";
+    readonly productoId: "productoId";
+    readonly userId: "userId";
+};
+export type BitacoraScalarFieldEnum = (typeof BitacoraScalarFieldEnum)[keyof typeof BitacoraScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: "asc";
     readonly desc: "desc";

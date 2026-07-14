@@ -1,4 +1,5 @@
 import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
 import type * as Prisma from "../internal/prismaNamespace";
 /**
  * Model User
@@ -21,9 +22,9 @@ export type UserSumAggregateOutputType = {
 export type UserMinAggregateOutputType = {
     id: number | null;
     nombre: string | null;
-    email: string | null;
+    documento: string | null;
     password: string | null;
-    rol: string | null;
+    rol: $Enums.Rol | null;
     activo: boolean | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -31,9 +32,9 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
     id: number | null;
     nombre: string | null;
-    email: string | null;
+    documento: string | null;
     password: string | null;
-    rol: string | null;
+    rol: $Enums.Rol | null;
     activo: boolean | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -41,7 +42,7 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
     id: number;
     nombre: number;
-    email: number;
+    documento: number;
     password: number;
     rol: number;
     activo: number;
@@ -58,7 +59,7 @@ export type UserSumAggregateInputType = {
 export type UserMinAggregateInputType = {
     id?: true;
     nombre?: true;
-    email?: true;
+    documento?: true;
     password?: true;
     rol?: true;
     activo?: true;
@@ -68,7 +69,7 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
     id?: true;
     nombre?: true;
-    email?: true;
+    documento?: true;
     password?: true;
     rol?: true;
     activo?: true;
@@ -78,7 +79,7 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
     id?: true;
     nombre?: true;
-    email?: true;
+    documento?: true;
     password?: true;
     rol?: true;
     activo?: true;
@@ -164,10 +165,10 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 };
 export type UserGroupByOutputType = {
     id: number;
-    nombre: string;
-    email: string;
+    nombre: string | null;
+    documento: string;
     password: string;
-    rol: string;
+    rol: $Enums.Rol;
     activo: boolean;
     createdAt: Date;
     updatedAt: Date;
@@ -185,10 +186,10 @@ export type UserWhereInput = {
     OR?: Prisma.UserWhereInput[];
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     id?: Prisma.IntFilter<"User"> | number;
-    nombre?: Prisma.StringFilter<"User"> | string;
-    email?: Prisma.StringFilter<"User"> | string;
+    nombre?: Prisma.StringNullableFilter<"User"> | string | null;
+    documento?: Prisma.StringFilter<"User"> | string;
     password?: Prisma.StringFilter<"User"> | string;
-    rol?: Prisma.StringFilter<"User"> | string;
+    rol?: Prisma.EnumRolFilter<"User"> | $Enums.Rol;
     activo?: Prisma.BoolFilter<"User"> | boolean;
     createdAt?: Prisma.DateTimeFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
@@ -197,11 +198,12 @@ export type UserWhereInput = {
     movimientos?: Prisma.MovimientoInventarioListRelationFilter;
     ventas?: Prisma.VentaListRelationFilter;
     gastos?: Prisma.GastoListRelationFilter;
+    bitacoras?: Prisma.BitacoraListRelationFilter;
 };
 export type UserOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
-    nombre?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
+    nombre?: Prisma.SortOrderInput | Prisma.SortOrder;
+    documento?: Prisma.SortOrder;
     password?: Prisma.SortOrder;
     rol?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
@@ -212,16 +214,17 @@ export type UserOrderByWithRelationInput = {
     movimientos?: Prisma.MovimientoInventarioOrderByRelationAggregateInput;
     ventas?: Prisma.VentaOrderByRelationAggregateInput;
     gastos?: Prisma.GastoOrderByRelationAggregateInput;
+    bitacoras?: Prisma.BitacoraOrderByRelationAggregateInput;
 };
 export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
-    email?: string;
+    documento?: string;
     AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
     OR?: Prisma.UserWhereInput[];
     NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[];
-    nombre?: Prisma.StringFilter<"User"> | string;
+    nombre?: Prisma.StringNullableFilter<"User"> | string | null;
     password?: Prisma.StringFilter<"User"> | string;
-    rol?: Prisma.StringFilter<"User"> | string;
+    rol?: Prisma.EnumRolFilter<"User"> | $Enums.Rol;
     activo?: Prisma.BoolFilter<"User"> | boolean;
     createdAt?: Prisma.DateTimeFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
@@ -230,11 +233,12 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
     movimientos?: Prisma.MovimientoInventarioListRelationFilter;
     ventas?: Prisma.VentaListRelationFilter;
     gastos?: Prisma.GastoListRelationFilter;
-}, "id" | "email">;
+    bitacoras?: Prisma.BitacoraListRelationFilter;
+}, "id" | "documento">;
 export type UserOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
-    nombre?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
+    nombre?: Prisma.SortOrderInput | Prisma.SortOrder;
+    documento?: Prisma.SortOrder;
     password?: Prisma.SortOrder;
     rol?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
@@ -251,19 +255,19 @@ export type UserScalarWhereWithAggregatesInput = {
     OR?: Prisma.UserScalarWhereWithAggregatesInput[];
     NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[];
     id?: Prisma.IntWithAggregatesFilter<"User"> | number;
-    nombre?: Prisma.StringWithAggregatesFilter<"User"> | string;
-    email?: Prisma.StringWithAggregatesFilter<"User"> | string;
+    nombre?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null;
+    documento?: Prisma.StringWithAggregatesFilter<"User"> | string;
     password?: Prisma.StringWithAggregatesFilter<"User"> | string;
-    rol?: Prisma.StringWithAggregatesFilter<"User"> | string;
+    rol?: Prisma.EnumRolWithAggregatesFilter<"User"> | $Enums.Rol;
     activo?: Prisma.BoolWithAggregatesFilter<"User"> | boolean;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string;
     updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string;
 };
 export type UserCreateInput = {
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -272,13 +276,14 @@ export type UserCreateInput = {
     movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateInput = {
     id?: number;
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -287,12 +292,13 @@ export type UserUncheckedCreateInput = {
     movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserUpdateInput = {
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -301,13 +307,14 @@ export type UserUpdateInput = {
     movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -316,32 +323,33 @@ export type UserUncheckedUpdateInput = {
     movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUncheckedUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateManyInput = {
     id?: number;
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
 };
 export type UserUpdateManyMutationInput = {
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type UserUncheckedUpdateManyInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -349,7 +357,7 @@ export type UserUncheckedUpdateManyInput = {
 export type UserCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
+    documento?: Prisma.SortOrder;
     password?: Prisma.SortOrder;
     rol?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
@@ -362,7 +370,7 @@ export type UserAvgOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
+    documento?: Prisma.SortOrder;
     password?: Prisma.SortOrder;
     rol?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
@@ -372,7 +380,7 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
-    email?: Prisma.SortOrder;
+    documento?: Prisma.SortOrder;
     password?: Prisma.SortOrder;
     rol?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
@@ -386,8 +394,14 @@ export type UserScalarRelationFilter = {
     is?: Prisma.UserWhereInput;
     isNot?: Prisma.UserWhereInput;
 };
+export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null;
+};
 export type StringFieldUpdateOperationsInput = {
     set?: string;
+};
+export type EnumRolFieldUpdateOperationsInput = {
+    set?: $Enums.Rol;
 };
 export type BoolFieldUpdateOperationsInput = {
     set?: boolean;
@@ -462,11 +476,23 @@ export type UserUpdateOneRequiredWithoutGastosNestedInput = {
     connect?: Prisma.UserWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGastosInput, Prisma.UserUpdateWithoutGastosInput>, Prisma.UserUncheckedUpdateWithoutGastosInput>;
 };
+export type UserCreateNestedOneWithoutBitacorasInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutBitacorasInput, Prisma.UserUncheckedCreateWithoutBitacorasInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutBitacorasInput;
+    connect?: Prisma.UserWhereUniqueInput;
+};
+export type UserUpdateOneRequiredWithoutBitacorasNestedInput = {
+    create?: Prisma.XOR<Prisma.UserCreateWithoutBitacorasInput, Prisma.UserUncheckedCreateWithoutBitacorasInput>;
+    connectOrCreate?: Prisma.UserCreateOrConnectWithoutBitacorasInput;
+    upsert?: Prisma.UserUpsertWithoutBitacorasInput;
+    connect?: Prisma.UserWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBitacorasInput, Prisma.UserUpdateWithoutBitacorasInput>, Prisma.UserUncheckedUpdateWithoutBitacorasInput>;
+};
 export type UserCreateWithoutRefreshTokensInput = {
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -474,13 +500,14 @@ export type UserCreateWithoutRefreshTokensInput = {
     movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
     id?: number;
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -488,6 +515,7 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
     movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -503,10 +531,10 @@ export type UserUpdateToOneWithWhereWithoutRefreshTokensInput = {
     data: Prisma.XOR<Prisma.UserUpdateWithoutRefreshTokensInput, Prisma.UserUncheckedUpdateWithoutRefreshTokensInput>;
 };
 export type UserUpdateWithoutRefreshTokensInput = {
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -514,13 +542,14 @@ export type UserUpdateWithoutRefreshTokensInput = {
     movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -528,12 +557,13 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
     movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUncheckedUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutFincasInput = {
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -541,13 +571,14 @@ export type UserCreateWithoutFincasInput = {
     movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutFincasInput = {
     id?: number;
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -555,6 +586,7 @@ export type UserUncheckedCreateWithoutFincasInput = {
     movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutFincasInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -570,10 +602,10 @@ export type UserUpdateToOneWithWhereWithoutFincasInput = {
     data: Prisma.XOR<Prisma.UserUpdateWithoutFincasInput, Prisma.UserUncheckedUpdateWithoutFincasInput>;
 };
 export type UserUpdateWithoutFincasInput = {
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -581,13 +613,14 @@ export type UserUpdateWithoutFincasInput = {
     movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutFincasInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -595,12 +628,13 @@ export type UserUncheckedUpdateWithoutFincasInput = {
     movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUncheckedUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutMovimientosInput = {
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -608,13 +642,14 @@ export type UserCreateWithoutMovimientosInput = {
     refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutMovimientosInput = {
     id?: number;
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -622,6 +657,7 @@ export type UserUncheckedCreateWithoutMovimientosInput = {
     refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutMovimientosInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -637,10 +673,10 @@ export type UserUpdateToOneWithWhereWithoutMovimientosInput = {
     data: Prisma.XOR<Prisma.UserUpdateWithoutMovimientosInput, Prisma.UserUncheckedUpdateWithoutMovimientosInput>;
 };
 export type UserUpdateWithoutMovimientosInput = {
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -648,13 +684,14 @@ export type UserUpdateWithoutMovimientosInput = {
     refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutMovimientosInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -662,12 +699,13 @@ export type UserUncheckedUpdateWithoutMovimientosInput = {
     refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUncheckedUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutVentasInput = {
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -675,13 +713,14 @@ export type UserCreateWithoutVentasInput = {
     refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
     movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutVentasInput = {
     id?: number;
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -689,6 +728,7 @@ export type UserUncheckedCreateWithoutVentasInput = {
     refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
     movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutUserInput;
     gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutVentasInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -704,10 +744,10 @@ export type UserUpdateToOneWithWhereWithoutVentasInput = {
     data: Prisma.XOR<Prisma.UserUpdateWithoutVentasInput, Prisma.UserUncheckedUpdateWithoutVentasInput>;
 };
 export type UserUpdateWithoutVentasInput = {
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -715,13 +755,14 @@ export type UserUpdateWithoutVentasInput = {
     refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
     movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutVentasInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -729,12 +770,13 @@ export type UserUncheckedUpdateWithoutVentasInput = {
     refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
     movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutUserNestedInput;
     gastos?: Prisma.GastoUncheckedUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutUserNestedInput;
 };
 export type UserCreateWithoutGastosInput = {
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -742,13 +784,14 @@ export type UserCreateWithoutGastosInput = {
     refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
     movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutUserInput;
 };
 export type UserUncheckedCreateWithoutGastosInput = {
     id?: number;
-    nombre: string;
-    email: string;
+    nombre?: string | null;
+    documento: string;
     password: string;
-    rol?: string;
+    rol?: $Enums.Rol;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
@@ -756,6 +799,7 @@ export type UserUncheckedCreateWithoutGastosInput = {
     refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
     movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutUserInput;
     ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutUserInput;
 };
 export type UserCreateOrConnectWithoutGastosInput = {
     where: Prisma.UserWhereUniqueInput;
@@ -771,10 +815,10 @@ export type UserUpdateToOneWithWhereWithoutGastosInput = {
     data: Prisma.XOR<Prisma.UserUpdateWithoutGastosInput, Prisma.UserUncheckedUpdateWithoutGastosInput>;
 };
 export type UserUpdateWithoutGastosInput = {
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -782,13 +826,14 @@ export type UserUpdateWithoutGastosInput = {
     refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
     movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutUserNestedInput;
 };
 export type UserUncheckedUpdateWithoutGastosInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
-    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
-    email?: Prisma.StringFieldUpdateOperationsInput | string;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
     password?: Prisma.StringFieldUpdateOperationsInput | string;
-    rol?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -796,6 +841,78 @@ export type UserUncheckedUpdateWithoutGastosInput = {
     refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
     movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutUserNestedInput;
     ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutUserNestedInput;
+};
+export type UserCreateWithoutBitacorasInput = {
+    nombre?: string | null;
+    documento: string;
+    password: string;
+    rol?: $Enums.Rol;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    fincas?: Prisma.FincaCreateNestedManyWithoutUserInput;
+    refreshTokens?: Prisma.RefreshTokenCreateNestedManyWithoutUserInput;
+    movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutUserInput;
+    ventas?: Prisma.VentaCreateNestedManyWithoutUserInput;
+    gastos?: Prisma.GastoCreateNestedManyWithoutUserInput;
+};
+export type UserUncheckedCreateWithoutBitacorasInput = {
+    id?: number;
+    nombre?: string | null;
+    documento: string;
+    password: string;
+    rol?: $Enums.Rol;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    fincas?: Prisma.FincaUncheckedCreateNestedManyWithoutUserInput;
+    refreshTokens?: Prisma.RefreshTokenUncheckedCreateNestedManyWithoutUserInput;
+    movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutUserInput;
+    ventas?: Prisma.VentaUncheckedCreateNestedManyWithoutUserInput;
+    gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutUserInput;
+};
+export type UserCreateOrConnectWithoutBitacorasInput = {
+    where: Prisma.UserWhereUniqueInput;
+    create: Prisma.XOR<Prisma.UserCreateWithoutBitacorasInput, Prisma.UserUncheckedCreateWithoutBitacorasInput>;
+};
+export type UserUpsertWithoutBitacorasInput = {
+    update: Prisma.XOR<Prisma.UserUpdateWithoutBitacorasInput, Prisma.UserUncheckedUpdateWithoutBitacorasInput>;
+    create: Prisma.XOR<Prisma.UserCreateWithoutBitacorasInput, Prisma.UserUncheckedCreateWithoutBitacorasInput>;
+    where?: Prisma.UserWhereInput;
+};
+export type UserUpdateToOneWithWhereWithoutBitacorasInput = {
+    where?: Prisma.UserWhereInput;
+    data: Prisma.XOR<Prisma.UserUpdateWithoutBitacorasInput, Prisma.UserUncheckedUpdateWithoutBitacorasInput>;
+};
+export type UserUpdateWithoutBitacorasInput = {
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    fincas?: Prisma.FincaUpdateManyWithoutUserNestedInput;
+    refreshTokens?: Prisma.RefreshTokenUpdateManyWithoutUserNestedInput;
+    movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutUserNestedInput;
+    ventas?: Prisma.VentaUpdateManyWithoutUserNestedInput;
+    gastos?: Prisma.GastoUpdateManyWithoutUserNestedInput;
+};
+export type UserUncheckedUpdateWithoutBitacorasInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    nombre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    documento?: Prisma.StringFieldUpdateOperationsInput | string;
+    password?: Prisma.StringFieldUpdateOperationsInput | string;
+    rol?: Prisma.EnumRolFieldUpdateOperationsInput | $Enums.Rol;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    fincas?: Prisma.FincaUncheckedUpdateManyWithoutUserNestedInput;
+    refreshTokens?: Prisma.RefreshTokenUncheckedUpdateManyWithoutUserNestedInput;
+    movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutUserNestedInput;
+    ventas?: Prisma.VentaUncheckedUpdateManyWithoutUserNestedInput;
+    gastos?: Prisma.GastoUncheckedUpdateManyWithoutUserNestedInput;
 };
 /**
  * Count Type UserCountOutputType
@@ -806,6 +923,7 @@ export type UserCountOutputType = {
     movimientos: number;
     ventas: number;
     gastos: number;
+    bitacoras: number;
 };
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     fincas?: boolean | UserCountOutputTypeCountFincasArgs;
@@ -813,6 +931,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
     movimientos?: boolean | UserCountOutputTypeCountMovimientosArgs;
     ventas?: boolean | UserCountOutputTypeCountVentasArgs;
     gastos?: boolean | UserCountOutputTypeCountGastosArgs;
+    bitacoras?: boolean | UserCountOutputTypeCountBitacorasArgs;
 };
 /**
  * UserCountOutputType without action
@@ -853,10 +972,16 @@ export type UserCountOutputTypeCountVentasArgs<ExtArgs extends runtime.Types.Ext
 export type UserCountOutputTypeCountGastosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.GastoWhereInput;
 };
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountBitacorasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.BitacoraWhereInput;
+};
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     nombre?: boolean;
-    email?: boolean;
+    documento?: boolean;
     password?: boolean;
     rol?: boolean;
     activo?: boolean;
@@ -867,12 +992,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
     movimientos?: boolean | Prisma.User$movimientosArgs<ExtArgs>;
     ventas?: boolean | Prisma.User$ventasArgs<ExtArgs>;
     gastos?: boolean | Prisma.User$gastosArgs<ExtArgs>;
+    bitacoras?: boolean | Prisma.User$bitacorasArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["user"]>;
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     nombre?: boolean;
-    email?: boolean;
+    documento?: boolean;
     password?: boolean;
     rol?: boolean;
     activo?: boolean;
@@ -882,7 +1008,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     nombre?: boolean;
-    email?: boolean;
+    documento?: boolean;
     password?: boolean;
     rol?: boolean;
     activo?: boolean;
@@ -892,20 +1018,21 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectScalar = {
     id?: boolean;
     nombre?: boolean;
-    email?: boolean;
+    documento?: boolean;
     password?: boolean;
     rol?: boolean;
     activo?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
 };
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "email" | "password" | "rol" | "activo" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>;
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "documento" | "password" | "rol" | "activo" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>;
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     fincas?: boolean | Prisma.User$fincasArgs<ExtArgs>;
     refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>;
     movimientos?: boolean | Prisma.User$movimientosArgs<ExtArgs>;
     ventas?: boolean | Prisma.User$ventasArgs<ExtArgs>;
     gastos?: boolean | Prisma.User$gastosArgs<ExtArgs>;
+    bitacoras?: boolean | Prisma.User$bitacorasArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -918,13 +1045,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         movimientos: Prisma.$MovimientoInventarioPayload<ExtArgs>[];
         ventas: Prisma.$VentaPayload<ExtArgs>[];
         gastos: Prisma.$GastoPayload<ExtArgs>[];
+        bitacoras: Prisma.$BitacoraPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
-        nombre: string;
-        email: string;
+        nombre: string | null;
+        documento: string;
         password: string;
-        rol: string;
+        rol: $Enums.Rol;
         activo: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -1262,6 +1390,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
     movimientos<T extends Prisma.User$movimientosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$movimientosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovimientoInventarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     ventas<T extends Prisma.User$ventasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ventasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VentaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     gastos<T extends Prisma.User$gastosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$gastosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GastoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    bitacoras<T extends Prisma.User$bitacorasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bitacorasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BitacoraPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1289,9 +1418,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
     readonly id: Prisma.FieldRef<"User", 'Int'>;
     readonly nombre: Prisma.FieldRef<"User", 'String'>;
-    readonly email: Prisma.FieldRef<"User", 'String'>;
+    readonly documento: Prisma.FieldRef<"User", 'String'>;
     readonly password: Prisma.FieldRef<"User", 'String'>;
-    readonly rol: Prisma.FieldRef<"User", 'String'>;
+    readonly rol: Prisma.FieldRef<"User", 'Rol'>;
     readonly activo: Prisma.FieldRef<"User", 'Boolean'>;
     readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>;
@@ -1784,6 +1913,29 @@ export type User$gastosArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
     take?: number;
     skip?: number;
     distinct?: Prisma.GastoScalarFieldEnum | Prisma.GastoScalarFieldEnum[];
+};
+/**
+ * User.bitacoras
+ */
+export type User$bitacorasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bitacora
+     */
+    select?: Prisma.BitacoraSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Bitacora
+     */
+    omit?: Prisma.BitacoraOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.BitacoraInclude<ExtArgs> | null;
+    where?: Prisma.BitacoraWhereInput;
+    orderBy?: Prisma.BitacoraOrderByWithRelationInput | Prisma.BitacoraOrderByWithRelationInput[];
+    cursor?: Prisma.BitacoraWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.BitacoraScalarFieldEnum | Prisma.BitacoraScalarFieldEnum[];
 };
 /**
  * User without action

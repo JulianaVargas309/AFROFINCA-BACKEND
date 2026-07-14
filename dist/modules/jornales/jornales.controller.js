@@ -38,10 +38,12 @@ exports.findById = findById;
 exports.create = create;
 exports.update = update;
 exports.remove = remove;
+exports.findByTrabajador = findByTrabajador;
+exports.updateEstado = updateEstado;
 const jornalesService = __importStar(require("./jornales.service"));
 async function findAll(req, res) {
-    const trabajadorId = Number(req.query.trabajadorId);
-    const jornales = await jornalesService.findAll(trabajadorId, req.user.id);
+    const loteId = req.query.loteId ? Number(req.query.loteId) : undefined;
+    const jornales = await jornalesService.findAll(loteId && !isNaN(loteId) ? loteId : undefined, req.user.id);
     res.json({ success: true, data: jornales });
 }
 async function findById(req, res) {
@@ -62,5 +64,16 @@ async function remove(req, res) {
     const id = Number(req.params.id);
     await jornalesService.deleteJornal(id, req.user.id);
     res.json({ success: true, message: "Jornal eliminado" });
+}
+async function findByTrabajador(req, res) {
+    const trabajadorId = Number(req.params.trabajadorId);
+    const jornales = await jornalesService.findByTrabajador(trabajadorId, req.user.id);
+    res.json({ success: true, data: jornales });
+}
+async function updateEstado(req, res) {
+    const id = Number(req.params.id);
+    const { estado } = req.body;
+    const jornal = await jornalesService.updateEstado(id, estado, req.user.id);
+    res.json({ success: true, data: jornal });
 }
 //# sourceMappingURL=jornales.controller.js.map

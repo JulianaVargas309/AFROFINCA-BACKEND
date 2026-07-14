@@ -4,8 +4,8 @@ import { Rol } from "./roles"
 export interface AuthRequest extends Request {
   user?: {
     id: number
-    email: string
-    nombre: string
+    documento: string
+    nombre: string | null
     rol: Rol
   }
 }

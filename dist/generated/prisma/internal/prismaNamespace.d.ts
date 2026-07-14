@@ -245,6 +245,7 @@ export declare const ModelName: {
     readonly Gasto: "Gasto";
     readonly Trabajador: "Trabajador";
     readonly Jornal: "Jornal";
+    readonly Bitacora: "Bitacora";
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export interface TypeMapCb<GlobalOmitOptions = {}> extends runtime.Types.Utils.Fn<{
@@ -257,7 +258,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         omit: GlobalOmitOptions;
     };
     meta: {
-        modelProps: "user" | "refreshToken" | "finca" | "lote" | "cultivo" | "cliente" | "proveedor" | "producto" | "movimientoInventario" | "venta" | "detalleVenta" | "gasto" | "trabajador" | "jornal";
+        modelProps: "user" | "refreshToken" | "finca" | "lote" | "cultivo" | "cliente" | "proveedor" | "producto" | "movimientoInventario" | "venta" | "detalleVenta" | "gasto" | "trabajador" | "jornal" | "bitacora";
         txIsolationLevel: TransactionIsolationLevel;
     };
     model: {
@@ -1297,6 +1298,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
                 };
             };
         };
+        Bitacora: {
+            payload: Prisma.$BitacoraPayload<ExtArgs>;
+            fields: Prisma.BitacoraFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.BitacoraFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.BitacoraFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>;
+                };
+                findFirst: {
+                    args: Prisma.BitacoraFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.BitacoraFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>;
+                };
+                findMany: {
+                    args: Prisma.BitacoraFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>[];
+                };
+                create: {
+                    args: Prisma.BitacoraCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>;
+                };
+                createMany: {
+                    args: Prisma.BitacoraCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.BitacoraCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>[];
+                };
+                delete: {
+                    args: Prisma.BitacoraDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>;
+                };
+                update: {
+                    args: Prisma.BitacoraUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.BitacoraDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.BitacoraUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.BitacoraUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>[];
+                };
+                upsert: {
+                    args: Prisma.BitacoraUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$BitacoraPayload>;
+                };
+                aggregate: {
+                    args: Prisma.BitacoraAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateBitacora>;
+                };
+                groupBy: {
+                    args: Prisma.BitacoraGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BitacoraGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.BitacoraCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.BitacoraCountAggregateOutputType> | number;
+                };
+            };
+        };
     };
 } & {
     other: {
@@ -1334,7 +1409,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export declare const UserScalarFieldEnum: {
     readonly id: "id";
     readonly nombre: "nombre";
-    readonly email: "email";
+    readonly documento: "documento";
     readonly password: "password";
     readonly rol: "rol";
     readonly activo: "activo";
@@ -1375,6 +1450,7 @@ export declare const LoteScalarFieldEnum: {
 export type LoteScalarFieldEnum = (typeof LoteScalarFieldEnum)[keyof typeof LoteScalarFieldEnum];
 export declare const CultivoScalarFieldEnum: {
     readonly id: "id";
+    readonly tipo: "tipo";
     readonly nombre: "nombre";
     readonly variedad: "variedad";
     readonly fechaSiembra: "fechaSiembra";
@@ -1382,6 +1458,10 @@ export declare const CultivoScalarFieldEnum: {
     readonly fechaCosechaReal: "fechaCosechaReal";
     readonly estado: "estado";
     readonly cantidadSembrada: "cantidadSembrada";
+    readonly numeroSoca: "numeroSoca";
+    readonly edadCafetal: "edadCafetal";
+    readonly plantasPorHectarea: "plantasPorHectarea";
+    readonly rendimientoEstimado: "rendimientoEstimado";
     readonly activo: "activo";
     readonly createdAt: "createdAt";
     readonly updatedAt: "updatedAt";
@@ -1466,6 +1546,7 @@ export declare const GastoScalarFieldEnum: {
     readonly proveedorId: "proveedorId";
     readonly cultivoId: "cultivoId";
     readonly fincaId: "fincaId";
+    readonly loteId: "loteId";
     readonly userId: "userId";
 };
 export type GastoScalarFieldEnum = (typeof GastoScalarFieldEnum)[keyof typeof GastoScalarFieldEnum];
@@ -1488,10 +1569,28 @@ export declare const JornalScalarFieldEnum: {
     readonly tarea: "tarea";
     readonly montoPagado: "montoPagado";
     readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
     readonly trabajadorId: "trabajadorId";
-    readonly fincaId: "fincaId";
+    readonly loteId: "loteId";
 };
 export type JornalScalarFieldEnum = (typeof JornalScalarFieldEnum)[keyof typeof JornalScalarFieldEnum];
+export declare const BitacoraScalarFieldEnum: {
+    readonly id: "id";
+    readonly fecha: "fecha";
+    readonly actividad: "actividad";
+    readonly descripcion: "descripcion";
+    readonly cantidad: "cantidad";
+    readonly unidadMedida: "unidadMedida";
+    readonly costo: "costo";
+    readonly observaciones: "observaciones";
+    readonly createdAt: "createdAt";
+    readonly updatedAt: "updatedAt";
+    readonly loteId: "loteId";
+    readonly cultivoId: "cultivoId";
+    readonly productoId: "productoId";
+    readonly userId: "userId";
+};
+export type BitacoraScalarFieldEnum = (typeof BitacoraScalarFieldEnum)[keyof typeof BitacoraScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: "asc";
     readonly desc: "desc";
@@ -1527,6 +1626,14 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>;
 /**
+ * Reference to a field of type 'Rol'
+ */
+export type EnumRolFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Rol'>;
+/**
+ * Reference to a field of type 'Rol[]'
+ */
+export type ListEnumRolFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Rol[]'>;
+/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>;
@@ -1546,6 +1653,46 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>;
+/**
+ * Reference to a field of type 'TipoCultivo'
+ */
+export type EnumTipoCultivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoCultivo'>;
+/**
+ * Reference to a field of type 'TipoCultivo[]'
+ */
+export type ListEnumTipoCultivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TipoCultivo[]'>;
+/**
+ * Reference to a field of type 'EstadoCultivo'
+ */
+export type EnumEstadoCultivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoCultivo'>;
+/**
+ * Reference to a field of type 'EstadoCultivo[]'
+ */
+export type ListEnumEstadoCultivoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoCultivo[]'>;
+/**
+ * Reference to a field of type 'EstadoVenta'
+ */
+export type EnumEstadoVentaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoVenta'>;
+/**
+ * Reference to a field of type 'EstadoVenta[]'
+ */
+export type ListEnumEstadoVentaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoVenta[]'>;
+/**
+ * Reference to a field of type 'CategoriaGasto'
+ */
+export type EnumCategoriaGastoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategoriaGasto'>;
+/**
+ * Reference to a field of type 'CategoriaGasto[]'
+ */
+export type ListEnumCategoriaGastoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CategoriaGasto[]'>;
+/**
+ * Reference to a field of type 'ActividadBitacora'
+ */
+export type EnumActividadBitacoraFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActividadBitacora'>;
+/**
+ * Reference to a field of type 'ActividadBitacora[]'
+ */
+export type ListEnumActividadBitacoraFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActividadBitacora[]'>;
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -1669,6 +1816,7 @@ export type GlobalOmitConfig = {
     gasto?: Prisma.GastoOmit;
     trabajador?: Prisma.TrabajadorOmit;
     jornal?: Prisma.JornalOmit;
+    bitacora?: Prisma.BitacoraOmit;
 };
 export type LogLevel = 'info' | 'query' | 'warn' | 'error';
 export type LogDefinition = {

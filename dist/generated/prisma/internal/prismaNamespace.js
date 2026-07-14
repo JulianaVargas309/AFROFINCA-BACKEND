@@ -48,7 +48,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.JornalScalarFieldEnum = exports.TrabajadorScalarFieldEnum = exports.GastoScalarFieldEnum = exports.DetalleVentaScalarFieldEnum = exports.VentaScalarFieldEnum = exports.MovimientoInventarioScalarFieldEnum = exports.ProductoScalarFieldEnum = exports.ProveedorScalarFieldEnum = exports.ClienteScalarFieldEnum = exports.CultivoScalarFieldEnum = exports.LoteScalarFieldEnum = exports.FincaScalarFieldEnum = exports.RefreshTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.BitacoraScalarFieldEnum = exports.JornalScalarFieldEnum = exports.TrabajadorScalarFieldEnum = exports.GastoScalarFieldEnum = exports.DetalleVentaScalarFieldEnum = exports.VentaScalarFieldEnum = exports.MovimientoInventarioScalarFieldEnum = exports.ProductoScalarFieldEnum = exports.ProveedorScalarFieldEnum = exports.ClienteScalarFieldEnum = exports.CultivoScalarFieldEnum = exports.LoteScalarFieldEnum = exports.FincaScalarFieldEnum = exports.RefreshTokenScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 /**
  * Prisma Errors
@@ -116,7 +116,8 @@ exports.ModelName = {
     DetalleVenta: 'DetalleVenta',
     Gasto: 'Gasto',
     Trabajador: 'Trabajador',
-    Jornal: 'Jornal'
+    Jornal: 'Jornal',
+    Bitacora: 'Bitacora'
 };
 /**
  * Enums
@@ -130,7 +131,7 @@ exports.TransactionIsolationLevel = runtime.makeStrictEnum({
 exports.UserScalarFieldEnum = {
     id: 'id',
     nombre: 'nombre',
-    email: 'email',
+    documento: 'documento',
     password: 'password',
     rol: 'rol',
     activo: 'activo',
@@ -167,6 +168,7 @@ exports.LoteScalarFieldEnum = {
 };
 exports.CultivoScalarFieldEnum = {
     id: 'id',
+    tipo: 'tipo',
     nombre: 'nombre',
     variedad: 'variedad',
     fechaSiembra: 'fechaSiembra',
@@ -174,6 +176,10 @@ exports.CultivoScalarFieldEnum = {
     fechaCosechaReal: 'fechaCosechaReal',
     estado: 'estado',
     cantidadSembrada: 'cantidadSembrada',
+    numeroSoca: 'numeroSoca',
+    edadCafetal: 'edadCafetal',
+    plantasPorHectarea: 'plantasPorHectarea',
+    rendimientoEstimado: 'rendimientoEstimado',
     activo: 'activo',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -251,6 +257,7 @@ exports.GastoScalarFieldEnum = {
     proveedorId: 'proveedorId',
     cultivoId: 'cultivoId',
     fincaId: 'fincaId',
+    loteId: 'loteId',
     userId: 'userId'
 };
 exports.TrabajadorScalarFieldEnum = {
@@ -271,8 +278,25 @@ exports.JornalScalarFieldEnum = {
     tarea: 'tarea',
     montoPagado: 'montoPagado',
     createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     trabajadorId: 'trabajadorId',
-    fincaId: 'fincaId'
+    loteId: 'loteId'
+};
+exports.BitacoraScalarFieldEnum = {
+    id: 'id',
+    fecha: 'fecha',
+    actividad: 'actividad',
+    descripcion: 'descripcion',
+    cantidad: 'cantidad',
+    unidadMedida: 'unidadMedida',
+    costo: 'costo',
+    observaciones: 'observaciones',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    loteId: 'loteId',
+    cultivoId: 'cultivoId',
+    productoId: 'productoId',
+    userId: 'userId'
 };
 exports.SortOrder = {
     asc: 'asc',

@@ -16,6 +16,28 @@ import gastosRoutes from "./modules/gastos/gastos.routes"
 import trabajadoresRoutes from "./modules/trabajadores/trabajadores.routes"
 import jornalesRoutes from "./modules/jornales/jornales.routes"
 import bitacoraRoutes from "./modules/bitacora/bitacora.routes"
+import rolesRoutes from "./modules/roles/roles.routes"
+import permissionsRoutes from "./modules/permissions/permissions.routes"
+import auditoriaRoutes from "./modules/auditoria/auditoria.routes"
+import temporadasRoutes from "./modules/temporadas/temporadas.routes"
+import produccionRoutes from "./modules/produccion/produccion.routes"
+import rendimientoRoutes from "./modules/rendimiento/rendimiento.routes"
+import categoriasRoutes from "./modules/categorias/categorias.routes"
+import comprasRoutes from "./modules/compras/compras.routes"
+import ajustesRoutes from "./modules/ajustes/ajustes.routes"
+import alertasRoutes from "./modules/alertas/alertas.routes"
+import historialLaboralRoutes from "./modules/historial-laboral/historial-laboral.routes"
+import asistenciasRoutes from "./modules/asistencias/asistencias.routes"
+import actividadesAsignadasRoutes from "./modules/actividades-asignadas/actividades-asignadas.routes"
+import calendarioRoutes from "./modules/calendario/calendario.routes"
+import recordatoriosRoutes from "./modules/recordatorios/recordatorios.routes"
+import actividadesRoutes from "./modules/actividades/actividades.routes"
+import cajaRoutes from "./modules/caja/caja.routes"
+import flujoRoutes from "./modules/flujo/flujo.routes"
+import presupuestosRoutes from "./modules/presupuestos/presupuestos.routes"
+import notificacionesRoutes from "./modules/notificaciones/notificaciones.routes"
+import configuracionRoutes from "./modules/configuracion/configuracion.routes"
+import dashboardRoutes from "./modules/dashboard/dashboard.routes"
 import { env } from "./config/env"
 import { errorHandler } from "./middleware/error.middleware"
 
@@ -30,7 +52,7 @@ app.use(
   })
 )
 app.use(morgan("dev"))
-app.use(express.json())
+app.use(express.json({ limit: "50mb" }))
 
 app.get("/api/health", (_req, res) => {
   res.json({ success: true, message: "API funcionando" })
@@ -50,6 +72,28 @@ app.use("/api/gastos", gastosRoutes)
 app.use("/api/trabajadores", trabajadoresRoutes)
 app.use("/api/jornales", jornalesRoutes)
 app.use("/api/bitacora", bitacoraRoutes)
+app.use("/api/roles", rolesRoutes)
+app.use("/api/permisos", permissionsRoutes)
+app.use("/api/auditoria", auditoriaRoutes)
+app.use("/api/temporadas", temporadasRoutes)
+app.use("/api/produccion", produccionRoutes)
+app.use("/api/rendimiento", rendimientoRoutes)
+app.use("/api/categorias", categoriasRoutes)
+app.use("/api/compras", comprasRoutes)
+app.use("/api/ajustes", ajustesRoutes)
+app.use("/api/alertas", alertasRoutes)
+app.use("/api/historial-laboral", historialLaboralRoutes)
+app.use("/api/asistencias", asistenciasRoutes)
+app.use("/api/actividades-asignadas", actividadesAsignadasRoutes)
+app.use("/api/calendario", calendarioRoutes)
+app.use("/api/recordatorios", recordatoriosRoutes)
+app.use("/api/actividades", actividadesRoutes)
+app.use("/api/caja", cajaRoutes)
+app.use("/api/flujo", flujoRoutes)
+app.use("/api/presupuestos", presupuestosRoutes)
+app.use("/api/notificaciones", notificacionesRoutes)
+app.use("/api/configuracion", configuracionRoutes)
+app.use("/api/dashboard", dashboardRoutes)
 
 app.use(errorHandler)
 

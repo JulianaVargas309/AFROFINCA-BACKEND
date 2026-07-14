@@ -4,7 +4,10 @@ import * as lotesService from "./lotes.service"
 
 export async function findAll(req: AuthRequest, res: Response) {
   const fincaId = Number(req.query.fincaId)
-  const lotes = await lotesService.findAll(fincaId, req.user!.id)
+  const lotes = await lotesService.findAll(
+    isNaN(fincaId) ? 0 : fincaId,
+    req.user!.id
+  )
   res.json({ success: true, data: lotes })
 }
 

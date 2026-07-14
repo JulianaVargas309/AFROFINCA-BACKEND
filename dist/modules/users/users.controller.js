@@ -38,6 +38,10 @@ exports.findById = findById;
 exports.create = create;
 exports.update = update;
 exports.remove = remove;
+exports.changePassword = changePassword;
+exports.changeRol = changeRol;
+exports.updateProfile = updateProfile;
+exports.search = search;
 const usersService = __importStar(require("./users.service"));
 async function findAll(_req, res) {
     const users = await usersService.findAll();
@@ -61,5 +65,30 @@ async function remove(req, res) {
     const id = Number(req.params.id);
     const user = await usersService.deactivateUser(id);
     res.json({ success: true, data: user });
+}
+async function changePassword(req, res) {
+    const id = Number(req.params.id);
+    const user = await usersService.changePassword(id, req.body);
+    res.json({ success: true, data: user });
+}
+async function changeRol(req, res) {
+    const id = Number(req.params.id);
+    const user = await usersService.changeRol(id, req.body);
+    res.json({ success: true, data: user });
+}
+async function updateProfile(req, res) {
+    const id = Number(req.params.id);
+    const user = await usersService.updateProfile(id, req.body);
+    res.json({ success: true, data: user });
+}
+async function search(req, res) {
+    const query = req.query.q;
+    if (!query) {
+        const users = await usersService.findAll();
+        res.json({ success: true, data: users });
+        return;
+    }
+    const users = await usersService.search(query);
+    res.json({ success: true, data: users });
 }
 //# sourceMappingURL=users.controller.js.map

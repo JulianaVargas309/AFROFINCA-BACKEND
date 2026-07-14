@@ -1,14 +1,12 @@
 import { z } from "zod"
 
 export const registerSchema = z.object({
-  nombre: z.string().min(2).max(100),
-  email: z.string().email(),
-  password: z.string().min(6).max(100),
+  documento: z.string().min(6).max(12),
   rol: z.enum(["ADMIN", "FAMILIAR", "CONSULTA"]).optional().default("FAMILIAR"),
 })
 
 export const loginSchema = z.object({
-  email: z.string().email(),
+  documento: z.string().min(1),
   password: z.string().min(1),
 })
 

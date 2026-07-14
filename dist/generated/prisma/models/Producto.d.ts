@@ -230,6 +230,7 @@ export type ProductoWhereInput = {
     updatedAt?: Prisma.DateTimeFilter<"Producto"> | Date | string;
     movimientos?: Prisma.MovimientoInventarioListRelationFilter;
     detalleVentas?: Prisma.DetalleVentaListRelationFilter;
+    bitacoras?: Prisma.BitacoraListRelationFilter;
 };
 export type ProductoOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -245,6 +246,7 @@ export type ProductoOrderByWithRelationInput = {
     updatedAt?: Prisma.SortOrder;
     movimientos?: Prisma.MovimientoInventarioOrderByRelationAggregateInput;
     detalleVentas?: Prisma.DetalleVentaOrderByRelationAggregateInput;
+    bitacoras?: Prisma.BitacoraOrderByRelationAggregateInput;
 };
 export type ProductoWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -263,6 +265,7 @@ export type ProductoWhereUniqueInput = Prisma.AtLeast<{
     updatedAt?: Prisma.DateTimeFilter<"Producto"> | Date | string;
     movimientos?: Prisma.MovimientoInventarioListRelationFilter;
     detalleVentas?: Prisma.DetalleVentaListRelationFilter;
+    bitacoras?: Prisma.BitacoraListRelationFilter;
 }, "id">;
 export type ProductoOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -311,6 +314,7 @@ export type ProductoCreateInput = {
     updatedAt?: Date | string;
     movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutProductoInput;
     detalleVentas?: Prisma.DetalleVentaCreateNestedManyWithoutProductoInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutProductoInput;
 };
 export type ProductoUncheckedCreateInput = {
     id?: number;
@@ -326,6 +330,7 @@ export type ProductoUncheckedCreateInput = {
     updatedAt?: Date | string;
     movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutProductoInput;
     detalleVentas?: Prisma.DetalleVentaUncheckedCreateNestedManyWithoutProductoInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutProductoInput;
 };
 export type ProductoUpdateInput = {
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
@@ -340,6 +345,7 @@ export type ProductoUpdateInput = {
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutProductoNestedInput;
     detalleVentas?: Prisma.DetalleVentaUpdateManyWithoutProductoNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutProductoNestedInput;
 };
 export type ProductoUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -355,6 +361,7 @@ export type ProductoUncheckedUpdateInput = {
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutProductoNestedInput;
     detalleVentas?: Prisma.DetalleVentaUncheckedUpdateManyWithoutProductoNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutProductoNestedInput;
 };
 export type ProductoCreateManyInput = {
     id?: number;
@@ -449,6 +456,10 @@ export type ProductoScalarRelationFilter = {
     is?: Prisma.ProductoWhereInput;
     isNot?: Prisma.ProductoWhereInput;
 };
+export type ProductoNullableScalarRelationFilter = {
+    is?: Prisma.ProductoWhereInput | null;
+    isNot?: Prisma.ProductoWhereInput | null;
+};
 export type FloatFieldUpdateOperationsInput = {
     set?: number;
     increment?: number;
@@ -480,6 +491,20 @@ export type ProductoUpdateOneRequiredWithoutDetalleVentasNestedInput = {
     connect?: Prisma.ProductoWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.ProductoUpdateToOneWithWhereWithoutDetalleVentasInput, Prisma.ProductoUpdateWithoutDetalleVentasInput>, Prisma.ProductoUncheckedUpdateWithoutDetalleVentasInput>;
 };
+export type ProductoCreateNestedOneWithoutBitacorasInput = {
+    create?: Prisma.XOR<Prisma.ProductoCreateWithoutBitacorasInput, Prisma.ProductoUncheckedCreateWithoutBitacorasInput>;
+    connectOrCreate?: Prisma.ProductoCreateOrConnectWithoutBitacorasInput;
+    connect?: Prisma.ProductoWhereUniqueInput;
+};
+export type ProductoUpdateOneWithoutBitacorasNestedInput = {
+    create?: Prisma.XOR<Prisma.ProductoCreateWithoutBitacorasInput, Prisma.ProductoUncheckedCreateWithoutBitacorasInput>;
+    connectOrCreate?: Prisma.ProductoCreateOrConnectWithoutBitacorasInput;
+    upsert?: Prisma.ProductoUpsertWithoutBitacorasInput;
+    disconnect?: Prisma.ProductoWhereInput | boolean;
+    delete?: Prisma.ProductoWhereInput | boolean;
+    connect?: Prisma.ProductoWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.ProductoUpdateToOneWithWhereWithoutBitacorasInput, Prisma.ProductoUpdateWithoutBitacorasInput>, Prisma.ProductoUncheckedUpdateWithoutBitacorasInput>;
+};
 export type ProductoCreateWithoutMovimientosInput = {
     nombre: string;
     descripcion?: string | null;
@@ -492,6 +517,7 @@ export type ProductoCreateWithoutMovimientosInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     detalleVentas?: Prisma.DetalleVentaCreateNestedManyWithoutProductoInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutProductoInput;
 };
 export type ProductoUncheckedCreateWithoutMovimientosInput = {
     id?: number;
@@ -506,6 +532,7 @@ export type ProductoUncheckedCreateWithoutMovimientosInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     detalleVentas?: Prisma.DetalleVentaUncheckedCreateNestedManyWithoutProductoInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutProductoInput;
 };
 export type ProductoCreateOrConnectWithoutMovimientosInput = {
     where: Prisma.ProductoWhereUniqueInput;
@@ -532,6 +559,7 @@ export type ProductoUpdateWithoutMovimientosInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     detalleVentas?: Prisma.DetalleVentaUpdateManyWithoutProductoNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutProductoNestedInput;
 };
 export type ProductoUncheckedUpdateWithoutMovimientosInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -546,6 +574,7 @@ export type ProductoUncheckedUpdateWithoutMovimientosInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     detalleVentas?: Prisma.DetalleVentaUncheckedUpdateManyWithoutProductoNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutProductoNestedInput;
 };
 export type ProductoCreateWithoutDetalleVentasInput = {
     nombre: string;
@@ -559,6 +588,7 @@ export type ProductoCreateWithoutDetalleVentasInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutProductoInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutProductoInput;
 };
 export type ProductoUncheckedCreateWithoutDetalleVentasInput = {
     id?: number;
@@ -573,6 +603,7 @@ export type ProductoUncheckedCreateWithoutDetalleVentasInput = {
     createdAt?: Date | string;
     updatedAt?: Date | string;
     movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutProductoInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutProductoInput;
 };
 export type ProductoCreateOrConnectWithoutDetalleVentasInput = {
     where: Prisma.ProductoWhereUniqueInput;
@@ -599,6 +630,7 @@ export type ProductoUpdateWithoutDetalleVentasInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutProductoNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutProductoNestedInput;
 };
 export type ProductoUncheckedUpdateWithoutDetalleVentasInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -613,6 +645,78 @@ export type ProductoUncheckedUpdateWithoutDetalleVentasInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutProductoNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutProductoNestedInput;
+};
+export type ProductoCreateWithoutBitacorasInput = {
+    nombre: string;
+    descripcion?: string | null;
+    categoria?: string | null;
+    unidadMedida?: string;
+    stockActual?: number;
+    stockMinimo?: number;
+    precioUnitario?: number | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    movimientos?: Prisma.MovimientoInventarioCreateNestedManyWithoutProductoInput;
+    detalleVentas?: Prisma.DetalleVentaCreateNestedManyWithoutProductoInput;
+};
+export type ProductoUncheckedCreateWithoutBitacorasInput = {
+    id?: number;
+    nombre: string;
+    descripcion?: string | null;
+    categoria?: string | null;
+    unidadMedida?: string;
+    stockActual?: number;
+    stockMinimo?: number;
+    precioUnitario?: number | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    movimientos?: Prisma.MovimientoInventarioUncheckedCreateNestedManyWithoutProductoInput;
+    detalleVentas?: Prisma.DetalleVentaUncheckedCreateNestedManyWithoutProductoInput;
+};
+export type ProductoCreateOrConnectWithoutBitacorasInput = {
+    where: Prisma.ProductoWhereUniqueInput;
+    create: Prisma.XOR<Prisma.ProductoCreateWithoutBitacorasInput, Prisma.ProductoUncheckedCreateWithoutBitacorasInput>;
+};
+export type ProductoUpsertWithoutBitacorasInput = {
+    update: Prisma.XOR<Prisma.ProductoUpdateWithoutBitacorasInput, Prisma.ProductoUncheckedUpdateWithoutBitacorasInput>;
+    create: Prisma.XOR<Prisma.ProductoCreateWithoutBitacorasInput, Prisma.ProductoUncheckedCreateWithoutBitacorasInput>;
+    where?: Prisma.ProductoWhereInput;
+};
+export type ProductoUpdateToOneWithWhereWithoutBitacorasInput = {
+    where?: Prisma.ProductoWhereInput;
+    data: Prisma.XOR<Prisma.ProductoUpdateWithoutBitacorasInput, Prisma.ProductoUncheckedUpdateWithoutBitacorasInput>;
+};
+export type ProductoUpdateWithoutBitacorasInput = {
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    unidadMedida?: Prisma.StringFieldUpdateOperationsInput | string;
+    stockActual?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stockMinimo?: Prisma.FloatFieldUpdateOperationsInput | number;
+    precioUnitario?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    movimientos?: Prisma.MovimientoInventarioUpdateManyWithoutProductoNestedInput;
+    detalleVentas?: Prisma.DetalleVentaUpdateManyWithoutProductoNestedInput;
+};
+export type ProductoUncheckedUpdateWithoutBitacorasInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    unidadMedida?: Prisma.StringFieldUpdateOperationsInput | string;
+    stockActual?: Prisma.FloatFieldUpdateOperationsInput | number;
+    stockMinimo?: Prisma.FloatFieldUpdateOperationsInput | number;
+    precioUnitario?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    movimientos?: Prisma.MovimientoInventarioUncheckedUpdateManyWithoutProductoNestedInput;
+    detalleVentas?: Prisma.DetalleVentaUncheckedUpdateManyWithoutProductoNestedInput;
 };
 /**
  * Count Type ProductoCountOutputType
@@ -620,10 +724,12 @@ export type ProductoUncheckedUpdateWithoutDetalleVentasInput = {
 export type ProductoCountOutputType = {
     movimientos: number;
     detalleVentas: number;
+    bitacoras: number;
 };
 export type ProductoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     movimientos?: boolean | ProductoCountOutputTypeCountMovimientosArgs;
     detalleVentas?: boolean | ProductoCountOutputTypeCountDetalleVentasArgs;
+    bitacoras?: boolean | ProductoCountOutputTypeCountBitacorasArgs;
 };
 /**
  * ProductoCountOutputType without action
@@ -646,6 +752,12 @@ export type ProductoCountOutputTypeCountMovimientosArgs<ExtArgs extends runtime.
 export type ProductoCountOutputTypeCountDetalleVentasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.DetalleVentaWhereInput;
 };
+/**
+ * ProductoCountOutputType without action
+ */
+export type ProductoCountOutputTypeCountBitacorasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.BitacoraWhereInput;
+};
 export type ProductoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
     nombre?: boolean;
@@ -660,6 +772,7 @@ export type ProductoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
     updatedAt?: boolean;
     movimientos?: boolean | Prisma.Producto$movimientosArgs<ExtArgs>;
     detalleVentas?: boolean | Prisma.Producto$detalleVentasArgs<ExtArgs>;
+    bitacoras?: boolean | Prisma.Producto$bitacorasArgs<ExtArgs>;
     _count?: boolean | Prisma.ProductoCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["producto"]>;
 export type ProductoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -705,6 +818,7 @@ export type ProductoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type ProductoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     movimientos?: boolean | Prisma.Producto$movimientosArgs<ExtArgs>;
     detalleVentas?: boolean | Prisma.Producto$detalleVentasArgs<ExtArgs>;
+    bitacoras?: boolean | Prisma.Producto$bitacorasArgs<ExtArgs>;
     _count?: boolean | Prisma.ProductoCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type ProductoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
@@ -714,6 +828,7 @@ export type $ProductoPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     objects: {
         movimientos: Prisma.$MovimientoInventarioPayload<ExtArgs>[];
         detalleVentas: Prisma.$DetalleVentaPayload<ExtArgs>[];
+        bitacoras: Prisma.$BitacoraPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -1058,6 +1173,7 @@ export interface Prisma__ProductoClient<T, Null = never, ExtArgs extends runtime
     readonly [Symbol.toStringTag]: "PrismaPromise";
     movimientos<T extends Prisma.Producto$movimientosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$movimientosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MovimientoInventarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     detalleVentas<T extends Prisma.Producto$detalleVentasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$detalleVentasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DetalleVentaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    bitacoras<T extends Prisma.Producto$bitacorasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Producto$bitacorasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BitacoraPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1514,6 +1630,29 @@ export type Producto$detalleVentasArgs<ExtArgs extends runtime.Types.Extensions.
     take?: number;
     skip?: number;
     distinct?: Prisma.DetalleVentaScalarFieldEnum | Prisma.DetalleVentaScalarFieldEnum[];
+};
+/**
+ * Producto.bitacoras
+ */
+export type Producto$bitacorasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bitacora
+     */
+    select?: Prisma.BitacoraSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Bitacora
+     */
+    omit?: Prisma.BitacoraOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.BitacoraInclude<ExtArgs> | null;
+    where?: Prisma.BitacoraWhereInput;
+    orderBy?: Prisma.BitacoraOrderByWithRelationInput | Prisma.BitacoraOrderByWithRelationInput[];
+    cursor?: Prisma.BitacoraWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.BitacoraScalarFieldEnum | Prisma.BitacoraScalarFieldEnum[];
 };
 /**
  * Producto without action

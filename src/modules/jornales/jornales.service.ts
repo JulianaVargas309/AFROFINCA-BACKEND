@@ -3,9 +3,15 @@ import { AppError } from "../../types"
 import { verifyLoteOwnership } from "../../lib/ownership"
 import { CreateJornalInput, UpdateJornalInput } from "./jornales.schema"
 
-export async function findAll(loteId: number, userId: number) {
+export async function findAll(loteId: number | undefined, userId: number) {
+  const where: Record<string, unknown> = {
+    lote: { finca: { userId } },
+  }
+  if (loteId) {
+    where.loteId = loteId
+  }
   return prisma.jornal.findMany({
-    where: { loteId, lote: { finca: { userId } } },
+    where,
     orderBy: { fecha: "desc" },
     include: {
       trabajador: { select: { id: true, nombre: true } },
@@ -51,4 +57,29 @@ export async function deleteJornal(id: number, userId: number) {
   })
   if (!jornal) throw new AppError("Jornal no encontrado", 404)
   return prisma.jornal.delete({ where: { id } })
+}
+
+export async function findByTrabajador(trabajadorId: number, userId: number) {
+  return prisma.jornal.findMany({
+    where: {
+      trabajadorId,
+      lote: { finca: { userId } },
+    },
+    orderBy: { fecha: "desc" },
+    include: {
+      trabajador: { select: { id: true, nombre: true } },
+      lote: { select: { id: true, nombre: true } },
+    },
+  })
+}
+
+export async function updateEstado(id: number, estado: string, userId: number) {
+  const jornal = await prisma.jornal.findFirst({
+    where: { id, lote: { finca: { userId } } },
+  })
+  if (!jornal) throw new AppError("Jornal no encontrado", 404)
+  return prisma.jornal.update({
+    where: { id },
+    data: { estado: estado as any },
+  })
 }

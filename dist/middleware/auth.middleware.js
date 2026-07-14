@@ -9,7 +9,7 @@ const env_1 = require("../config/env");
 function authenticate(req, res, next) {
     const header = req.headers.authorization;
     if (!header || !header.startsWith("Bearer ")) {
-        res.status(401).json({ success: false, error: "Token no proporcionado" });
+        res.status(401).json({ success: false, message: "Token no proporcionado" });
         return;
     }
     const token = header.split(" ")[1];
@@ -19,7 +19,7 @@ function authenticate(req, res, next) {
         next();
     }
     catch {
-        res.status(401).json({ success: false, error: "Token inválido" });
+        res.status(401).json({ success: false, message: "Token inválido" });
     }
 }
 //# sourceMappingURL=auth.middleware.js.map

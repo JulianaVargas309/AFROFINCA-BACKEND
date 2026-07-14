@@ -20,6 +20,9 @@ const ventas_routes_1 = __importDefault(require("./modules/ventas/ventas.routes"
 const gastos_routes_1 = __importDefault(require("./modules/gastos/gastos.routes"));
 const trabajadores_routes_1 = __importDefault(require("./modules/trabajadores/trabajadores.routes"));
 const jornales_routes_1 = __importDefault(require("./modules/jornales/jornales.routes"));
+const bitacora_routes_1 = __importDefault(require("./modules/bitacora/bitacora.routes"));
+const roles_routes_1 = __importDefault(require("./modules/roles/roles.routes"));
+const permissions_routes_1 = __importDefault(require("./modules/permissions/permissions.routes"));
 const env_1 = require("./config/env");
 const error_middleware_1 = require("./middleware/error.middleware");
 const app = (0, express_1.default)();
@@ -47,6 +50,9 @@ app.use("/api/ventas", ventas_routes_1.default);
 app.use("/api/gastos", gastos_routes_1.default);
 app.use("/api/trabajadores", trabajadores_routes_1.default);
 app.use("/api/jornales", jornales_routes_1.default);
+app.use("/api/bitacora", bitacora_routes_1.default);
+app.use("/api/roles", roles_routes_1.default);
+app.use("/api/permisos", permissions_routes_1.default);
 app.use(error_middleware_1.errorHandler);
 exports.default = app;
 //# sourceMappingURL=app.js.map

@@ -37,6 +37,7 @@ exports.findAll = findAll;
 exports.findById = findById;
 exports.create = create;
 exports.update = update;
+exports.remove = remove;
 const ventasService = __importStar(require("./ventas.service"));
 async function findAll(req, res) {
     const { page, limit } = req.query;
@@ -56,5 +57,10 @@ async function update(req, res) {
     const id = Number(req.params.id);
     const venta = await ventasService.updateVenta(id, req.body, req.user.id);
     res.json({ success: true, data: venta });
+}
+async function remove(req, res) {
+    const id = Number(req.params.id);
+    await ventasService.deleteVenta(id, req.user.id);
+    res.json({ success: true, message: "Venta anulada" });
 }
 //# sourceMappingURL=ventas.controller.js.map

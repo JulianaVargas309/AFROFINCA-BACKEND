@@ -3,10 +3,17 @@ import { AppError } from "../../types"
 import { verifyLoteOwnership } from "../../lib/ownership"
 import { CreateCultivoInput, UpdateCultivoInput } from "./cultivos.schema"
 
-export async function findAll(loteId: number, userId: number) {
-  await verifyLoteOwnership(loteId, userId)
+export async function findAll(loteId: number | undefined, userId: number) {
+  const where: Record<string, unknown> = {
+    activo: true,
+    lote: { finca: { userId } },
+  }
+  if (loteId) {
+    await verifyLoteOwnership(loteId, userId)
+    where.loteId = loteId
+  }
   return prisma.cultivo.findMany({
-    where: { loteId, activo: true },
+    where,
     orderBy: { fechaSiembra: "desc" },
     include: { lote: { select: { id: true, nombre: true } } },
   })

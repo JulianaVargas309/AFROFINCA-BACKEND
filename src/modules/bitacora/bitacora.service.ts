@@ -37,8 +37,10 @@ export async function findAll(
     user: { select: { id: true, nombre: true } },
   }
 
-  if (!filters.page && !filters.limit) {
-    return prisma.bitacora.findMany({ where, orderBy, include })
+  if (!filters.page) {
+    const opts: Record<string, unknown> = { where, orderBy, include }
+    if (filters.limit) opts.take = filters.limit
+    return prisma.bitacora.findMany(opts as Parameters<typeof prisma.bitacora.findMany>[0])
   }
 
   const params = getPaginationParams({ page: filters.page, limit: filters.limit })

@@ -3,8 +3,11 @@ import { AuthRequest } from "../../types"
 import * as jornalesService from "./jornales.service"
 
 export async function findAll(req: AuthRequest, res: Response) {
-  const loteId = Number(req.query.loteId)
-  const jornales = await jornalesService.findAll(loteId, req.user!.id)
+  const loteId = req.query.loteId ? Number(req.query.loteId) : undefined
+  const jornales = await jornalesService.findAll(
+    loteId && !isNaN(loteId) ? loteId : undefined,
+    req.user!.id
+  )
   res.json({ success: true, data: jornales })
 }
 
@@ -29,4 +32,17 @@ export async function remove(req: AuthRequest, res: Response) {
   const id = Number(req.params.id)
   await jornalesService.deleteJornal(id, req.user!.id)
   res.json({ success: true, message: "Jornal eliminado" })
+}
+
+export async function findByTrabajador(req: AuthRequest, res: Response) {
+  const trabajadorId = Number(req.params.trabajadorId)
+  const jornales = await jornalesService.findByTrabajador(trabajadorId, req.user!.id)
+  res.json({ success: true, data: jornales })
+}
+
+export async function updateEstado(req: AuthRequest, res: Response) {
+  const id = Number(req.params.id)
+  const { estado } = req.body
+  const jornal = await jornalesService.updateEstado(id, estado, req.user!.id)
+  res.json({ success: true, data: jornal })
 }

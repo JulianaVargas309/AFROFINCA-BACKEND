@@ -17,14 +17,14 @@ export type JornalAvgAggregateOutputType = {
     horas: number | null;
     montoPagado: number | null;
     trabajadorId: number | null;
-    fincaId: number | null;
+    loteId: number | null;
 };
 export type JornalSumAggregateOutputType = {
     id: number | null;
     horas: number | null;
     montoPagado: number | null;
     trabajadorId: number | null;
-    fincaId: number | null;
+    loteId: number | null;
 };
 export type JornalMinAggregateOutputType = {
     id: number | null;
@@ -33,8 +33,9 @@ export type JornalMinAggregateOutputType = {
     tarea: string | null;
     montoPagado: number | null;
     createdAt: Date | null;
+    updatedAt: Date | null;
     trabajadorId: number | null;
-    fincaId: number | null;
+    loteId: number | null;
 };
 export type JornalMaxAggregateOutputType = {
     id: number | null;
@@ -43,8 +44,9 @@ export type JornalMaxAggregateOutputType = {
     tarea: string | null;
     montoPagado: number | null;
     createdAt: Date | null;
+    updatedAt: Date | null;
     trabajadorId: number | null;
-    fincaId: number | null;
+    loteId: number | null;
 };
 export type JornalCountAggregateOutputType = {
     id: number;
@@ -53,8 +55,9 @@ export type JornalCountAggregateOutputType = {
     tarea: number;
     montoPagado: number;
     createdAt: number;
+    updatedAt: number;
     trabajadorId: number;
-    fincaId: number;
+    loteId: number;
     _all: number;
 };
 export type JornalAvgAggregateInputType = {
@@ -62,14 +65,14 @@ export type JornalAvgAggregateInputType = {
     horas?: true;
     montoPagado?: true;
     trabajadorId?: true;
-    fincaId?: true;
+    loteId?: true;
 };
 export type JornalSumAggregateInputType = {
     id?: true;
     horas?: true;
     montoPagado?: true;
     trabajadorId?: true;
-    fincaId?: true;
+    loteId?: true;
 };
 export type JornalMinAggregateInputType = {
     id?: true;
@@ -78,8 +81,9 @@ export type JornalMinAggregateInputType = {
     tarea?: true;
     montoPagado?: true;
     createdAt?: true;
+    updatedAt?: true;
     trabajadorId?: true;
-    fincaId?: true;
+    loteId?: true;
 };
 export type JornalMaxAggregateInputType = {
     id?: true;
@@ -88,8 +92,9 @@ export type JornalMaxAggregateInputType = {
     tarea?: true;
     montoPagado?: true;
     createdAt?: true;
+    updatedAt?: true;
     trabajadorId?: true;
-    fincaId?: true;
+    loteId?: true;
 };
 export type JornalCountAggregateInputType = {
     id?: true;
@@ -98,8 +103,9 @@ export type JornalCountAggregateInputType = {
     tarea?: true;
     montoPagado?: true;
     createdAt?: true;
+    updatedAt?: true;
     trabajadorId?: true;
-    fincaId?: true;
+    loteId?: true;
     _all?: true;
 };
 export type JornalAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -185,8 +191,9 @@ export type JornalGroupByOutputType = {
     tarea: string | null;
     montoPagado: number | null;
     createdAt: Date;
+    updatedAt: Date;
     trabajadorId: number;
-    fincaId: number;
+    loteId: number;
     _count: JornalCountAggregateOutputType | null;
     _avg: JornalAvgAggregateOutputType | null;
     _sum: JornalSumAggregateOutputType | null;
@@ -206,10 +213,11 @@ export type JornalWhereInput = {
     tarea?: Prisma.StringNullableFilter<"Jornal"> | string | null;
     montoPagado?: Prisma.FloatNullableFilter<"Jornal"> | number | null;
     createdAt?: Prisma.DateTimeFilter<"Jornal"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"Jornal"> | Date | string;
     trabajadorId?: Prisma.IntFilter<"Jornal"> | number;
-    fincaId?: Prisma.IntFilter<"Jornal"> | number;
+    loteId?: Prisma.IntFilter<"Jornal"> | number;
     trabajador?: Prisma.XOR<Prisma.TrabajadorScalarRelationFilter, Prisma.TrabajadorWhereInput>;
-    finca?: Prisma.XOR<Prisma.FincaScalarRelationFilter, Prisma.FincaWhereInput>;
+    lote?: Prisma.XOR<Prisma.LoteScalarRelationFilter, Prisma.LoteWhereInput>;
 };
 export type JornalOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
@@ -218,10 +226,11 @@ export type JornalOrderByWithRelationInput = {
     tarea?: Prisma.SortOrderInput | Prisma.SortOrder;
     montoPagado?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
     trabajadorId?: Prisma.SortOrder;
-    fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
     trabajador?: Prisma.TrabajadorOrderByWithRelationInput;
-    finca?: Prisma.FincaOrderByWithRelationInput;
+    lote?: Prisma.LoteOrderByWithRelationInput;
 };
 export type JornalWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
@@ -233,10 +242,11 @@ export type JornalWhereUniqueInput = Prisma.AtLeast<{
     tarea?: Prisma.StringNullableFilter<"Jornal"> | string | null;
     montoPagado?: Prisma.FloatNullableFilter<"Jornal"> | number | null;
     createdAt?: Prisma.DateTimeFilter<"Jornal"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"Jornal"> | Date | string;
     trabajadorId?: Prisma.IntFilter<"Jornal"> | number;
-    fincaId?: Prisma.IntFilter<"Jornal"> | number;
+    loteId?: Prisma.IntFilter<"Jornal"> | number;
     trabajador?: Prisma.XOR<Prisma.TrabajadorScalarRelationFilter, Prisma.TrabajadorWhereInput>;
-    finca?: Prisma.XOR<Prisma.FincaScalarRelationFilter, Prisma.FincaWhereInput>;
+    lote?: Prisma.XOR<Prisma.LoteScalarRelationFilter, Prisma.LoteWhereInput>;
 }, "id">;
 export type JornalOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
@@ -245,8 +255,9 @@ export type JornalOrderByWithAggregationInput = {
     tarea?: Prisma.SortOrderInput | Prisma.SortOrder;
     montoPagado?: Prisma.SortOrderInput | Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
     trabajadorId?: Prisma.SortOrder;
-    fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
     _count?: Prisma.JornalCountOrderByAggregateInput;
     _avg?: Prisma.JornalAvgOrderByAggregateInput;
     _max?: Prisma.JornalMaxOrderByAggregateInput;
@@ -263,8 +274,9 @@ export type JornalScalarWhereWithAggregatesInput = {
     tarea?: Prisma.StringNullableWithAggregatesFilter<"Jornal"> | string | null;
     montoPagado?: Prisma.FloatNullableWithAggregatesFilter<"Jornal"> | number | null;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"Jornal"> | Date | string;
+    updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Jornal"> | Date | string;
     trabajadorId?: Prisma.IntWithAggregatesFilter<"Jornal"> | number;
-    fincaId?: Prisma.IntWithAggregatesFilter<"Jornal"> | number;
+    loteId?: Prisma.IntWithAggregatesFilter<"Jornal"> | number;
 };
 export type JornalCreateInput = {
     fecha: Date | string;
@@ -272,8 +284,9 @@ export type JornalCreateInput = {
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
+    updatedAt?: Date | string;
     trabajador: Prisma.TrabajadorCreateNestedOneWithoutJornalesInput;
-    finca: Prisma.FincaCreateNestedOneWithoutJornalesInput;
+    lote: Prisma.LoteCreateNestedOneWithoutJornalesInput;
 };
 export type JornalUncheckedCreateInput = {
     id?: number;
@@ -282,8 +295,9 @@ export type JornalUncheckedCreateInput = {
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
+    updatedAt?: Date | string;
     trabajadorId: number;
-    fincaId: number;
+    loteId: number;
 };
 export type JornalUpdateInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -291,8 +305,9 @@ export type JornalUpdateInput = {
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     trabajador?: Prisma.TrabajadorUpdateOneRequiredWithoutJornalesNestedInput;
-    finca?: Prisma.FincaUpdateOneRequiredWithoutJornalesNestedInput;
+    lote?: Prisma.LoteUpdateOneRequiredWithoutJornalesNestedInput;
 };
 export type JornalUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -301,8 +316,9 @@ export type JornalUncheckedUpdateInput = {
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     trabajadorId?: Prisma.IntFieldUpdateOperationsInput | number;
-    fincaId?: Prisma.IntFieldUpdateOperationsInput | number;
+    loteId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type JornalCreateManyInput = {
     id?: number;
@@ -311,8 +327,9 @@ export type JornalCreateManyInput = {
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
+    updatedAt?: Date | string;
     trabajadorId: number;
-    fincaId: number;
+    loteId: number;
 };
 export type JornalUpdateManyMutationInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -320,6 +337,7 @@ export type JornalUpdateManyMutationInput = {
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type JornalUncheckedUpdateManyInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -328,8 +346,9 @@ export type JornalUncheckedUpdateManyInput = {
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     trabajadorId?: Prisma.IntFieldUpdateOperationsInput | number;
-    fincaId?: Prisma.IntFieldUpdateOperationsInput | number;
+    loteId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type JornalListRelationFilter = {
     every?: Prisma.JornalWhereInput;
@@ -346,15 +365,16 @@ export type JornalCountOrderByAggregateInput = {
     tarea?: Prisma.SortOrder;
     montoPagado?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
     trabajadorId?: Prisma.SortOrder;
-    fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
 };
 export type JornalAvgOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     horas?: Prisma.SortOrder;
     montoPagado?: Prisma.SortOrder;
     trabajadorId?: Prisma.SortOrder;
-    fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
 };
 export type JornalMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -363,8 +383,9 @@ export type JornalMaxOrderByAggregateInput = {
     tarea?: Prisma.SortOrder;
     montoPagado?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
     trabajadorId?: Prisma.SortOrder;
-    fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
 };
 export type JornalMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
@@ -373,52 +394,53 @@ export type JornalMinOrderByAggregateInput = {
     tarea?: Prisma.SortOrder;
     montoPagado?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
+    updatedAt?: Prisma.SortOrder;
     trabajadorId?: Prisma.SortOrder;
-    fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
 };
 export type JornalSumOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     horas?: Prisma.SortOrder;
     montoPagado?: Prisma.SortOrder;
     trabajadorId?: Prisma.SortOrder;
-    fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
 };
-export type JornalCreateNestedManyWithoutFincaInput = {
-    create?: Prisma.XOR<Prisma.JornalCreateWithoutFincaInput, Prisma.JornalUncheckedCreateWithoutFincaInput> | Prisma.JornalCreateWithoutFincaInput[] | Prisma.JornalUncheckedCreateWithoutFincaInput[];
-    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutFincaInput | Prisma.JornalCreateOrConnectWithoutFincaInput[];
-    createMany?: Prisma.JornalCreateManyFincaInputEnvelope;
+export type JornalCreateNestedManyWithoutLoteInput = {
+    create?: Prisma.XOR<Prisma.JornalCreateWithoutLoteInput, Prisma.JornalUncheckedCreateWithoutLoteInput> | Prisma.JornalCreateWithoutLoteInput[] | Prisma.JornalUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutLoteInput | Prisma.JornalCreateOrConnectWithoutLoteInput[];
+    createMany?: Prisma.JornalCreateManyLoteInputEnvelope;
     connect?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
 };
-export type JornalUncheckedCreateNestedManyWithoutFincaInput = {
-    create?: Prisma.XOR<Prisma.JornalCreateWithoutFincaInput, Prisma.JornalUncheckedCreateWithoutFincaInput> | Prisma.JornalCreateWithoutFincaInput[] | Prisma.JornalUncheckedCreateWithoutFincaInput[];
-    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutFincaInput | Prisma.JornalCreateOrConnectWithoutFincaInput[];
-    createMany?: Prisma.JornalCreateManyFincaInputEnvelope;
+export type JornalUncheckedCreateNestedManyWithoutLoteInput = {
+    create?: Prisma.XOR<Prisma.JornalCreateWithoutLoteInput, Prisma.JornalUncheckedCreateWithoutLoteInput> | Prisma.JornalCreateWithoutLoteInput[] | Prisma.JornalUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutLoteInput | Prisma.JornalCreateOrConnectWithoutLoteInput[];
+    createMany?: Prisma.JornalCreateManyLoteInputEnvelope;
     connect?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
 };
-export type JornalUpdateManyWithoutFincaNestedInput = {
-    create?: Prisma.XOR<Prisma.JornalCreateWithoutFincaInput, Prisma.JornalUncheckedCreateWithoutFincaInput> | Prisma.JornalCreateWithoutFincaInput[] | Prisma.JornalUncheckedCreateWithoutFincaInput[];
-    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutFincaInput | Prisma.JornalCreateOrConnectWithoutFincaInput[];
-    upsert?: Prisma.JornalUpsertWithWhereUniqueWithoutFincaInput | Prisma.JornalUpsertWithWhereUniqueWithoutFincaInput[];
-    createMany?: Prisma.JornalCreateManyFincaInputEnvelope;
+export type JornalUpdateManyWithoutLoteNestedInput = {
+    create?: Prisma.XOR<Prisma.JornalCreateWithoutLoteInput, Prisma.JornalUncheckedCreateWithoutLoteInput> | Prisma.JornalCreateWithoutLoteInput[] | Prisma.JornalUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutLoteInput | Prisma.JornalCreateOrConnectWithoutLoteInput[];
+    upsert?: Prisma.JornalUpsertWithWhereUniqueWithoutLoteInput | Prisma.JornalUpsertWithWhereUniqueWithoutLoteInput[];
+    createMany?: Prisma.JornalCreateManyLoteInputEnvelope;
     set?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
     disconnect?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
     delete?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
     connect?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
-    update?: Prisma.JornalUpdateWithWhereUniqueWithoutFincaInput | Prisma.JornalUpdateWithWhereUniqueWithoutFincaInput[];
-    updateMany?: Prisma.JornalUpdateManyWithWhereWithoutFincaInput | Prisma.JornalUpdateManyWithWhereWithoutFincaInput[];
+    update?: Prisma.JornalUpdateWithWhereUniqueWithoutLoteInput | Prisma.JornalUpdateWithWhereUniqueWithoutLoteInput[];
+    updateMany?: Prisma.JornalUpdateManyWithWhereWithoutLoteInput | Prisma.JornalUpdateManyWithWhereWithoutLoteInput[];
     deleteMany?: Prisma.JornalScalarWhereInput | Prisma.JornalScalarWhereInput[];
 };
-export type JornalUncheckedUpdateManyWithoutFincaNestedInput = {
-    create?: Prisma.XOR<Prisma.JornalCreateWithoutFincaInput, Prisma.JornalUncheckedCreateWithoutFincaInput> | Prisma.JornalCreateWithoutFincaInput[] | Prisma.JornalUncheckedCreateWithoutFincaInput[];
-    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutFincaInput | Prisma.JornalCreateOrConnectWithoutFincaInput[];
-    upsert?: Prisma.JornalUpsertWithWhereUniqueWithoutFincaInput | Prisma.JornalUpsertWithWhereUniqueWithoutFincaInput[];
-    createMany?: Prisma.JornalCreateManyFincaInputEnvelope;
+export type JornalUncheckedUpdateManyWithoutLoteNestedInput = {
+    create?: Prisma.XOR<Prisma.JornalCreateWithoutLoteInput, Prisma.JornalUncheckedCreateWithoutLoteInput> | Prisma.JornalCreateWithoutLoteInput[] | Prisma.JornalUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.JornalCreateOrConnectWithoutLoteInput | Prisma.JornalCreateOrConnectWithoutLoteInput[];
+    upsert?: Prisma.JornalUpsertWithWhereUniqueWithoutLoteInput | Prisma.JornalUpsertWithWhereUniqueWithoutLoteInput[];
+    createMany?: Prisma.JornalCreateManyLoteInputEnvelope;
     set?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
     disconnect?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
     delete?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
     connect?: Prisma.JornalWhereUniqueInput | Prisma.JornalWhereUniqueInput[];
-    update?: Prisma.JornalUpdateWithWhereUniqueWithoutFincaInput | Prisma.JornalUpdateWithWhereUniqueWithoutFincaInput[];
-    updateMany?: Prisma.JornalUpdateManyWithWhereWithoutFincaInput | Prisma.JornalUpdateManyWithWhereWithoutFincaInput[];
+    update?: Prisma.JornalUpdateWithWhereUniqueWithoutLoteInput | Prisma.JornalUpdateWithWhereUniqueWithoutLoteInput[];
+    updateMany?: Prisma.JornalUpdateManyWithWhereWithoutLoteInput | Prisma.JornalUpdateManyWithWhereWithoutLoteInput[];
     deleteMany?: Prisma.JornalScalarWhereInput | Prisma.JornalScalarWhereInput[];
 };
 export type JornalCreateNestedManyWithoutTrabajadorInput = {
@@ -459,43 +481,45 @@ export type JornalUncheckedUpdateManyWithoutTrabajadorNestedInput = {
     updateMany?: Prisma.JornalUpdateManyWithWhereWithoutTrabajadorInput | Prisma.JornalUpdateManyWithWhereWithoutTrabajadorInput[];
     deleteMany?: Prisma.JornalScalarWhereInput | Prisma.JornalScalarWhereInput[];
 };
-export type JornalCreateWithoutFincaInput = {
+export type JornalCreateWithoutLoteInput = {
     fecha: Date | string;
     horas?: number | null;
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
+    updatedAt?: Date | string;
     trabajador: Prisma.TrabajadorCreateNestedOneWithoutJornalesInput;
 };
-export type JornalUncheckedCreateWithoutFincaInput = {
+export type JornalUncheckedCreateWithoutLoteInput = {
     id?: number;
     fecha: Date | string;
     horas?: number | null;
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
+    updatedAt?: Date | string;
     trabajadorId: number;
 };
-export type JornalCreateOrConnectWithoutFincaInput = {
+export type JornalCreateOrConnectWithoutLoteInput = {
     where: Prisma.JornalWhereUniqueInput;
-    create: Prisma.XOR<Prisma.JornalCreateWithoutFincaInput, Prisma.JornalUncheckedCreateWithoutFincaInput>;
+    create: Prisma.XOR<Prisma.JornalCreateWithoutLoteInput, Prisma.JornalUncheckedCreateWithoutLoteInput>;
 };
-export type JornalCreateManyFincaInputEnvelope = {
-    data: Prisma.JornalCreateManyFincaInput | Prisma.JornalCreateManyFincaInput[];
+export type JornalCreateManyLoteInputEnvelope = {
+    data: Prisma.JornalCreateManyLoteInput | Prisma.JornalCreateManyLoteInput[];
     skipDuplicates?: boolean;
 };
-export type JornalUpsertWithWhereUniqueWithoutFincaInput = {
+export type JornalUpsertWithWhereUniqueWithoutLoteInput = {
     where: Prisma.JornalWhereUniqueInput;
-    update: Prisma.XOR<Prisma.JornalUpdateWithoutFincaInput, Prisma.JornalUncheckedUpdateWithoutFincaInput>;
-    create: Prisma.XOR<Prisma.JornalCreateWithoutFincaInput, Prisma.JornalUncheckedCreateWithoutFincaInput>;
+    update: Prisma.XOR<Prisma.JornalUpdateWithoutLoteInput, Prisma.JornalUncheckedUpdateWithoutLoteInput>;
+    create: Prisma.XOR<Prisma.JornalCreateWithoutLoteInput, Prisma.JornalUncheckedCreateWithoutLoteInput>;
 };
-export type JornalUpdateWithWhereUniqueWithoutFincaInput = {
+export type JornalUpdateWithWhereUniqueWithoutLoteInput = {
     where: Prisma.JornalWhereUniqueInput;
-    data: Prisma.XOR<Prisma.JornalUpdateWithoutFincaInput, Prisma.JornalUncheckedUpdateWithoutFincaInput>;
+    data: Prisma.XOR<Prisma.JornalUpdateWithoutLoteInput, Prisma.JornalUncheckedUpdateWithoutLoteInput>;
 };
-export type JornalUpdateManyWithWhereWithoutFincaInput = {
+export type JornalUpdateManyWithWhereWithoutLoteInput = {
     where: Prisma.JornalScalarWhereInput;
-    data: Prisma.XOR<Prisma.JornalUpdateManyMutationInput, Prisma.JornalUncheckedUpdateManyWithoutFincaInput>;
+    data: Prisma.XOR<Prisma.JornalUpdateManyMutationInput, Prisma.JornalUncheckedUpdateManyWithoutLoteInput>;
 };
 export type JornalScalarWhereInput = {
     AND?: Prisma.JornalScalarWhereInput | Prisma.JornalScalarWhereInput[];
@@ -507,8 +531,9 @@ export type JornalScalarWhereInput = {
     tarea?: Prisma.StringNullableFilter<"Jornal"> | string | null;
     montoPagado?: Prisma.FloatNullableFilter<"Jornal"> | number | null;
     createdAt?: Prisma.DateTimeFilter<"Jornal"> | Date | string;
+    updatedAt?: Prisma.DateTimeFilter<"Jornal"> | Date | string;
     trabajadorId?: Prisma.IntFilter<"Jornal"> | number;
-    fincaId?: Prisma.IntFilter<"Jornal"> | number;
+    loteId?: Prisma.IntFilter<"Jornal"> | number;
 };
 export type JornalCreateWithoutTrabajadorInput = {
     fecha: Date | string;
@@ -516,7 +541,8 @@ export type JornalCreateWithoutTrabajadorInput = {
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
-    finca: Prisma.FincaCreateNestedOneWithoutJornalesInput;
+    updatedAt?: Date | string;
+    lote: Prisma.LoteCreateNestedOneWithoutJornalesInput;
 };
 export type JornalUncheckedCreateWithoutTrabajadorInput = {
     id?: number;
@@ -525,7 +551,8 @@ export type JornalUncheckedCreateWithoutTrabajadorInput = {
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
-    fincaId: number;
+    updatedAt?: Date | string;
+    loteId: number;
 };
 export type JornalCreateOrConnectWithoutTrabajadorInput = {
     where: Prisma.JornalWhereUniqueInput;
@@ -548,39 +575,43 @@ export type JornalUpdateManyWithWhereWithoutTrabajadorInput = {
     where: Prisma.JornalScalarWhereInput;
     data: Prisma.XOR<Prisma.JornalUpdateManyMutationInput, Prisma.JornalUncheckedUpdateManyWithoutTrabajadorInput>;
 };
-export type JornalCreateManyFincaInput = {
+export type JornalCreateManyLoteInput = {
     id?: number;
     fecha: Date | string;
     horas?: number | null;
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
+    updatedAt?: Date | string;
     trabajadorId: number;
 };
-export type JornalUpdateWithoutFincaInput = {
+export type JornalUpdateWithoutLoteInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     horas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     trabajador?: Prisma.TrabajadorUpdateOneRequiredWithoutJornalesNestedInput;
 };
-export type JornalUncheckedUpdateWithoutFincaInput = {
+export type JornalUncheckedUpdateWithoutLoteInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     horas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     trabajadorId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
-export type JornalUncheckedUpdateManyWithoutFincaInput = {
+export type JornalUncheckedUpdateManyWithoutLoteInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     horas?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     trabajadorId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type JornalCreateManyTrabajadorInput = {
@@ -590,7 +621,8 @@ export type JornalCreateManyTrabajadorInput = {
     tarea?: string | null;
     montoPagado?: number | null;
     createdAt?: Date | string;
-    fincaId: number;
+    updatedAt?: Date | string;
+    loteId: number;
 };
 export type JornalUpdateWithoutTrabajadorInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -598,7 +630,8 @@ export type JornalUpdateWithoutTrabajadorInput = {
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-    finca?: Prisma.FincaUpdateOneRequiredWithoutJornalesNestedInput;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    lote?: Prisma.LoteUpdateOneRequiredWithoutJornalesNestedInput;
 };
 export type JornalUncheckedUpdateWithoutTrabajadorInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -607,7 +640,8 @@ export type JornalUncheckedUpdateWithoutTrabajadorInput = {
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-    fincaId?: Prisma.IntFieldUpdateOperationsInput | number;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    loteId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type JornalUncheckedUpdateManyWithoutTrabajadorInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -616,7 +650,8 @@ export type JornalUncheckedUpdateManyWithoutTrabajadorInput = {
     tarea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     montoPagado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
-    fincaId?: Prisma.IntFieldUpdateOperationsInput | number;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    loteId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type JornalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -625,10 +660,11 @@ export type JornalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     tarea?: boolean;
     montoPagado?: boolean;
     createdAt?: boolean;
+    updatedAt?: boolean;
     trabajadorId?: boolean;
-    fincaId?: boolean;
+    loteId?: boolean;
     trabajador?: boolean | Prisma.TrabajadorDefaultArgs<ExtArgs>;
-    finca?: boolean | Prisma.FincaDefaultArgs<ExtArgs>;
+    lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["jornal"]>;
 export type JornalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -637,10 +673,11 @@ export type JornalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
     tarea?: boolean;
     montoPagado?: boolean;
     createdAt?: boolean;
+    updatedAt?: boolean;
     trabajadorId?: boolean;
-    fincaId?: boolean;
+    loteId?: boolean;
     trabajador?: boolean | Prisma.TrabajadorDefaultArgs<ExtArgs>;
-    finca?: boolean | Prisma.FincaDefaultArgs<ExtArgs>;
+    lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["jornal"]>;
 export type JornalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
@@ -649,10 +686,11 @@ export type JornalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
     tarea?: boolean;
     montoPagado?: boolean;
     createdAt?: boolean;
+    updatedAt?: boolean;
     trabajadorId?: boolean;
-    fincaId?: boolean;
+    loteId?: boolean;
     trabajador?: boolean | Prisma.TrabajadorDefaultArgs<ExtArgs>;
-    finca?: boolean | Prisma.FincaDefaultArgs<ExtArgs>;
+    lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["jornal"]>;
 export type JornalSelectScalar = {
     id?: boolean;
@@ -661,27 +699,28 @@ export type JornalSelectScalar = {
     tarea?: boolean;
     montoPagado?: boolean;
     createdAt?: boolean;
+    updatedAt?: boolean;
     trabajadorId?: boolean;
-    fincaId?: boolean;
+    loteId?: boolean;
 };
-export type JornalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fecha" | "horas" | "tarea" | "montoPagado" | "createdAt" | "trabajadorId" | "fincaId", ExtArgs["result"]["jornal"]>;
+export type JornalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fecha" | "horas" | "tarea" | "montoPagado" | "createdAt" | "updatedAt" | "trabajadorId" | "loteId", ExtArgs["result"]["jornal"]>;
 export type JornalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     trabajador?: boolean | Prisma.TrabajadorDefaultArgs<ExtArgs>;
-    finca?: boolean | Prisma.FincaDefaultArgs<ExtArgs>;
+    lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
 };
 export type JornalIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     trabajador?: boolean | Prisma.TrabajadorDefaultArgs<ExtArgs>;
-    finca?: boolean | Prisma.FincaDefaultArgs<ExtArgs>;
+    lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
 };
 export type JornalIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     trabajador?: boolean | Prisma.TrabajadorDefaultArgs<ExtArgs>;
-    finca?: boolean | Prisma.FincaDefaultArgs<ExtArgs>;
+    lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
 };
 export type $JornalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     name: "Jornal";
     objects: {
         trabajador: Prisma.$TrabajadorPayload<ExtArgs>;
-        finca: Prisma.$FincaPayload<ExtArgs>;
+        lote: Prisma.$LotePayload<ExtArgs>;
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
@@ -690,8 +729,9 @@ export type $JornalPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
         tarea: string | null;
         montoPagado: number | null;
         createdAt: Date;
+        updatedAt: Date;
         trabajadorId: number;
-        fincaId: number;
+        loteId: number;
     }, ExtArgs["result"]["jornal"]>;
     composites: {};
 };
@@ -1022,7 +1062,7 @@ export interface JornalDelegate<ExtArgs extends runtime.Types.Extensions.Interna
 export interface Prisma__JornalClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
     trabajador<T extends Prisma.TrabajadorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrabajadorDefaultArgs<ExtArgs>>): Prisma.Prisma__TrabajadorClient<runtime.Types.Result.GetResult<Prisma.$TrabajadorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
-    finca<T extends Prisma.FincaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FincaDefaultArgs<ExtArgs>>): Prisma.Prisma__FincaClient<runtime.Types.Result.GetResult<Prisma.$FincaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
+    lote<T extends Prisma.LoteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LoteDefaultArgs<ExtArgs>>): Prisma.Prisma__LoteClient<runtime.Types.Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1054,8 +1094,9 @@ export interface JornalFieldRefs {
     readonly tarea: Prisma.FieldRef<"Jornal", 'String'>;
     readonly montoPagado: Prisma.FieldRef<"Jornal", 'Float'>;
     readonly createdAt: Prisma.FieldRef<"Jornal", 'DateTime'>;
+    readonly updatedAt: Prisma.FieldRef<"Jornal", 'DateTime'>;
     readonly trabajadorId: Prisma.FieldRef<"Jornal", 'Int'>;
-    readonly fincaId: Prisma.FieldRef<"Jornal", 'Int'>;
+    readonly loteId: Prisma.FieldRef<"Jornal", 'Int'>;
 }
 /**
  * Jornal findUnique

@@ -1,4 +1,5 @@
 import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
 import type * as Prisma from "../internal/prismaNamespace";
 /**
  * Model Cultivo
@@ -15,22 +16,35 @@ export type AggregateCultivo = {
 export type CultivoAvgAggregateOutputType = {
     id: number | null;
     cantidadSembrada: number | null;
+    numeroSoca: number | null;
+    edadCafetal: number | null;
+    plantasPorHectarea: number | null;
+    rendimientoEstimado: number | null;
     loteId: number | null;
 };
 export type CultivoSumAggregateOutputType = {
     id: number | null;
     cantidadSembrada: number | null;
+    numeroSoca: number | null;
+    edadCafetal: number | null;
+    plantasPorHectarea: number | null;
+    rendimientoEstimado: number | null;
     loteId: number | null;
 };
 export type CultivoMinAggregateOutputType = {
     id: number | null;
+    tipo: $Enums.TipoCultivo | null;
     nombre: string | null;
     variedad: string | null;
     fechaSiembra: Date | null;
     fechaCosechaEstimada: Date | null;
     fechaCosechaReal: Date | null;
-    estado: string | null;
+    estado: $Enums.EstadoCultivo | null;
     cantidadSembrada: number | null;
+    numeroSoca: number | null;
+    edadCafetal: number | null;
+    plantasPorHectarea: number | null;
+    rendimientoEstimado: number | null;
     activo: boolean | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -38,13 +52,18 @@ export type CultivoMinAggregateOutputType = {
 };
 export type CultivoMaxAggregateOutputType = {
     id: number | null;
+    tipo: $Enums.TipoCultivo | null;
     nombre: string | null;
     variedad: string | null;
     fechaSiembra: Date | null;
     fechaCosechaEstimada: Date | null;
     fechaCosechaReal: Date | null;
-    estado: string | null;
+    estado: $Enums.EstadoCultivo | null;
     cantidadSembrada: number | null;
+    numeroSoca: number | null;
+    edadCafetal: number | null;
+    plantasPorHectarea: number | null;
+    rendimientoEstimado: number | null;
     activo: boolean | null;
     createdAt: Date | null;
     updatedAt: Date | null;
@@ -52,6 +71,7 @@ export type CultivoMaxAggregateOutputType = {
 };
 export type CultivoCountAggregateOutputType = {
     id: number;
+    tipo: number;
     nombre: number;
     variedad: number;
     fechaSiembra: number;
@@ -59,6 +79,10 @@ export type CultivoCountAggregateOutputType = {
     fechaCosechaReal: number;
     estado: number;
     cantidadSembrada: number;
+    numeroSoca: number;
+    edadCafetal: number;
+    plantasPorHectarea: number;
+    rendimientoEstimado: number;
     activo: number;
     createdAt: number;
     updatedAt: number;
@@ -68,15 +92,24 @@ export type CultivoCountAggregateOutputType = {
 export type CultivoAvgAggregateInputType = {
     id?: true;
     cantidadSembrada?: true;
+    numeroSoca?: true;
+    edadCafetal?: true;
+    plantasPorHectarea?: true;
+    rendimientoEstimado?: true;
     loteId?: true;
 };
 export type CultivoSumAggregateInputType = {
     id?: true;
     cantidadSembrada?: true;
+    numeroSoca?: true;
+    edadCafetal?: true;
+    plantasPorHectarea?: true;
+    rendimientoEstimado?: true;
     loteId?: true;
 };
 export type CultivoMinAggregateInputType = {
     id?: true;
+    tipo?: true;
     nombre?: true;
     variedad?: true;
     fechaSiembra?: true;
@@ -84,6 +117,10 @@ export type CultivoMinAggregateInputType = {
     fechaCosechaReal?: true;
     estado?: true;
     cantidadSembrada?: true;
+    numeroSoca?: true;
+    edadCafetal?: true;
+    plantasPorHectarea?: true;
+    rendimientoEstimado?: true;
     activo?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -91,6 +128,7 @@ export type CultivoMinAggregateInputType = {
 };
 export type CultivoMaxAggregateInputType = {
     id?: true;
+    tipo?: true;
     nombre?: true;
     variedad?: true;
     fechaSiembra?: true;
@@ -98,6 +136,10 @@ export type CultivoMaxAggregateInputType = {
     fechaCosechaReal?: true;
     estado?: true;
     cantidadSembrada?: true;
+    numeroSoca?: true;
+    edadCafetal?: true;
+    plantasPorHectarea?: true;
+    rendimientoEstimado?: true;
     activo?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -105,6 +147,7 @@ export type CultivoMaxAggregateInputType = {
 };
 export type CultivoCountAggregateInputType = {
     id?: true;
+    tipo?: true;
     nombre?: true;
     variedad?: true;
     fechaSiembra?: true;
@@ -112,6 +155,10 @@ export type CultivoCountAggregateInputType = {
     fechaCosechaReal?: true;
     estado?: true;
     cantidadSembrada?: true;
+    numeroSoca?: true;
+    edadCafetal?: true;
+    plantasPorHectarea?: true;
+    rendimientoEstimado?: true;
     activo?: true;
     createdAt?: true;
     updatedAt?: true;
@@ -196,13 +243,18 @@ export type CultivoGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 };
 export type CultivoGroupByOutputType = {
     id: number;
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad: string | null;
     fechaSiembra: Date;
     fechaCosechaEstimada: Date | null;
     fechaCosechaReal: Date | null;
-    estado: string;
+    estado: $Enums.EstadoCultivo;
     cantidadSembrada: number | null;
+    numeroSoca: number | null;
+    edadCafetal: number | null;
+    plantasPorHectarea: number | null;
+    rendimientoEstimado: number | null;
     activo: boolean;
     createdAt: Date;
     updatedAt: Date;
@@ -221,22 +273,29 @@ export type CultivoWhereInput = {
     OR?: Prisma.CultivoWhereInput[];
     NOT?: Prisma.CultivoWhereInput | Prisma.CultivoWhereInput[];
     id?: Prisma.IntFilter<"Cultivo"> | number;
+    tipo?: Prisma.EnumTipoCultivoFilter<"Cultivo"> | $Enums.TipoCultivo;
     nombre?: Prisma.StringFilter<"Cultivo"> | string;
     variedad?: Prisma.StringNullableFilter<"Cultivo"> | string | null;
     fechaSiembra?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     fechaCosechaEstimada?: Prisma.DateTimeNullableFilter<"Cultivo"> | Date | string | null;
     fechaCosechaReal?: Prisma.DateTimeNullableFilter<"Cultivo"> | Date | string | null;
-    estado?: Prisma.StringFilter<"Cultivo"> | string;
+    estado?: Prisma.EnumEstadoCultivoFilter<"Cultivo"> | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
+    numeroSoca?: Prisma.IntNullableFilter<"Cultivo"> | number | null;
+    edadCafetal?: Prisma.IntNullableFilter<"Cultivo"> | number | null;
+    plantasPorHectarea?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
+    rendimientoEstimado?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
     activo?: Prisma.BoolFilter<"Cultivo"> | boolean;
     createdAt?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     loteId?: Prisma.IntFilter<"Cultivo"> | number;
     lote?: Prisma.XOR<Prisma.LoteScalarRelationFilter, Prisma.LoteWhereInput>;
     gastos?: Prisma.GastoListRelationFilter;
+    bitacoras?: Prisma.BitacoraListRelationFilter;
 };
 export type CultivoOrderByWithRelationInput = {
     id?: Prisma.SortOrder;
+    tipo?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
     variedad?: Prisma.SortOrderInput | Prisma.SortOrder;
     fechaSiembra?: Prisma.SortOrder;
@@ -244,34 +303,46 @@ export type CultivoOrderByWithRelationInput = {
     fechaCosechaReal?: Prisma.SortOrderInput | Prisma.SortOrder;
     estado?: Prisma.SortOrder;
     cantidadSembrada?: Prisma.SortOrderInput | Prisma.SortOrder;
+    numeroSoca?: Prisma.SortOrderInput | Prisma.SortOrder;
+    edadCafetal?: Prisma.SortOrderInput | Prisma.SortOrder;
+    plantasPorHectarea?: Prisma.SortOrderInput | Prisma.SortOrder;
+    rendimientoEstimado?: Prisma.SortOrderInput | Prisma.SortOrder;
     activo?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
     loteId?: Prisma.SortOrder;
     lote?: Prisma.LoteOrderByWithRelationInput;
     gastos?: Prisma.GastoOrderByRelationAggregateInput;
+    bitacoras?: Prisma.BitacoraOrderByRelationAggregateInput;
 };
 export type CultivoWhereUniqueInput = Prisma.AtLeast<{
     id?: number;
     AND?: Prisma.CultivoWhereInput | Prisma.CultivoWhereInput[];
     OR?: Prisma.CultivoWhereInput[];
     NOT?: Prisma.CultivoWhereInput | Prisma.CultivoWhereInput[];
+    tipo?: Prisma.EnumTipoCultivoFilter<"Cultivo"> | $Enums.TipoCultivo;
     nombre?: Prisma.StringFilter<"Cultivo"> | string;
     variedad?: Prisma.StringNullableFilter<"Cultivo"> | string | null;
     fechaSiembra?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     fechaCosechaEstimada?: Prisma.DateTimeNullableFilter<"Cultivo"> | Date | string | null;
     fechaCosechaReal?: Prisma.DateTimeNullableFilter<"Cultivo"> | Date | string | null;
-    estado?: Prisma.StringFilter<"Cultivo"> | string;
+    estado?: Prisma.EnumEstadoCultivoFilter<"Cultivo"> | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
+    numeroSoca?: Prisma.IntNullableFilter<"Cultivo"> | number | null;
+    edadCafetal?: Prisma.IntNullableFilter<"Cultivo"> | number | null;
+    plantasPorHectarea?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
+    rendimientoEstimado?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
     activo?: Prisma.BoolFilter<"Cultivo"> | boolean;
     createdAt?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     loteId?: Prisma.IntFilter<"Cultivo"> | number;
     lote?: Prisma.XOR<Prisma.LoteScalarRelationFilter, Prisma.LoteWhereInput>;
     gastos?: Prisma.GastoListRelationFilter;
+    bitacoras?: Prisma.BitacoraListRelationFilter;
 }, "id">;
 export type CultivoOrderByWithAggregationInput = {
     id?: Prisma.SortOrder;
+    tipo?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
     variedad?: Prisma.SortOrderInput | Prisma.SortOrder;
     fechaSiembra?: Prisma.SortOrder;
@@ -279,6 +350,10 @@ export type CultivoOrderByWithAggregationInput = {
     fechaCosechaReal?: Prisma.SortOrderInput | Prisma.SortOrder;
     estado?: Prisma.SortOrder;
     cantidadSembrada?: Prisma.SortOrderInput | Prisma.SortOrder;
+    numeroSoca?: Prisma.SortOrderInput | Prisma.SortOrder;
+    edadCafetal?: Prisma.SortOrderInput | Prisma.SortOrder;
+    plantasPorHectarea?: Prisma.SortOrderInput | Prisma.SortOrder;
+    rendimientoEstimado?: Prisma.SortOrderInput | Prisma.SortOrder;
     activo?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -294,111 +369,155 @@ export type CultivoScalarWhereWithAggregatesInput = {
     OR?: Prisma.CultivoScalarWhereWithAggregatesInput[];
     NOT?: Prisma.CultivoScalarWhereWithAggregatesInput | Prisma.CultivoScalarWhereWithAggregatesInput[];
     id?: Prisma.IntWithAggregatesFilter<"Cultivo"> | number;
+    tipo?: Prisma.EnumTipoCultivoWithAggregatesFilter<"Cultivo"> | $Enums.TipoCultivo;
     nombre?: Prisma.StringWithAggregatesFilter<"Cultivo"> | string;
     variedad?: Prisma.StringNullableWithAggregatesFilter<"Cultivo"> | string | null;
     fechaSiembra?: Prisma.DateTimeWithAggregatesFilter<"Cultivo"> | Date | string;
     fechaCosechaEstimada?: Prisma.DateTimeNullableWithAggregatesFilter<"Cultivo"> | Date | string | null;
     fechaCosechaReal?: Prisma.DateTimeNullableWithAggregatesFilter<"Cultivo"> | Date | string | null;
-    estado?: Prisma.StringWithAggregatesFilter<"Cultivo"> | string;
+    estado?: Prisma.EnumEstadoCultivoWithAggregatesFilter<"Cultivo"> | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.FloatNullableWithAggregatesFilter<"Cultivo"> | number | null;
+    numeroSoca?: Prisma.IntNullableWithAggregatesFilter<"Cultivo"> | number | null;
+    edadCafetal?: Prisma.IntNullableWithAggregatesFilter<"Cultivo"> | number | null;
+    plantasPorHectarea?: Prisma.FloatNullableWithAggregatesFilter<"Cultivo"> | number | null;
+    rendimientoEstimado?: Prisma.FloatNullableWithAggregatesFilter<"Cultivo"> | number | null;
     activo?: Prisma.BoolWithAggregatesFilter<"Cultivo"> | boolean;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"Cultivo"> | Date | string;
     updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Cultivo"> | Date | string;
     loteId?: Prisma.IntWithAggregatesFilter<"Cultivo"> | number;
 };
 export type CultivoCreateInput = {
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     lote: Prisma.LoteCreateNestedOneWithoutCultivosInput;
     gastos?: Prisma.GastoCreateNestedManyWithoutCultivoInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutCultivoInput;
 };
 export type CultivoUncheckedCreateInput = {
     id?: number;
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     loteId: number;
     gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutCultivoInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutCultivoInput;
 };
 export type CultivoUpdateInput = {
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     lote?: Prisma.LoteUpdateOneRequiredWithoutCultivosNestedInput;
     gastos?: Prisma.GastoUpdateManyWithoutCultivoNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutCultivoNestedInput;
 };
 export type CultivoUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     loteId?: Prisma.IntFieldUpdateOperationsInput | number;
     gastos?: Prisma.GastoUncheckedUpdateManyWithoutCultivoNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutCultivoNestedInput;
 };
 export type CultivoCreateManyInput = {
     id?: number;
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     loteId: number;
 };
 export type CultivoUpdateManyMutationInput = {
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type CultivoUncheckedUpdateManyInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -414,6 +533,7 @@ export type CultivoOrderByRelationAggregateInput = {
 };
 export type CultivoCountOrderByAggregateInput = {
     id?: Prisma.SortOrder;
+    tipo?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
     variedad?: Prisma.SortOrder;
     fechaSiembra?: Prisma.SortOrder;
@@ -421,6 +541,10 @@ export type CultivoCountOrderByAggregateInput = {
     fechaCosechaReal?: Prisma.SortOrder;
     estado?: Prisma.SortOrder;
     cantidadSembrada?: Prisma.SortOrder;
+    numeroSoca?: Prisma.SortOrder;
+    edadCafetal?: Prisma.SortOrder;
+    plantasPorHectarea?: Prisma.SortOrder;
+    rendimientoEstimado?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -429,10 +553,15 @@ export type CultivoCountOrderByAggregateInput = {
 export type CultivoAvgOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     cantidadSembrada?: Prisma.SortOrder;
+    numeroSoca?: Prisma.SortOrder;
+    edadCafetal?: Prisma.SortOrder;
+    plantasPorHectarea?: Prisma.SortOrder;
+    rendimientoEstimado?: Prisma.SortOrder;
     loteId?: Prisma.SortOrder;
 };
 export type CultivoMaxOrderByAggregateInput = {
     id?: Prisma.SortOrder;
+    tipo?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
     variedad?: Prisma.SortOrder;
     fechaSiembra?: Prisma.SortOrder;
@@ -440,6 +569,10 @@ export type CultivoMaxOrderByAggregateInput = {
     fechaCosechaReal?: Prisma.SortOrder;
     estado?: Prisma.SortOrder;
     cantidadSembrada?: Prisma.SortOrder;
+    numeroSoca?: Prisma.SortOrder;
+    edadCafetal?: Prisma.SortOrder;
+    plantasPorHectarea?: Prisma.SortOrder;
+    rendimientoEstimado?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -447,6 +580,7 @@ export type CultivoMaxOrderByAggregateInput = {
 };
 export type CultivoMinOrderByAggregateInput = {
     id?: Prisma.SortOrder;
+    tipo?: Prisma.SortOrder;
     nombre?: Prisma.SortOrder;
     variedad?: Prisma.SortOrder;
     fechaSiembra?: Prisma.SortOrder;
@@ -454,6 +588,10 @@ export type CultivoMinOrderByAggregateInput = {
     fechaCosechaReal?: Prisma.SortOrder;
     estado?: Prisma.SortOrder;
     cantidadSembrada?: Prisma.SortOrder;
+    numeroSoca?: Prisma.SortOrder;
+    edadCafetal?: Prisma.SortOrder;
+    plantasPorHectarea?: Prisma.SortOrder;
+    rendimientoEstimado?: Prisma.SortOrder;
     activo?: Prisma.SortOrder;
     createdAt?: Prisma.SortOrder;
     updatedAt?: Prisma.SortOrder;
@@ -462,6 +600,10 @@ export type CultivoMinOrderByAggregateInput = {
 export type CultivoSumOrderByAggregateInput = {
     id?: Prisma.SortOrder;
     cantidadSembrada?: Prisma.SortOrder;
+    numeroSoca?: Prisma.SortOrder;
+    edadCafetal?: Prisma.SortOrder;
+    plantasPorHectarea?: Prisma.SortOrder;
+    rendimientoEstimado?: Prisma.SortOrder;
     loteId?: Prisma.SortOrder;
 };
 export type CultivoNullableScalarRelationFilter = {
@@ -506,8 +648,21 @@ export type CultivoUncheckedUpdateManyWithoutLoteNestedInput = {
     updateMany?: Prisma.CultivoUpdateManyWithWhereWithoutLoteInput | Prisma.CultivoUpdateManyWithWhereWithoutLoteInput[];
     deleteMany?: Prisma.CultivoScalarWhereInput | Prisma.CultivoScalarWhereInput[];
 };
+export type EnumTipoCultivoFieldUpdateOperationsInput = {
+    set?: $Enums.TipoCultivo;
+};
 export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null;
+};
+export type EnumEstadoCultivoFieldUpdateOperationsInput = {
+    set?: $Enums.EstadoCultivo;
+};
+export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null;
+    increment?: number;
+    decrement?: number;
+    multiply?: number;
+    divide?: number;
 };
 export type CultivoCreateNestedOneWithoutGastosInput = {
     create?: Prisma.XOR<Prisma.CultivoCreateWithoutGastosInput, Prisma.CultivoUncheckedCreateWithoutGastosInput>;
@@ -523,32 +678,58 @@ export type CultivoUpdateOneWithoutGastosNestedInput = {
     connect?: Prisma.CultivoWhereUniqueInput;
     update?: Prisma.XOR<Prisma.XOR<Prisma.CultivoUpdateToOneWithWhereWithoutGastosInput, Prisma.CultivoUpdateWithoutGastosInput>, Prisma.CultivoUncheckedUpdateWithoutGastosInput>;
 };
+export type CultivoCreateNestedOneWithoutBitacorasInput = {
+    create?: Prisma.XOR<Prisma.CultivoCreateWithoutBitacorasInput, Prisma.CultivoUncheckedCreateWithoutBitacorasInput>;
+    connectOrCreate?: Prisma.CultivoCreateOrConnectWithoutBitacorasInput;
+    connect?: Prisma.CultivoWhereUniqueInput;
+};
+export type CultivoUpdateOneWithoutBitacorasNestedInput = {
+    create?: Prisma.XOR<Prisma.CultivoCreateWithoutBitacorasInput, Prisma.CultivoUncheckedCreateWithoutBitacorasInput>;
+    connectOrCreate?: Prisma.CultivoCreateOrConnectWithoutBitacorasInput;
+    upsert?: Prisma.CultivoUpsertWithoutBitacorasInput;
+    disconnect?: Prisma.CultivoWhereInput | boolean;
+    delete?: Prisma.CultivoWhereInput | boolean;
+    connect?: Prisma.CultivoWhereUniqueInput;
+    update?: Prisma.XOR<Prisma.XOR<Prisma.CultivoUpdateToOneWithWhereWithoutBitacorasInput, Prisma.CultivoUpdateWithoutBitacorasInput>, Prisma.CultivoUncheckedUpdateWithoutBitacorasInput>;
+};
 export type CultivoCreateWithoutLoteInput = {
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     gastos?: Prisma.GastoCreateNestedManyWithoutCultivoInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutCultivoInput;
 };
 export type CultivoUncheckedCreateWithoutLoteInput = {
     id?: number;
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutCultivoInput;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutCultivoInput;
 };
 export type CultivoCreateOrConnectWithoutLoteInput = {
     where: Prisma.CultivoWhereUniqueInput;
@@ -576,44 +757,61 @@ export type CultivoScalarWhereInput = {
     OR?: Prisma.CultivoScalarWhereInput[];
     NOT?: Prisma.CultivoScalarWhereInput | Prisma.CultivoScalarWhereInput[];
     id?: Prisma.IntFilter<"Cultivo"> | number;
+    tipo?: Prisma.EnumTipoCultivoFilter<"Cultivo"> | $Enums.TipoCultivo;
     nombre?: Prisma.StringFilter<"Cultivo"> | string;
     variedad?: Prisma.StringNullableFilter<"Cultivo"> | string | null;
     fechaSiembra?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     fechaCosechaEstimada?: Prisma.DateTimeNullableFilter<"Cultivo"> | Date | string | null;
     fechaCosechaReal?: Prisma.DateTimeNullableFilter<"Cultivo"> | Date | string | null;
-    estado?: Prisma.StringFilter<"Cultivo"> | string;
+    estado?: Prisma.EnumEstadoCultivoFilter<"Cultivo"> | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
+    numeroSoca?: Prisma.IntNullableFilter<"Cultivo"> | number | null;
+    edadCafetal?: Prisma.IntNullableFilter<"Cultivo"> | number | null;
+    plantasPorHectarea?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
+    rendimientoEstimado?: Prisma.FloatNullableFilter<"Cultivo"> | number | null;
     activo?: Prisma.BoolFilter<"Cultivo"> | boolean;
     createdAt?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Cultivo"> | Date | string;
     loteId?: Prisma.IntFilter<"Cultivo"> | number;
 };
 export type CultivoCreateWithoutGastosInput = {
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     lote: Prisma.LoteCreateNestedOneWithoutCultivosInput;
+    bitacoras?: Prisma.BitacoraCreateNestedManyWithoutCultivoInput;
 };
 export type CultivoUncheckedCreateWithoutGastosInput = {
     id?: number;
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     loteId: number;
+    bitacoras?: Prisma.BitacoraUncheckedCreateNestedManyWithoutCultivoInput;
 };
 export type CultivoCreateOrConnectWithoutGastosInput = {
     where: Prisma.CultivoWhereUniqueInput;
@@ -629,81 +827,206 @@ export type CultivoUpdateToOneWithWhereWithoutGastosInput = {
     data: Prisma.XOR<Prisma.CultivoUpdateWithoutGastosInput, Prisma.CultivoUncheckedUpdateWithoutGastosInput>;
 };
 export type CultivoUpdateWithoutGastosInput = {
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     lote?: Prisma.LoteUpdateOneRequiredWithoutCultivosNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutCultivoNestedInput;
 };
 export type CultivoUncheckedUpdateWithoutGastosInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     loteId?: Prisma.IntFieldUpdateOperationsInput | number;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutCultivoNestedInput;
 };
-export type CultivoCreateManyLoteInput = {
-    id?: number;
+export type CultivoCreateWithoutBitacorasInput = {
+    tipo: $Enums.TipoCultivo;
     nombre: string;
     variedad?: string | null;
     fechaSiembra: Date | string;
     fechaCosechaEstimada?: Date | string | null;
     fechaCosechaReal?: Date | string | null;
-    estado?: string;
+    estado?: $Enums.EstadoCultivo;
     cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    lote: Prisma.LoteCreateNestedOneWithoutCultivosInput;
+    gastos?: Prisma.GastoCreateNestedManyWithoutCultivoInput;
+};
+export type CultivoUncheckedCreateWithoutBitacorasInput = {
+    id?: number;
+    tipo: $Enums.TipoCultivo;
+    nombre: string;
+    variedad?: string | null;
+    fechaSiembra: Date | string;
+    fechaCosechaEstimada?: Date | string | null;
+    fechaCosechaReal?: Date | string | null;
+    estado?: $Enums.EstadoCultivo;
+    cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
+    activo?: boolean;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    loteId: number;
+    gastos?: Prisma.GastoUncheckedCreateNestedManyWithoutCultivoInput;
+};
+export type CultivoCreateOrConnectWithoutBitacorasInput = {
+    where: Prisma.CultivoWhereUniqueInput;
+    create: Prisma.XOR<Prisma.CultivoCreateWithoutBitacorasInput, Prisma.CultivoUncheckedCreateWithoutBitacorasInput>;
+};
+export type CultivoUpsertWithoutBitacorasInput = {
+    update: Prisma.XOR<Prisma.CultivoUpdateWithoutBitacorasInput, Prisma.CultivoUncheckedUpdateWithoutBitacorasInput>;
+    create: Prisma.XOR<Prisma.CultivoCreateWithoutBitacorasInput, Prisma.CultivoUncheckedCreateWithoutBitacorasInput>;
+    where?: Prisma.CultivoWhereInput;
+};
+export type CultivoUpdateToOneWithWhereWithoutBitacorasInput = {
+    where?: Prisma.CultivoWhereInput;
+    data: Prisma.XOR<Prisma.CultivoUpdateWithoutBitacorasInput, Prisma.CultivoUncheckedUpdateWithoutBitacorasInput>;
+};
+export type CultivoUpdateWithoutBitacorasInput = {
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
+    cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    lote?: Prisma.LoteUpdateOneRequiredWithoutCultivosNestedInput;
+    gastos?: Prisma.GastoUpdateManyWithoutCultivoNestedInput;
+};
+export type CultivoUncheckedUpdateWithoutBitacorasInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
+    nombre?: Prisma.StringFieldUpdateOperationsInput | string;
+    variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
+    cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    loteId?: Prisma.IntFieldUpdateOperationsInput | number;
+    gastos?: Prisma.GastoUncheckedUpdateManyWithoutCultivoNestedInput;
+};
+export type CultivoCreateManyLoteInput = {
+    id?: number;
+    tipo: $Enums.TipoCultivo;
+    nombre: string;
+    variedad?: string | null;
+    fechaSiembra: Date | string;
+    fechaCosechaEstimada?: Date | string | null;
+    fechaCosechaReal?: Date | string | null;
+    estado?: $Enums.EstadoCultivo;
+    cantidadSembrada?: number | null;
+    numeroSoca?: number | null;
+    edadCafetal?: number | null;
+    plantasPorHectarea?: number | null;
+    rendimientoEstimado?: number | null;
     activo?: boolean;
     createdAt?: Date | string;
     updatedAt?: Date | string;
 };
 export type CultivoUpdateWithoutLoteInput = {
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     gastos?: Prisma.GastoUpdateManyWithoutCultivoNestedInput;
+    bitacoras?: Prisma.BitacoraUpdateManyWithoutCultivoNestedInput;
 };
 export type CultivoUncheckedUpdateWithoutLoteInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     gastos?: Prisma.GastoUncheckedUpdateManyWithoutCultivoNestedInput;
+    bitacoras?: Prisma.BitacoraUncheckedUpdateManyWithoutCultivoNestedInput;
 };
 export type CultivoUncheckedUpdateManyWithoutLoteInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
+    tipo?: Prisma.EnumTipoCultivoFieldUpdateOperationsInput | $Enums.TipoCultivo;
     nombre?: Prisma.StringFieldUpdateOperationsInput | string;
     variedad?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     fechaSiembra?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     fechaCosechaEstimada?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
     fechaCosechaReal?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoCultivoFieldUpdateOperationsInput | $Enums.EstadoCultivo;
     cantidadSembrada?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    numeroSoca?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    edadCafetal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    plantasPorHectarea?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
+    rendimientoEstimado?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null;
     activo?: Prisma.BoolFieldUpdateOperationsInput | boolean;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -713,9 +1036,11 @@ export type CultivoUncheckedUpdateManyWithoutLoteInput = {
  */
 export type CultivoCountOutputType = {
     gastos: number;
+    bitacoras: number;
 };
 export type CultivoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     gastos?: boolean | CultivoCountOutputTypeCountGastosArgs;
+    bitacoras?: boolean | CultivoCountOutputTypeCountBitacorasArgs;
 };
 /**
  * CultivoCountOutputType without action
@@ -732,8 +1057,15 @@ export type CultivoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 export type CultivoCountOutputTypeCountGastosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     where?: Prisma.GastoWhereInput;
 };
+/**
+ * CultivoCountOutputType without action
+ */
+export type CultivoCountOutputTypeCountBitacorasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    where?: Prisma.BitacoraWhereInput;
+};
 export type CultivoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
+    tipo?: boolean;
     nombre?: boolean;
     variedad?: boolean;
     fechaSiembra?: boolean;
@@ -741,16 +1073,22 @@ export type CultivoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     fechaCosechaReal?: boolean;
     estado?: boolean;
     cantidadSembrada?: boolean;
+    numeroSoca?: boolean;
+    edadCafetal?: boolean;
+    plantasPorHectarea?: boolean;
+    rendimientoEstimado?: boolean;
     activo?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     loteId?: boolean;
     lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
     gastos?: boolean | Prisma.Cultivo$gastosArgs<ExtArgs>;
+    bitacoras?: boolean | Prisma.Cultivo$bitacorasArgs<ExtArgs>;
     _count?: boolean | Prisma.CultivoCountOutputTypeDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["cultivo"]>;
 export type CultivoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
+    tipo?: boolean;
     nombre?: boolean;
     variedad?: boolean;
     fechaSiembra?: boolean;
@@ -758,6 +1096,10 @@ export type CultivoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
     fechaCosechaReal?: boolean;
     estado?: boolean;
     cantidadSembrada?: boolean;
+    numeroSoca?: boolean;
+    edadCafetal?: boolean;
+    plantasPorHectarea?: boolean;
+    rendimientoEstimado?: boolean;
     activo?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -766,6 +1108,7 @@ export type CultivoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
 }, ExtArgs["result"]["cultivo"]>;
 export type CultivoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
     id?: boolean;
+    tipo?: boolean;
     nombre?: boolean;
     variedad?: boolean;
     fechaSiembra?: boolean;
@@ -773,6 +1116,10 @@ export type CultivoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
     fechaCosechaReal?: boolean;
     estado?: boolean;
     cantidadSembrada?: boolean;
+    numeroSoca?: boolean;
+    edadCafetal?: boolean;
+    plantasPorHectarea?: boolean;
+    rendimientoEstimado?: boolean;
     activo?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
@@ -781,6 +1128,7 @@ export type CultivoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
 }, ExtArgs["result"]["cultivo"]>;
 export type CultivoSelectScalar = {
     id?: boolean;
+    tipo?: boolean;
     nombre?: boolean;
     variedad?: boolean;
     fechaSiembra?: boolean;
@@ -788,15 +1136,20 @@ export type CultivoSelectScalar = {
     fechaCosechaReal?: boolean;
     estado?: boolean;
     cantidadSembrada?: boolean;
+    numeroSoca?: boolean;
+    edadCafetal?: boolean;
+    plantasPorHectarea?: boolean;
+    rendimientoEstimado?: boolean;
     activo?: boolean;
     createdAt?: boolean;
     updatedAt?: boolean;
     loteId?: boolean;
 };
-export type CultivoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "variedad" | "fechaSiembra" | "fechaCosechaEstimada" | "fechaCosechaReal" | "estado" | "cantidadSembrada" | "activo" | "createdAt" | "updatedAt" | "loteId", ExtArgs["result"]["cultivo"]>;
+export type CultivoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tipo" | "nombre" | "variedad" | "fechaSiembra" | "fechaCosechaEstimada" | "fechaCosechaReal" | "estado" | "cantidadSembrada" | "numeroSoca" | "edadCafetal" | "plantasPorHectarea" | "rendimientoEstimado" | "activo" | "createdAt" | "updatedAt" | "loteId", ExtArgs["result"]["cultivo"]>;
 export type CultivoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     lote?: boolean | Prisma.LoteDefaultArgs<ExtArgs>;
     gastos?: boolean | Prisma.Cultivo$gastosArgs<ExtArgs>;
+    bitacoras?: boolean | Prisma.Cultivo$bitacorasArgs<ExtArgs>;
     _count?: boolean | Prisma.CultivoCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type CultivoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -810,16 +1163,22 @@ export type $CultivoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     objects: {
         lote: Prisma.$LotePayload<ExtArgs>;
         gastos: Prisma.$GastoPayload<ExtArgs>[];
+        bitacoras: Prisma.$BitacoraPayload<ExtArgs>[];
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
+        tipo: $Enums.TipoCultivo;
         nombre: string;
         variedad: string | null;
         fechaSiembra: Date;
         fechaCosechaEstimada: Date | null;
         fechaCosechaReal: Date | null;
-        estado: string;
+        estado: $Enums.EstadoCultivo;
         cantidadSembrada: number | null;
+        numeroSoca: number | null;
+        edadCafetal: number | null;
+        plantasPorHectarea: number | null;
+        rendimientoEstimado: number | null;
         activo: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -1155,6 +1514,7 @@ export interface Prisma__CultivoClient<T, Null = never, ExtArgs extends runtime.
     readonly [Symbol.toStringTag]: "PrismaPromise";
     lote<T extends Prisma.LoteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LoteDefaultArgs<ExtArgs>>): Prisma.Prisma__LoteClient<runtime.Types.Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     gastos<T extends Prisma.Cultivo$gastosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cultivo$gastosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GastoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
+    bitacoras<T extends Prisma.Cultivo$bitacorasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cultivo$bitacorasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BitacoraPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1181,13 +1541,18 @@ export interface Prisma__CultivoClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface CultivoFieldRefs {
     readonly id: Prisma.FieldRef<"Cultivo", 'Int'>;
+    readonly tipo: Prisma.FieldRef<"Cultivo", 'TipoCultivo'>;
     readonly nombre: Prisma.FieldRef<"Cultivo", 'String'>;
     readonly variedad: Prisma.FieldRef<"Cultivo", 'String'>;
     readonly fechaSiembra: Prisma.FieldRef<"Cultivo", 'DateTime'>;
     readonly fechaCosechaEstimada: Prisma.FieldRef<"Cultivo", 'DateTime'>;
     readonly fechaCosechaReal: Prisma.FieldRef<"Cultivo", 'DateTime'>;
-    readonly estado: Prisma.FieldRef<"Cultivo", 'String'>;
+    readonly estado: Prisma.FieldRef<"Cultivo", 'EstadoCultivo'>;
     readonly cantidadSembrada: Prisma.FieldRef<"Cultivo", 'Float'>;
+    readonly numeroSoca: Prisma.FieldRef<"Cultivo", 'Int'>;
+    readonly edadCafetal: Prisma.FieldRef<"Cultivo", 'Int'>;
+    readonly plantasPorHectarea: Prisma.FieldRef<"Cultivo", 'Float'>;
+    readonly rendimientoEstimado: Prisma.FieldRef<"Cultivo", 'Float'>;
     readonly activo: Prisma.FieldRef<"Cultivo", 'Boolean'>;
     readonly createdAt: Prisma.FieldRef<"Cultivo", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"Cultivo", 'DateTime'>;
@@ -1597,6 +1962,29 @@ export type Cultivo$gastosArgs<ExtArgs extends runtime.Types.Extensions.Internal
     take?: number;
     skip?: number;
     distinct?: Prisma.GastoScalarFieldEnum | Prisma.GastoScalarFieldEnum[];
+};
+/**
+ * Cultivo.bitacoras
+ */
+export type Cultivo$bitacorasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Bitacora
+     */
+    select?: Prisma.BitacoraSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Bitacora
+     */
+    omit?: Prisma.BitacoraOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.BitacoraInclude<ExtArgs> | null;
+    where?: Prisma.BitacoraWhereInput;
+    orderBy?: Prisma.BitacoraOrderByWithRelationInput | Prisma.BitacoraOrderByWithRelationInput[];
+    cursor?: Prisma.BitacoraWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Prisma.BitacoraScalarFieldEnum | Prisma.BitacoraScalarFieldEnum[];
 };
 /**
  * Cultivo without action

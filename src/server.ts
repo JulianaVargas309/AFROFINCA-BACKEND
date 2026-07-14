@@ -2,6 +2,14 @@ import app from "./app"
 import { env } from "./config/env"
 import { prisma } from "./lib/prisma"
 
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("[UNHANDLED REJECTION]", reason)
+})
+
+process.on("uncaughtException", (error) => {
+  console.error("[UNCAUGHT EXCEPTION]", error)
+})
+
 const server = app.listen(env.PORT, () => {
   console.log(`Servidor corriendo en puerto ${env.PORT}`)
 })

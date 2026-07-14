@@ -1,4 +1,5 @@
 import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
 import type * as Prisma from "../internal/prismaNamespace";
 /**
  * Model Gasto
@@ -18,6 +19,7 @@ export type GastoAvgAggregateOutputType = {
     proveedorId: number | null;
     cultivoId: number | null;
     fincaId: number | null;
+    loteId: number | null;
     userId: number | null;
 };
 export type GastoSumAggregateOutputType = {
@@ -26,32 +28,35 @@ export type GastoSumAggregateOutputType = {
     proveedorId: number | null;
     cultivoId: number | null;
     fincaId: number | null;
+    loteId: number | null;
     userId: number | null;
 };
 export type GastoMinAggregateOutputType = {
     id: number | null;
     descripcion: string | null;
     monto: number | null;
-    categoria: string | null;
+    categoria: $Enums.CategoriaGasto | null;
     fecha: Date | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     proveedorId: number | null;
     cultivoId: number | null;
     fincaId: number | null;
+    loteId: number | null;
     userId: number | null;
 };
 export type GastoMaxAggregateOutputType = {
     id: number | null;
     descripcion: string | null;
     monto: number | null;
-    categoria: string | null;
+    categoria: $Enums.CategoriaGasto | null;
     fecha: Date | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     proveedorId: number | null;
     cultivoId: number | null;
     fincaId: number | null;
+    loteId: number | null;
     userId: number | null;
 };
 export type GastoCountAggregateOutputType = {
@@ -65,6 +70,7 @@ export type GastoCountAggregateOutputType = {
     proveedorId: number;
     cultivoId: number;
     fincaId: number;
+    loteId: number;
     userId: number;
     _all: number;
 };
@@ -74,6 +80,7 @@ export type GastoAvgAggregateInputType = {
     proveedorId?: true;
     cultivoId?: true;
     fincaId?: true;
+    loteId?: true;
     userId?: true;
 };
 export type GastoSumAggregateInputType = {
@@ -82,6 +89,7 @@ export type GastoSumAggregateInputType = {
     proveedorId?: true;
     cultivoId?: true;
     fincaId?: true;
+    loteId?: true;
     userId?: true;
 };
 export type GastoMinAggregateInputType = {
@@ -95,6 +103,7 @@ export type GastoMinAggregateInputType = {
     proveedorId?: true;
     cultivoId?: true;
     fincaId?: true;
+    loteId?: true;
     userId?: true;
 };
 export type GastoMaxAggregateInputType = {
@@ -108,6 +117,7 @@ export type GastoMaxAggregateInputType = {
     proveedorId?: true;
     cultivoId?: true;
     fincaId?: true;
+    loteId?: true;
     userId?: true;
 };
 export type GastoCountAggregateInputType = {
@@ -121,6 +131,7 @@ export type GastoCountAggregateInputType = {
     proveedorId?: true;
     cultivoId?: true;
     fincaId?: true;
+    loteId?: true;
     userId?: true;
     _all?: true;
 };
@@ -204,13 +215,14 @@ export type GastoGroupByOutputType = {
     id: number;
     descripcion: string;
     monto: number;
-    categoria: string | null;
+    categoria: $Enums.CategoriaGasto | null;
     fecha: Date;
     createdAt: Date;
     updatedAt: Date;
     proveedorId: number | null;
     cultivoId: number | null;
     fincaId: number | null;
+    loteId: number | null;
     userId: number;
     _count: GastoCountAggregateOutputType | null;
     _avg: GastoAvgAggregateOutputType | null;
@@ -228,17 +240,19 @@ export type GastoWhereInput = {
     id?: Prisma.IntFilter<"Gasto"> | number;
     descripcion?: Prisma.StringFilter<"Gasto"> | string;
     monto?: Prisma.FloatFilter<"Gasto"> | number;
-    categoria?: Prisma.StringNullableFilter<"Gasto"> | string | null;
+    categoria?: Prisma.EnumCategoriaGastoNullableFilter<"Gasto"> | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     createdAt?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     proveedorId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     cultivoId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     fincaId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
+    loteId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     userId?: Prisma.IntFilter<"Gasto"> | number;
     proveedor?: Prisma.XOR<Prisma.ProveedorNullableScalarRelationFilter, Prisma.ProveedorWhereInput> | null;
     cultivo?: Prisma.XOR<Prisma.CultivoNullableScalarRelationFilter, Prisma.CultivoWhereInput> | null;
     finca?: Prisma.XOR<Prisma.FincaNullableScalarRelationFilter, Prisma.FincaWhereInput> | null;
+    lote?: Prisma.XOR<Prisma.LoteNullableScalarRelationFilter, Prisma.LoteWhereInput> | null;
     user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
 };
 export type GastoOrderByWithRelationInput = {
@@ -252,10 +266,12 @@ export type GastoOrderByWithRelationInput = {
     proveedorId?: Prisma.SortOrderInput | Prisma.SortOrder;
     cultivoId?: Prisma.SortOrderInput | Prisma.SortOrder;
     fincaId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    loteId?: Prisma.SortOrderInput | Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     proveedor?: Prisma.ProveedorOrderByWithRelationInput;
     cultivo?: Prisma.CultivoOrderByWithRelationInput;
     finca?: Prisma.FincaOrderByWithRelationInput;
+    lote?: Prisma.LoteOrderByWithRelationInput;
     user?: Prisma.UserOrderByWithRelationInput;
 };
 export type GastoWhereUniqueInput = Prisma.AtLeast<{
@@ -265,17 +281,19 @@ export type GastoWhereUniqueInput = Prisma.AtLeast<{
     NOT?: Prisma.GastoWhereInput | Prisma.GastoWhereInput[];
     descripcion?: Prisma.StringFilter<"Gasto"> | string;
     monto?: Prisma.FloatFilter<"Gasto"> | number;
-    categoria?: Prisma.StringNullableFilter<"Gasto"> | string | null;
+    categoria?: Prisma.EnumCategoriaGastoNullableFilter<"Gasto"> | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     createdAt?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     proveedorId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     cultivoId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     fincaId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
+    loteId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     userId?: Prisma.IntFilter<"Gasto"> | number;
     proveedor?: Prisma.XOR<Prisma.ProveedorNullableScalarRelationFilter, Prisma.ProveedorWhereInput> | null;
     cultivo?: Prisma.XOR<Prisma.CultivoNullableScalarRelationFilter, Prisma.CultivoWhereInput> | null;
     finca?: Prisma.XOR<Prisma.FincaNullableScalarRelationFilter, Prisma.FincaWhereInput> | null;
+    lote?: Prisma.XOR<Prisma.LoteNullableScalarRelationFilter, Prisma.LoteWhereInput> | null;
     user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>;
 }, "id">;
 export type GastoOrderByWithAggregationInput = {
@@ -289,6 +307,7 @@ export type GastoOrderByWithAggregationInput = {
     proveedorId?: Prisma.SortOrderInput | Prisma.SortOrder;
     cultivoId?: Prisma.SortOrderInput | Prisma.SortOrder;
     fincaId?: Prisma.SortOrderInput | Prisma.SortOrder;
+    loteId?: Prisma.SortOrderInput | Prisma.SortOrder;
     userId?: Prisma.SortOrder;
     _count?: Prisma.GastoCountOrderByAggregateInput;
     _avg?: Prisma.GastoAvgOrderByAggregateInput;
@@ -303,82 +322,88 @@ export type GastoScalarWhereWithAggregatesInput = {
     id?: Prisma.IntWithAggregatesFilter<"Gasto"> | number;
     descripcion?: Prisma.StringWithAggregatesFilter<"Gasto"> | string;
     monto?: Prisma.FloatWithAggregatesFilter<"Gasto"> | number;
-    categoria?: Prisma.StringNullableWithAggregatesFilter<"Gasto"> | string | null;
+    categoria?: Prisma.EnumCategoriaGastoNullableWithAggregatesFilter<"Gasto"> | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeWithAggregatesFilter<"Gasto"> | Date | string;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"Gasto"> | Date | string;
     updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Gasto"> | Date | string;
     proveedorId?: Prisma.IntNullableWithAggregatesFilter<"Gasto"> | number | null;
     cultivoId?: Prisma.IntNullableWithAggregatesFilter<"Gasto"> | number | null;
     fincaId?: Prisma.IntNullableWithAggregatesFilter<"Gasto"> | number | null;
+    loteId?: Prisma.IntNullableWithAggregatesFilter<"Gasto"> | number | null;
     userId?: Prisma.IntWithAggregatesFilter<"Gasto"> | number;
 };
 export type GastoCreateInput = {
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedor?: Prisma.ProveedorCreateNestedOneWithoutGastosInput;
     cultivo?: Prisma.CultivoCreateNestedOneWithoutGastosInput;
     finca?: Prisma.FincaCreateNestedOneWithoutGastosInput;
+    lote?: Prisma.LoteCreateNestedOneWithoutGastosInput;
     user: Prisma.UserCreateNestedOneWithoutGastosInput;
 };
 export type GastoUncheckedCreateInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     cultivoId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoUpdateInput = {
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedor?: Prisma.ProveedorUpdateOneWithoutGastosNestedInput;
     cultivo?: Prisma.CultivoUpdateOneWithoutGastosNestedInput;
     finca?: Prisma.FincaUpdateOneWithoutGastosNestedInput;
+    lote?: Prisma.LoteUpdateOneWithoutGastosNestedInput;
     user?: Prisma.UserUpdateOneRequiredWithoutGastosNestedInput;
 };
 export type GastoUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoCreateManyInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     cultivoId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoUpdateManyMutationInput = {
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
@@ -387,13 +412,14 @@ export type GastoUncheckedUpdateManyInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoListRelationFilter = {
@@ -415,6 +441,7 @@ export type GastoCountOrderByAggregateInput = {
     proveedorId?: Prisma.SortOrder;
     cultivoId?: Prisma.SortOrder;
     fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
 };
 export type GastoAvgOrderByAggregateInput = {
@@ -423,6 +450,7 @@ export type GastoAvgOrderByAggregateInput = {
     proveedorId?: Prisma.SortOrder;
     cultivoId?: Prisma.SortOrder;
     fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
 };
 export type GastoMaxOrderByAggregateInput = {
@@ -436,6 +464,7 @@ export type GastoMaxOrderByAggregateInput = {
     proveedorId?: Prisma.SortOrder;
     cultivoId?: Prisma.SortOrder;
     fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
 };
 export type GastoMinOrderByAggregateInput = {
@@ -449,6 +478,7 @@ export type GastoMinOrderByAggregateInput = {
     proveedorId?: Prisma.SortOrder;
     cultivoId?: Prisma.SortOrder;
     fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
 };
 export type GastoSumOrderByAggregateInput = {
@@ -457,6 +487,7 @@ export type GastoSumOrderByAggregateInput = {
     proveedorId?: Prisma.SortOrder;
     cultivoId?: Prisma.SortOrder;
     fincaId?: Prisma.SortOrder;
+    loteId?: Prisma.SortOrder;
     userId?: Prisma.SortOrder;
 };
 export type GastoCreateNestedManyWithoutUserInput = {
@@ -535,6 +566,44 @@ export type GastoUncheckedUpdateManyWithoutFincaNestedInput = {
     updateMany?: Prisma.GastoUpdateManyWithWhereWithoutFincaInput | Prisma.GastoUpdateManyWithWhereWithoutFincaInput[];
     deleteMany?: Prisma.GastoScalarWhereInput | Prisma.GastoScalarWhereInput[];
 };
+export type GastoCreateNestedManyWithoutLoteInput = {
+    create?: Prisma.XOR<Prisma.GastoCreateWithoutLoteInput, Prisma.GastoUncheckedCreateWithoutLoteInput> | Prisma.GastoCreateWithoutLoteInput[] | Prisma.GastoUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.GastoCreateOrConnectWithoutLoteInput | Prisma.GastoCreateOrConnectWithoutLoteInput[];
+    createMany?: Prisma.GastoCreateManyLoteInputEnvelope;
+    connect?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+};
+export type GastoUncheckedCreateNestedManyWithoutLoteInput = {
+    create?: Prisma.XOR<Prisma.GastoCreateWithoutLoteInput, Prisma.GastoUncheckedCreateWithoutLoteInput> | Prisma.GastoCreateWithoutLoteInput[] | Prisma.GastoUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.GastoCreateOrConnectWithoutLoteInput | Prisma.GastoCreateOrConnectWithoutLoteInput[];
+    createMany?: Prisma.GastoCreateManyLoteInputEnvelope;
+    connect?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+};
+export type GastoUpdateManyWithoutLoteNestedInput = {
+    create?: Prisma.XOR<Prisma.GastoCreateWithoutLoteInput, Prisma.GastoUncheckedCreateWithoutLoteInput> | Prisma.GastoCreateWithoutLoteInput[] | Prisma.GastoUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.GastoCreateOrConnectWithoutLoteInput | Prisma.GastoCreateOrConnectWithoutLoteInput[];
+    upsert?: Prisma.GastoUpsertWithWhereUniqueWithoutLoteInput | Prisma.GastoUpsertWithWhereUniqueWithoutLoteInput[];
+    createMany?: Prisma.GastoCreateManyLoteInputEnvelope;
+    set?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    disconnect?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    delete?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    connect?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    update?: Prisma.GastoUpdateWithWhereUniqueWithoutLoteInput | Prisma.GastoUpdateWithWhereUniqueWithoutLoteInput[];
+    updateMany?: Prisma.GastoUpdateManyWithWhereWithoutLoteInput | Prisma.GastoUpdateManyWithWhereWithoutLoteInput[];
+    deleteMany?: Prisma.GastoScalarWhereInput | Prisma.GastoScalarWhereInput[];
+};
+export type GastoUncheckedUpdateManyWithoutLoteNestedInput = {
+    create?: Prisma.XOR<Prisma.GastoCreateWithoutLoteInput, Prisma.GastoUncheckedCreateWithoutLoteInput> | Prisma.GastoCreateWithoutLoteInput[] | Prisma.GastoUncheckedCreateWithoutLoteInput[];
+    connectOrCreate?: Prisma.GastoCreateOrConnectWithoutLoteInput | Prisma.GastoCreateOrConnectWithoutLoteInput[];
+    upsert?: Prisma.GastoUpsertWithWhereUniqueWithoutLoteInput | Prisma.GastoUpsertWithWhereUniqueWithoutLoteInput[];
+    createMany?: Prisma.GastoCreateManyLoteInputEnvelope;
+    set?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    disconnect?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    delete?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    connect?: Prisma.GastoWhereUniqueInput | Prisma.GastoWhereUniqueInput[];
+    update?: Prisma.GastoUpdateWithWhereUniqueWithoutLoteInput | Prisma.GastoUpdateWithWhereUniqueWithoutLoteInput[];
+    updateMany?: Prisma.GastoUpdateManyWithWhereWithoutLoteInput | Prisma.GastoUpdateManyWithWhereWithoutLoteInput[];
+    deleteMany?: Prisma.GastoScalarWhereInput | Prisma.GastoScalarWhereInput[];
+};
 export type GastoCreateNestedManyWithoutCultivoInput = {
     create?: Prisma.XOR<Prisma.GastoCreateWithoutCultivoInput, Prisma.GastoUncheckedCreateWithoutCultivoInput> | Prisma.GastoCreateWithoutCultivoInput[] | Prisma.GastoUncheckedCreateWithoutCultivoInput[];
     connectOrCreate?: Prisma.GastoCreateOrConnectWithoutCultivoInput | Prisma.GastoCreateOrConnectWithoutCultivoInput[];
@@ -611,35 +680,33 @@ export type GastoUncheckedUpdateManyWithoutProveedorNestedInput = {
     updateMany?: Prisma.GastoUpdateManyWithWhereWithoutProveedorInput | Prisma.GastoUpdateManyWithWhereWithoutProveedorInput[];
     deleteMany?: Prisma.GastoScalarWhereInput | Prisma.GastoScalarWhereInput[];
 };
-export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null;
-    increment?: number;
-    decrement?: number;
-    multiply?: number;
-    divide?: number;
+export type NullableEnumCategoriaGastoFieldUpdateOperationsInput = {
+    set?: $Enums.CategoriaGasto | null;
 };
 export type GastoCreateWithoutUserInput = {
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedor?: Prisma.ProveedorCreateNestedOneWithoutGastosInput;
     cultivo?: Prisma.CultivoCreateNestedOneWithoutGastosInput;
     finca?: Prisma.FincaCreateNestedOneWithoutGastosInput;
+    lote?: Prisma.LoteCreateNestedOneWithoutGastosInput;
 };
 export type GastoUncheckedCreateWithoutUserInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     cultivoId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
 };
 export type GastoCreateOrConnectWithoutUserInput = {
     where: Prisma.GastoWhereUniqueInput;
@@ -669,36 +736,39 @@ export type GastoScalarWhereInput = {
     id?: Prisma.IntFilter<"Gasto"> | number;
     descripcion?: Prisma.StringFilter<"Gasto"> | string;
     monto?: Prisma.FloatFilter<"Gasto"> | number;
-    categoria?: Prisma.StringNullableFilter<"Gasto"> | string | null;
+    categoria?: Prisma.EnumCategoriaGastoNullableFilter<"Gasto"> | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     createdAt?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Gasto"> | Date | string;
     proveedorId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     cultivoId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     fincaId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
+    loteId?: Prisma.IntNullableFilter<"Gasto"> | number | null;
     userId?: Prisma.IntFilter<"Gasto"> | number;
 };
 export type GastoCreateWithoutFincaInput = {
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedor?: Prisma.ProveedorCreateNestedOneWithoutGastosInput;
     cultivo?: Prisma.CultivoCreateNestedOneWithoutGastosInput;
+    lote?: Prisma.LoteCreateNestedOneWithoutGastosInput;
     user: Prisma.UserCreateNestedOneWithoutGastosInput;
 };
 export type GastoUncheckedCreateWithoutFincaInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     cultivoId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoCreateOrConnectWithoutFincaInput = {
@@ -722,27 +792,75 @@ export type GastoUpdateManyWithWhereWithoutFincaInput = {
     where: Prisma.GastoScalarWhereInput;
     data: Prisma.XOR<Prisma.GastoUpdateManyMutationInput, Prisma.GastoUncheckedUpdateManyWithoutFincaInput>;
 };
+export type GastoCreateWithoutLoteInput = {
+    descripcion: string;
+    monto: number;
+    categoria?: $Enums.CategoriaGasto | null;
+    fecha?: Date | string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    proveedor?: Prisma.ProveedorCreateNestedOneWithoutGastosInput;
+    cultivo?: Prisma.CultivoCreateNestedOneWithoutGastosInput;
+    finca?: Prisma.FincaCreateNestedOneWithoutGastosInput;
+    user: Prisma.UserCreateNestedOneWithoutGastosInput;
+};
+export type GastoUncheckedCreateWithoutLoteInput = {
+    id?: number;
+    descripcion: string;
+    monto: number;
+    categoria?: $Enums.CategoriaGasto | null;
+    fecha?: Date | string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    proveedorId?: number | null;
+    cultivoId?: number | null;
+    fincaId?: number | null;
+    userId: number;
+};
+export type GastoCreateOrConnectWithoutLoteInput = {
+    where: Prisma.GastoWhereUniqueInput;
+    create: Prisma.XOR<Prisma.GastoCreateWithoutLoteInput, Prisma.GastoUncheckedCreateWithoutLoteInput>;
+};
+export type GastoCreateManyLoteInputEnvelope = {
+    data: Prisma.GastoCreateManyLoteInput | Prisma.GastoCreateManyLoteInput[];
+    skipDuplicates?: boolean;
+};
+export type GastoUpsertWithWhereUniqueWithoutLoteInput = {
+    where: Prisma.GastoWhereUniqueInput;
+    update: Prisma.XOR<Prisma.GastoUpdateWithoutLoteInput, Prisma.GastoUncheckedUpdateWithoutLoteInput>;
+    create: Prisma.XOR<Prisma.GastoCreateWithoutLoteInput, Prisma.GastoUncheckedCreateWithoutLoteInput>;
+};
+export type GastoUpdateWithWhereUniqueWithoutLoteInput = {
+    where: Prisma.GastoWhereUniqueInput;
+    data: Prisma.XOR<Prisma.GastoUpdateWithoutLoteInput, Prisma.GastoUncheckedUpdateWithoutLoteInput>;
+};
+export type GastoUpdateManyWithWhereWithoutLoteInput = {
+    where: Prisma.GastoScalarWhereInput;
+    data: Prisma.XOR<Prisma.GastoUpdateManyMutationInput, Prisma.GastoUncheckedUpdateManyWithoutLoteInput>;
+};
 export type GastoCreateWithoutCultivoInput = {
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedor?: Prisma.ProveedorCreateNestedOneWithoutGastosInput;
     finca?: Prisma.FincaCreateNestedOneWithoutGastosInput;
+    lote?: Prisma.LoteCreateNestedOneWithoutGastosInput;
     user: Prisma.UserCreateNestedOneWithoutGastosInput;
 };
 export type GastoUncheckedCreateWithoutCultivoInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoCreateOrConnectWithoutCultivoInput = {
@@ -769,24 +887,26 @@ export type GastoUpdateManyWithWhereWithoutCultivoInput = {
 export type GastoCreateWithoutProveedorInput = {
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     cultivo?: Prisma.CultivoCreateNestedOneWithoutGastosInput;
     finca?: Prisma.FincaCreateNestedOneWithoutGastosInput;
+    lote?: Prisma.LoteCreateNestedOneWithoutGastosInput;
     user: Prisma.UserCreateNestedOneWithoutGastosInput;
 };
 export type GastoUncheckedCreateWithoutProveedorInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     cultivoId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoCreateOrConnectWithoutProveedorInput = {
@@ -814,188 +934,255 @@ export type GastoCreateManyUserInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     cultivoId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
 };
 export type GastoUpdateWithoutUserInput = {
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedor?: Prisma.ProveedorUpdateOneWithoutGastosNestedInput;
     cultivo?: Prisma.CultivoUpdateOneWithoutGastosNestedInput;
     finca?: Prisma.FincaUpdateOneWithoutGastosNestedInput;
+    lote?: Prisma.LoteUpdateOneWithoutGastosNestedInput;
 };
 export type GastoUncheckedUpdateWithoutUserInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
 };
 export type GastoUncheckedUpdateManyWithoutUserInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
 };
 export type GastoCreateManyFincaInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     cultivoId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoUpdateWithoutFincaInput = {
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedor?: Prisma.ProveedorUpdateOneWithoutGastosNestedInput;
     cultivo?: Prisma.CultivoUpdateOneWithoutGastosNestedInput;
+    lote?: Prisma.LoteUpdateOneWithoutGastosNestedInput;
     user?: Prisma.UserUpdateOneRequiredWithoutGastosNestedInput;
 };
 export type GastoUncheckedUpdateWithoutFincaInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoUncheckedUpdateManyWithoutFincaInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    userId?: Prisma.IntFieldUpdateOperationsInput | number;
+};
+export type GastoCreateManyLoteInput = {
+    id?: number;
+    descripcion: string;
+    monto: number;
+    categoria?: $Enums.CategoriaGasto | null;
+    fecha?: Date | string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
+    proveedorId?: number | null;
+    cultivoId?: number | null;
+    fincaId?: number | null;
+    userId: number;
+};
+export type GastoUpdateWithoutLoteInput = {
+    descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
+    monto?: Prisma.FloatFieldUpdateOperationsInput | number;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
+    fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    proveedor?: Prisma.ProveedorUpdateOneWithoutGastosNestedInput;
+    cultivo?: Prisma.CultivoUpdateOneWithoutGastosNestedInput;
+    finca?: Prisma.FincaUpdateOneWithoutGastosNestedInput;
+    user?: Prisma.UserUpdateOneRequiredWithoutGastosNestedInput;
+};
+export type GastoUncheckedUpdateWithoutLoteInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
+    monto?: Prisma.FloatFieldUpdateOperationsInput | number;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
+    fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    userId?: Prisma.IntFieldUpdateOperationsInput | number;
+};
+export type GastoUncheckedUpdateManyWithoutLoteInput = {
+    id?: Prisma.IntFieldUpdateOperationsInput | number;
+    descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
+    monto?: Prisma.FloatFieldUpdateOperationsInput | number;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
+    fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+    proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoCreateManyCultivoInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     proveedorId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoUpdateWithoutCultivoInput = {
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedor?: Prisma.ProveedorUpdateOneWithoutGastosNestedInput;
     finca?: Prisma.FincaUpdateOneWithoutGastosNestedInput;
+    lote?: Prisma.LoteUpdateOneWithoutGastosNestedInput;
     user?: Prisma.UserUpdateOneRequiredWithoutGastosNestedInput;
 };
 export type GastoUncheckedUpdateWithoutCultivoInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoUncheckedUpdateManyWithoutCultivoInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     proveedorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoCreateManyProveedorInput = {
     id?: number;
     descripcion: string;
     monto: number;
-    categoria?: string | null;
+    categoria?: $Enums.CategoriaGasto | null;
     fecha?: Date | string;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     cultivoId?: number | null;
     fincaId?: number | null;
+    loteId?: number | null;
     userId: number;
 };
 export type GastoUpdateWithoutProveedorInput = {
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     cultivo?: Prisma.CultivoUpdateOneWithoutGastosNestedInput;
     finca?: Prisma.FincaUpdateOneWithoutGastosNestedInput;
+    lote?: Prisma.LoteUpdateOneWithoutGastosNestedInput;
     user?: Prisma.UserUpdateOneRequiredWithoutGastosNestedInput;
 };
 export type GastoUncheckedUpdateWithoutProveedorInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoUncheckedUpdateManyWithoutProveedorInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     descripcion?: Prisma.StringFieldUpdateOperationsInput | string;
     monto?: Prisma.FloatFieldUpdateOperationsInput | number;
-    categoria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+    categoria?: Prisma.NullableEnumCategoriaGastoFieldUpdateOperationsInput | $Enums.CategoriaGasto | null;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     cultivoId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     fincaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
+    loteId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
 };
 export type GastoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1009,10 +1196,12 @@ export type GastoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     proveedorId?: boolean;
     cultivoId?: boolean;
     fincaId?: boolean;
+    loteId?: boolean;
     userId?: boolean;
     proveedor?: boolean | Prisma.Gasto$proveedorArgs<ExtArgs>;
     cultivo?: boolean | Prisma.Gasto$cultivoArgs<ExtArgs>;
     finca?: boolean | Prisma.Gasto$fincaArgs<ExtArgs>;
+    lote?: boolean | Prisma.Gasto$loteArgs<ExtArgs>;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["gasto"]>;
 export type GastoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1026,10 +1215,12 @@ export type GastoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
     proveedorId?: boolean;
     cultivoId?: boolean;
     fincaId?: boolean;
+    loteId?: boolean;
     userId?: boolean;
     proveedor?: boolean | Prisma.Gasto$proveedorArgs<ExtArgs>;
     cultivo?: boolean | Prisma.Gasto$cultivoArgs<ExtArgs>;
     finca?: boolean | Prisma.Gasto$fincaArgs<ExtArgs>;
+    lote?: boolean | Prisma.Gasto$loteArgs<ExtArgs>;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["gasto"]>;
 export type GastoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1043,10 +1234,12 @@ export type GastoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
     proveedorId?: boolean;
     cultivoId?: boolean;
     fincaId?: boolean;
+    loteId?: boolean;
     userId?: boolean;
     proveedor?: boolean | Prisma.Gasto$proveedorArgs<ExtArgs>;
     cultivo?: boolean | Prisma.Gasto$cultivoArgs<ExtArgs>;
     finca?: boolean | Prisma.Gasto$fincaArgs<ExtArgs>;
+    lote?: boolean | Prisma.Gasto$loteArgs<ExtArgs>;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 }, ExtArgs["result"]["gasto"]>;
 export type GastoSelectScalar = {
@@ -1060,25 +1253,29 @@ export type GastoSelectScalar = {
     proveedorId?: boolean;
     cultivoId?: boolean;
     fincaId?: boolean;
+    loteId?: boolean;
     userId?: boolean;
 };
-export type GastoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "descripcion" | "monto" | "categoria" | "fecha" | "createdAt" | "updatedAt" | "proveedorId" | "cultivoId" | "fincaId" | "userId", ExtArgs["result"]["gasto"]>;
+export type GastoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "descripcion" | "monto" | "categoria" | "fecha" | "createdAt" | "updatedAt" | "proveedorId" | "cultivoId" | "fincaId" | "loteId" | "userId", ExtArgs["result"]["gasto"]>;
 export type GastoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     proveedor?: boolean | Prisma.Gasto$proveedorArgs<ExtArgs>;
     cultivo?: boolean | Prisma.Gasto$cultivoArgs<ExtArgs>;
     finca?: boolean | Prisma.Gasto$fincaArgs<ExtArgs>;
+    lote?: boolean | Prisma.Gasto$loteArgs<ExtArgs>;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 };
 export type GastoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     proveedor?: boolean | Prisma.Gasto$proveedorArgs<ExtArgs>;
     cultivo?: boolean | Prisma.Gasto$cultivoArgs<ExtArgs>;
     finca?: boolean | Prisma.Gasto$fincaArgs<ExtArgs>;
+    lote?: boolean | Prisma.Gasto$loteArgs<ExtArgs>;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 };
 export type GastoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     proveedor?: boolean | Prisma.Gasto$proveedorArgs<ExtArgs>;
     cultivo?: boolean | Prisma.Gasto$cultivoArgs<ExtArgs>;
     finca?: boolean | Prisma.Gasto$fincaArgs<ExtArgs>;
+    lote?: boolean | Prisma.Gasto$loteArgs<ExtArgs>;
     user?: boolean | Prisma.UserDefaultArgs<ExtArgs>;
 };
 export type $GastoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1087,19 +1284,21 @@ export type $GastoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
         proveedor: Prisma.$ProveedorPayload<ExtArgs> | null;
         cultivo: Prisma.$CultivoPayload<ExtArgs> | null;
         finca: Prisma.$FincaPayload<ExtArgs> | null;
+        lote: Prisma.$LotePayload<ExtArgs> | null;
         user: Prisma.$UserPayload<ExtArgs>;
     };
     scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: number;
         descripcion: string;
         monto: number;
-        categoria: string | null;
+        categoria: $Enums.CategoriaGasto | null;
         fecha: Date;
         createdAt: Date;
         updatedAt: Date;
         proveedorId: number | null;
         cultivoId: number | null;
         fincaId: number | null;
+        loteId: number | null;
         userId: number;
     }, ExtArgs["result"]["gasto"]>;
     composites: {};
@@ -1433,6 +1632,7 @@ export interface Prisma__GastoClient<T, Null = never, ExtArgs extends runtime.Ty
     proveedor<T extends Prisma.Gasto$proveedorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gasto$proveedorArgs<ExtArgs>>): Prisma.Prisma__ProveedorClient<runtime.Types.Result.GetResult<Prisma.$ProveedorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     cultivo<T extends Prisma.Gasto$cultivoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gasto$cultivoArgs<ExtArgs>>): Prisma.Prisma__CultivoClient<runtime.Types.Result.GetResult<Prisma.$CultivoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     finca<T extends Prisma.Gasto$fincaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gasto$fincaArgs<ExtArgs>>): Prisma.Prisma__FincaClient<runtime.Types.Result.GetResult<Prisma.$FincaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    lote<T extends Prisma.Gasto$loteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Gasto$loteArgs<ExtArgs>>): Prisma.Prisma__LoteClient<runtime.Types.Result.GetResult<Prisma.$LotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1462,13 +1662,14 @@ export interface GastoFieldRefs {
     readonly id: Prisma.FieldRef<"Gasto", 'Int'>;
     readonly descripcion: Prisma.FieldRef<"Gasto", 'String'>;
     readonly monto: Prisma.FieldRef<"Gasto", 'Float'>;
-    readonly categoria: Prisma.FieldRef<"Gasto", 'String'>;
+    readonly categoria: Prisma.FieldRef<"Gasto", 'CategoriaGasto'>;
     readonly fecha: Prisma.FieldRef<"Gasto", 'DateTime'>;
     readonly createdAt: Prisma.FieldRef<"Gasto", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"Gasto", 'DateTime'>;
     readonly proveedorId: Prisma.FieldRef<"Gasto", 'Int'>;
     readonly cultivoId: Prisma.FieldRef<"Gasto", 'Int'>;
     readonly fincaId: Prisma.FieldRef<"Gasto", 'Int'>;
+    readonly loteId: Prisma.FieldRef<"Gasto", 'Int'>;
     readonly userId: Prisma.FieldRef<"Gasto", 'Int'>;
 }
 /**
@@ -1906,6 +2107,24 @@ export type Gasto$fincaArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
      */
     include?: Prisma.FincaInclude<ExtArgs> | null;
     where?: Prisma.FincaWhereInput;
+};
+/**
+ * Gasto.lote
+ */
+export type Gasto$loteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lote
+     */
+    select?: Prisma.LoteSelect<ExtArgs> | null;
+    /**
+     * Omit specific fields from the Lote
+     */
+    omit?: Prisma.LoteOmit<ExtArgs> | null;
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Prisma.LoteInclude<ExtArgs> | null;
+    where?: Prisma.LoteWhereInput;
 };
 /**
  * Gasto without action

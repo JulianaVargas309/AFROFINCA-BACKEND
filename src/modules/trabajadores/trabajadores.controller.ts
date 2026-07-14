@@ -28,3 +28,14 @@ export async function remove(req: Request, res: Response) {
   const trabajador = await trabajadoresService.deactivateTrabajador(id)
   res.json({ success: true, data: trabajador })
 }
+
+export async function search(req: Request, res: Response) {
+  const query = req.query.q as string
+  if (!query) {
+    const trabajadores = await trabajadoresService.findAll()
+    res.json({ success: true, data: trabajadores })
+    return
+  }
+  const trabajadores = await trabajadoresService.search(query)
+  res.json({ success: true, data: trabajadores })
+}

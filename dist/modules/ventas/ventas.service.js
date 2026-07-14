@@ -4,6 +4,7 @@ exports.findAll = findAll;
 exports.findById = findById;
 exports.createVenta = createVenta;
 exports.updateVenta = updateVenta;
+exports.deleteVenta = deleteVenta;
 const prisma_1 = require("../../lib/prisma");
 const types_1 = require("../../types");
 const pagination_1 = require("../../lib/pagination");
@@ -104,10 +105,10 @@ async function updateVenta(id, input, userId) {
     const venta = await prisma_1.prisma.venta.findFirst({ where: { id, userId } });
     if (!venta)
         throw new types_1.AppError("Venta no encontrada", 404);
-    if (venta.estado === "anulada") {
+    if (venta.estado === "ANULADA") {
         throw new types_1.AppError("No se puede modificar una venta anulada");
     }
-    if (input.estado === "anulada") {
+    if (input.estado === "ANULADA") {
         await prisma_1.prisma.$transaction(async (tx) => {
             const detalles = await tx.detalleVenta.findMany({ where: { ventaId: id } });
             for (const d of detalles) {
@@ -121,6 +122,36 @@ async function updateVenta(id, input, userId) {
     return prisma_1.prisma.venta.update({
         where: { id },
         data: { estado: input.estado },
+        include: {
+            cliente: { select: { id: true, nombre: true } },
+            detalles: {
+                include: { producto: { select: { id: true, nombre: true } } },
+            },
+        },
+    });
+}
+async function deleteVenta(id, userId) {
+    const venta = await prisma_1.prisma.venta.findFirst({ where: { id, userId } });
+    if (!venta)
+        throw new types_1.AppError("Venta no encontrada", 404);
+    if (venta.estado === "ANULADA") {
+        throw new types_1.AppError("La venta ya está anulada");
+    }
+    await prisma_1.prisma.$transaction(async (tx) => {
+        const detalles = await tx.detalleVenta.findMany({ where: { ventaId: id } });
+        for (const d of detalles) {
+            await tx.producto.update({
+                where: { id: d.productoId },
+                data: { stockActual: { increment: d.cantidad } },
+            });
+        }
+        await tx.venta.update({
+            where: { id },
+            data: { estado: "ANULADA" },
+        });
+    });
+    return prisma_1.prisma.venta.findFirst({
+        where: { id },
         include: {
             cliente: { select: { id: true, nombre: true } },
             detalles: {

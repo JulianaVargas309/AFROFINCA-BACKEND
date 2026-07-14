@@ -271,6 +271,17 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get jornal(): Prisma.JornalDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    /**
+     * `prisma.bitacora`: Exposes CRUD operations for the **Bitacora** model.
+      * Example usage:
+      * ```ts
+      * // Fetch zero or more Bitacoras
+      * const bitacoras = await prisma.bitacora.findMany()
+      * ```
+      */
+    get bitacora(): Prisma.BitacoraDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
 }
 export declare function getPrismaClientClass(): PrismaClientConstructor;
 //# sourceMappingURL=class.d.ts.map

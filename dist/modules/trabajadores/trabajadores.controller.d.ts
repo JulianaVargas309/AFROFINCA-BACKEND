@@ -4,4 +4,5 @@ export declare function findById(req: Request, res: Response): Promise<void>;
 export declare function create(req: Request, res: Response): Promise<void>;
 export declare function update(req: Request, res: Response): Promise<void>;
 export declare function remove(req: Request, res: Response): Promise<void>;
+export declare function search(req: Request, res: Response): Promise<void>;
 //# sourceMappingURL=trabajadores.controller.d.ts.map

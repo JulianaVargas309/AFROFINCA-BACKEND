@@ -5,6 +5,7 @@ exports.findById = findById;
 exports.createTrabajador = createTrabajador;
 exports.updateTrabajador = updateTrabajador;
 exports.deactivateTrabajador = deactivateTrabajador;
+exports.search = search;
 const prisma_1 = require("../../lib/prisma");
 const types_1 = require("../../types");
 async function findAll() {
@@ -33,5 +34,18 @@ async function deactivateTrabajador(id) {
     if (!trabajador)
         throw new types_1.AppError("Trabajador no encontrado", 404);
     return prisma_1.prisma.trabajador.update({ where: { id }, data: { activo: false } });
+}
+async function search(query) {
+    return prisma_1.prisma.trabajador.findMany({
+        where: {
+            activo: true,
+            OR: [
+                { nombre: { contains: query, mode: "insensitive" } },
+                { apellido: { contains: query, mode: "insensitive" } },
+                { documento: { contains: query, mode: "insensitive" } },
+            ],
+        },
+        orderBy: { nombre: "asc" },
+    });
 }
 //# sourceMappingURL=trabajadores.service.js.map

@@ -13,9 +13,7 @@ const prisma_1 = require("../../lib/prisma");
 const env_1 = require("../../config/env");
 const types_1 = require("../../types");
 function generateAccessToken(user) {
-    return jsonwebtoken_1.default.sign(user, env_1.env.JWT_SECRET, {
-        expiresIn: env_1.env.JWT_EXPIRES_IN,
-    });
+    return jsonwebtoken_1.default.sign({ id: user.id, documento: user.documento, nombre: user.nombre, rol: user.rol }, env_1.env.JWT_SECRET, { expiresIn: env_1.env.JWT_EXPIRES_IN });
 }
 async function generateRefreshToken(userId) {
     const token = crypto_1.default.randomBytes(40).toString("hex");
@@ -28,18 +26,23 @@ async function generateRefreshToken(userId) {
 }
 async function registerUser(input) {
     const existing = await prisma_1.prisma.user.findUnique({
-        where: { email: input.email },
+        where: { documento: input.documento },
     });
     if (existing) {
-        throw new types_1.AppError("El email ya está registrado");
+        throw new types_1.AppError("El documento ya está registrado");
     }
-    const password = await bcryptjs_1.default.hash(input.password, 10);
+    const password = await bcryptjs_1.default.hash(input.documento, 10);
     const user = await prisma_1.prisma.user.create({
-        data: { ...input, password },
+        data: {
+            nombre: input.documento,
+            documento: input.documento,
+            password,
+            rol: input.rol,
+        },
         select: {
             id: true,
             nombre: true,
-            email: true,
+            documento: true,
             rol: true,
             activo: true,
             createdAt: true,
@@ -47,11 +50,15 @@ async function registerUser(input) {
     });
     const accessToken = generateAccessToken(user);
     const refreshToken = await generateRefreshToken(user.id);
-    return { user, accessToken, refreshToken };
+    return {
+        user: { ...user, nombre: user.nombre ?? user.documento },
+        accessToken,
+        refreshToken,
+    };
 }
 async function loginUser(input) {
     const user = await prisma_1.prisma.user.findUnique({
-        where: { email: input.email },
+        where: { documento: input.documento },
     });
     if (!user || !user.activo) {
         throw new types_1.AppError("Credenciales inválidas", 401);
@@ -66,7 +73,7 @@ async function loginUser(input) {
         user: {
             id: user.id,
             nombre: user.nombre,
-            email: user.email,
+            documento: user.documento,
             rol: user.rol,
         },
         accessToken,
@@ -96,7 +103,7 @@ async function refreshUserToken(refreshToken) {
         user: {
             id: stored.user.id,
             nombre: stored.user.nombre,
-            email: stored.user.email,
+            documento: stored.user.documento,
             rol: stored.user.rol,
         },
         accessToken,

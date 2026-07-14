@@ -7,7 +7,7 @@ function validate(schema) {
         if (!result.success) {
             res.status(400).json({
                 success: false,
-                error: "Datos inválidos",
+                message: "Datos inválidos",
                 details: result.error.issues,
             });
             return;

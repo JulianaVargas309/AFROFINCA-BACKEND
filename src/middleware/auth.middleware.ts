@@ -10,7 +10,7 @@ export function authenticate(
 ) {
   const header = req.headers.authorization
   if (!header || !header.startsWith("Bearer ")) {
-    res.status(401).json({ success: false, error: "Token no proporcionado" })
+    res.status(401).json({ success: false, message: "Token no proporcionado" })
     return
   }
 
@@ -20,6 +20,6 @@ export function authenticate(
     req.user = decoded
     next()
   } catch {
-    res.status(401).json({ success: false, error: "Token inválido" })
+    res.status(401).json({ success: false, message: "Token inválido" })
   }
 }

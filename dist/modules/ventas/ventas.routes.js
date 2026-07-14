@@ -44,5 +44,6 @@ router.get("/", ventasController.findAll);
 router.get("/:id", ventasController.findById);
 router.post("/", (0, validate_middleware_1.validate)(ventas_schema_1.createVentaSchema), ventasController.create);
 router.patch("/:id", (0, validate_middleware_1.validate)(ventas_schema_1.updateVentaSchema), ventasController.update);
+router.delete("/:id", ventasController.remove);
 exports.default = router;
 //# sourceMappingURL=ventas.routes.js.map

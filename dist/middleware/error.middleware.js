@@ -13,7 +13,7 @@ function errorHandler(err, _req, res, _next) {
     if (err instanceof types_1.AppError) {
         res.status(err.statusCode).json({
             success: false,
-            error: err.message,
+            message: err.message,
         });
         return;
     }
@@ -22,7 +22,7 @@ function errorHandler(err, _req, res, _next) {
         if (mapping) {
             res.status(mapping.status).json({
                 success: false,
-                error: mapping.message,
+                message: mapping.message,
                 ...(err.code === "P2002" && {
                     details: err.meta?.target,
                 }),
@@ -33,7 +33,7 @@ function errorHandler(err, _req, res, _next) {
     console.error("[ERROR]", err);
     res.status(500).json({
         success: false,
-        error: "Error interno del servidor",
+        message: "Error interno del servidor",
     });
 }
 //# sourceMappingURL=error.middleware.js.map

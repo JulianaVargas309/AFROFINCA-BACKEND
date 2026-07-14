@@ -1,4 +1,5 @@
 import type * as runtime from "@prisma/client/runtime/client";
+import type * as $Enums from "../enums";
 import type * as Prisma from "../internal/prismaNamespace";
 /**
  * Model Venta
@@ -28,7 +29,7 @@ export type VentaMinAggregateOutputType = {
     id: number | null;
     fecha: Date | null;
     total: number | null;
-    estado: string | null;
+    estado: $Enums.EstadoVenta | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     clienteId: number | null;
@@ -38,7 +39,7 @@ export type VentaMaxAggregateOutputType = {
     id: number | null;
     fecha: Date | null;
     total: number | null;
-    estado: string | null;
+    estado: $Enums.EstadoVenta | null;
     createdAt: Date | null;
     updatedAt: Date | null;
     clienteId: number | null;
@@ -178,7 +179,7 @@ export type VentaGroupByOutputType = {
     id: number;
     fecha: Date;
     total: number;
-    estado: string;
+    estado: $Enums.EstadoVenta;
     createdAt: Date;
     updatedAt: Date;
     clienteId: number;
@@ -199,7 +200,7 @@ export type VentaWhereInput = {
     id?: Prisma.IntFilter<"Venta"> | number;
     fecha?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     total?: Prisma.FloatFilter<"Venta"> | number;
-    estado?: Prisma.StringFilter<"Venta"> | string;
+    estado?: Prisma.EnumEstadoVentaFilter<"Venta"> | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     clienteId?: Prisma.IntFilter<"Venta"> | number;
@@ -228,7 +229,7 @@ export type VentaWhereUniqueInput = Prisma.AtLeast<{
     NOT?: Prisma.VentaWhereInput | Prisma.VentaWhereInput[];
     fecha?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     total?: Prisma.FloatFilter<"Venta"> | number;
-    estado?: Prisma.StringFilter<"Venta"> | string;
+    estado?: Prisma.EnumEstadoVentaFilter<"Venta"> | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     clienteId?: Prisma.IntFilter<"Venta"> | number;
@@ -259,7 +260,7 @@ export type VentaScalarWhereWithAggregatesInput = {
     id?: Prisma.IntWithAggregatesFilter<"Venta"> | number;
     fecha?: Prisma.DateTimeWithAggregatesFilter<"Venta"> | Date | string;
     total?: Prisma.FloatWithAggregatesFilter<"Venta"> | number;
-    estado?: Prisma.StringWithAggregatesFilter<"Venta"> | string;
+    estado?: Prisma.EnumEstadoVentaWithAggregatesFilter<"Venta"> | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"Venta"> | Date | string;
     updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Venta"> | Date | string;
     clienteId?: Prisma.IntWithAggregatesFilter<"Venta"> | number;
@@ -268,7 +269,7 @@ export type VentaScalarWhereWithAggregatesInput = {
 export type VentaCreateInput = {
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     cliente: Prisma.ClienteCreateNestedOneWithoutVentasInput;
@@ -279,7 +280,7 @@ export type VentaUncheckedCreateInput = {
     id?: number;
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     clienteId: number;
@@ -289,7 +290,7 @@ export type VentaUncheckedCreateInput = {
 export type VentaUpdateInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     cliente?: Prisma.ClienteUpdateOneRequiredWithoutVentasNestedInput;
@@ -300,7 +301,7 @@ export type VentaUncheckedUpdateInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     clienteId?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -311,7 +312,7 @@ export type VentaCreateManyInput = {
     id?: number;
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     clienteId: number;
@@ -320,7 +321,7 @@ export type VentaCreateManyInput = {
 export type VentaUpdateManyMutationInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
@@ -328,7 +329,7 @@ export type VentaUncheckedUpdateManyInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     clienteId?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -464,6 +465,9 @@ export type VentaUncheckedUpdateManyWithoutClienteNestedInput = {
     updateMany?: Prisma.VentaUpdateManyWithWhereWithoutClienteInput | Prisma.VentaUpdateManyWithWhereWithoutClienteInput[];
     deleteMany?: Prisma.VentaScalarWhereInput | Prisma.VentaScalarWhereInput[];
 };
+export type EnumEstadoVentaFieldUpdateOperationsInput = {
+    set?: $Enums.EstadoVenta;
+};
 export type VentaCreateNestedOneWithoutDetallesInput = {
     create?: Prisma.XOR<Prisma.VentaCreateWithoutDetallesInput, Prisma.VentaUncheckedCreateWithoutDetallesInput>;
     connectOrCreate?: Prisma.VentaCreateOrConnectWithoutDetallesInput;
@@ -479,7 +483,7 @@ export type VentaUpdateOneRequiredWithoutDetallesNestedInput = {
 export type VentaCreateWithoutUserInput = {
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     cliente: Prisma.ClienteCreateNestedOneWithoutVentasInput;
@@ -489,7 +493,7 @@ export type VentaUncheckedCreateWithoutUserInput = {
     id?: number;
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     clienteId: number;
@@ -523,7 +527,7 @@ export type VentaScalarWhereInput = {
     id?: Prisma.IntFilter<"Venta"> | number;
     fecha?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     total?: Prisma.FloatFilter<"Venta"> | number;
-    estado?: Prisma.StringFilter<"Venta"> | string;
+    estado?: Prisma.EnumEstadoVentaFilter<"Venta"> | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     updatedAt?: Prisma.DateTimeFilter<"Venta"> | Date | string;
     clienteId?: Prisma.IntFilter<"Venta"> | number;
@@ -532,7 +536,7 @@ export type VentaScalarWhereInput = {
 export type VentaCreateWithoutClienteInput = {
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     user: Prisma.UserCreateNestedOneWithoutVentasInput;
@@ -542,7 +546,7 @@ export type VentaUncheckedCreateWithoutClienteInput = {
     id?: number;
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     userId: number;
@@ -572,7 +576,7 @@ export type VentaUpdateManyWithWhereWithoutClienteInput = {
 export type VentaCreateWithoutDetallesInput = {
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     cliente: Prisma.ClienteCreateNestedOneWithoutVentasInput;
@@ -582,7 +586,7 @@ export type VentaUncheckedCreateWithoutDetallesInput = {
     id?: number;
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     clienteId: number;
@@ -604,7 +608,7 @@ export type VentaUpdateToOneWithWhereWithoutDetallesInput = {
 export type VentaUpdateWithoutDetallesInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     cliente?: Prisma.ClienteUpdateOneRequiredWithoutVentasNestedInput;
@@ -614,7 +618,7 @@ export type VentaUncheckedUpdateWithoutDetallesInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     clienteId?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -624,7 +628,7 @@ export type VentaCreateManyUserInput = {
     id?: number;
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     clienteId: number;
@@ -632,7 +636,7 @@ export type VentaCreateManyUserInput = {
 export type VentaUpdateWithoutUserInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     cliente?: Prisma.ClienteUpdateOneRequiredWithoutVentasNestedInput;
@@ -642,7 +646,7 @@ export type VentaUncheckedUpdateWithoutUserInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     clienteId?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -652,7 +656,7 @@ export type VentaUncheckedUpdateManyWithoutUserInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     clienteId?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -661,7 +665,7 @@ export type VentaCreateManyClienteInput = {
     id?: number;
     fecha?: Date | string;
     total: number;
-    estado?: string;
+    estado?: $Enums.EstadoVenta;
     createdAt?: Date | string;
     updatedAt?: Date | string;
     userId: number;
@@ -669,7 +673,7 @@ export type VentaCreateManyClienteInput = {
 export type VentaUpdateWithoutClienteInput = {
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     user?: Prisma.UserUpdateOneRequiredWithoutVentasNestedInput;
@@ -679,7 +683,7 @@ export type VentaUncheckedUpdateWithoutClienteInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -689,7 +693,7 @@ export type VentaUncheckedUpdateManyWithoutClienteInput = {
     id?: Prisma.IntFieldUpdateOperationsInput | number;
     fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     total?: Prisma.FloatFieldUpdateOperationsInput | number;
-    estado?: Prisma.StringFieldUpdateOperationsInput | string;
+    estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta;
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
     userId?: Prisma.IntFieldUpdateOperationsInput | number;
@@ -792,7 +796,7 @@ export type $VentaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
         id: number;
         fecha: Date;
         total: number;
-        estado: string;
+        estado: $Enums.EstadoVenta;
         createdAt: Date;
         updatedAt: Date;
         clienteId: number;
@@ -1157,7 +1161,7 @@ export interface VentaFieldRefs {
     readonly id: Prisma.FieldRef<"Venta", 'Int'>;
     readonly fecha: Prisma.FieldRef<"Venta", 'DateTime'>;
     readonly total: Prisma.FieldRef<"Venta", 'Float'>;
-    readonly estado: Prisma.FieldRef<"Venta", 'String'>;
+    readonly estado: Prisma.FieldRef<"Venta", 'EstadoVenta'>;
     readonly createdAt: Prisma.FieldRef<"Venta", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"Venta", 'DateTime'>;
     readonly clienteId: Prisma.FieldRef<"Venta", 'Int'>;

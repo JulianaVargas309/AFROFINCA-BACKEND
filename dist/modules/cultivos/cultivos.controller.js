@@ -40,8 +40,8 @@ exports.update = update;
 exports.remove = remove;
 const cultivosService = __importStar(require("./cultivos.service"));
 async function findAll(req, res) {
-    const loteId = Number(req.query.loteId);
-    const cultivos = await cultivosService.findAll(loteId, req.user.id);
+    const loteId = req.query.loteId ? Number(req.query.loteId) : undefined;
+    const cultivos = await cultivosService.findAll(loteId && !isNaN(loteId) ? loteId : undefined, req.user.id);
     res.json({ success: true, data: cultivos });
 }
 async function findById(req, res) {

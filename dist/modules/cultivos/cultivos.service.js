@@ -7,31 +7,36 @@ exports.updateCultivo = updateCultivo;
 exports.deactivateCultivo = deactivateCultivo;
 const prisma_1 = require("../../lib/prisma");
 const types_1 = require("../../types");
-async function verifyAccess(loteId, userId) {
-    const lote = await prisma_1.prisma.lote.findFirst({
-        where: { id: loteId, finca: { userId } },
-    });
-    if (!lote)
-        throw new types_1.AppError("Lote no encontrado", 404);
-    return lote;
-}
+const ownership_1 = require("../../lib/ownership");
 async function findAll(loteId, userId) {
-    await verifyAccess(loteId, userId);
+    const where = {
+        activo: true,
+        lote: { finca: { userId } },
+    };
+    if (loteId) {
+        await (0, ownership_1.verifyLoteOwnership)(loteId, userId);
+        where.loteId = loteId;
+    }
     return prisma_1.prisma.cultivo.findMany({
-        where: { loteId, activo: true },
+        where,
         orderBy: { fechaSiembra: "desc" },
+        include: { lote: { select: { id: true, nombre: true } } },
     });
 }
 async function findById(id, userId) {
     const cultivo = await prisma_1.prisma.cultivo.findFirst({
         where: { id, lote: { finca: { userId } } },
+        include: {
+            lote: { select: { id: true, nombre: true } },
+            gastos: { select: { id: true, descripcion: true, monto: true } },
+        },
     });
     if (!cultivo)
         throw new types_1.AppError("Cultivo no encontrado", 404);
     return cultivo;
 }
 async function createCultivo(input, userId) {
-    await verifyAccess(input.loteId, userId);
+    await (0, ownership_1.verifyLoteOwnership)(input.loteId, userId);
     return prisma_1.prisma.cultivo.create({ data: input });
 }
 async function updateCultivo(id, input, userId) {

@@ -41,6 +41,8 @@ const movimientos_schema_1 = require("./movimientos.schema");
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
 router.get("/", movimientosController.findAll);
+router.get("/:id", movimientosController.findById);
 router.post("/", (0, validate_middleware_1.validate)(movimientos_schema_1.createMovimientoSchema), movimientosController.create);
+router.delete("/:id", movimientosController.remove);
 exports.default = router;
 //# sourceMappingURL=movimientos.routes.js.map

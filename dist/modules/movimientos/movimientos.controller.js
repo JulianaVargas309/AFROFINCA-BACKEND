@@ -34,15 +34,27 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findAll = findAll;
+exports.findById = findById;
 exports.create = create;
+exports.remove = remove;
 const movimientosService = __importStar(require("./movimientos.service"));
 async function findAll(req, res) {
     const productoId = Number(req.query.productoId);
-    const movimientos = await movimientosService.findAll(productoId);
+    const movimientos = await movimientosService.findAll(isNaN(productoId) ? 0 : productoId);
     res.json({ success: true, data: movimientos });
+}
+async function findById(req, res) {
+    const id = Number(req.params.id);
+    const movimiento = await movimientosService.findById(id);
+    res.json({ success: true, data: movimiento });
 }
 async function create(req, res) {
     const movimiento = await movimientosService.createMovimiento(req.body, req.user.id);
     res.status(201).json({ success: true, data: movimiento });
+}
+async function remove(req, res) {
+    const id = Number(req.params.id);
+    await movimientosService.deleteMovimiento(id);
+    res.json({ success: true, message: "Movimiento eliminado" });
 }
 //# sourceMappingURL=movimientos.controller.js.map

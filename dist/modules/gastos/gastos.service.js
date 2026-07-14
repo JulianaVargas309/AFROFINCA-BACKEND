@@ -8,18 +8,16 @@ exports.deleteGasto = deleteGasto;
 const prisma_1 = require("../../lib/prisma");
 const types_1 = require("../../types");
 const pagination_1 = require("../../lib/pagination");
+const gastoInclude = {
+    proveedor: { select: { id: true, nombre: true } },
+    cultivo: { select: { id: true, nombre: true } },
+    finca: { select: { id: true, nombre: true } },
+    lote: { select: { id: true, nombre: true } },
+};
 async function findAll(userId, page, limit) {
     const where = { userId };
     if (!page && !limit) {
-        return prisma_1.prisma.gasto.findMany({
-            where,
-            orderBy: { fecha: "desc" },
-            include: {
-                proveedor: { select: { id: true, nombre: true } },
-                cultivo: { select: { id: true, nombre: true } },
-                finca: { select: { id: true, nombre: true } },
-            },
-        });
+        return prisma_1.prisma.gasto.findMany({ where, orderBy: { fecha: "desc" }, include: gastoInclude });
     }
     const params = (0, pagination_1.getPaginationParams)({ page, limit });
     const [data, total] = await Promise.all([
@@ -28,25 +26,14 @@ async function findAll(userId, page, limit) {
             orderBy: { fecha: "desc" },
             skip: params.skip,
             take: params.take,
-            include: {
-                proveedor: { select: { id: true, nombre: true } },
-                cultivo: { select: { id: true, nombre: true } },
-                finca: { select: { id: true, nombre: true } },
-            },
+            include: gastoInclude,
         }),
         prisma_1.prisma.gasto.count({ where }),
     ]);
     return (0, pagination_1.paginatedResponse)(data, total, { page, limit });
 }
 async function findById(id, userId) {
-    const gasto = await prisma_1.prisma.gasto.findFirst({
-        where: { id, userId },
-        include: {
-            proveedor: { select: { id: true, nombre: true } },
-            cultivo: { select: { id: true, nombre: true } },
-            finca: { select: { id: true, nombre: true } },
-        },
-    });
+    const gasto = await prisma_1.prisma.gasto.findFirst({ where: { id, userId }, include: gastoInclude });
     if (!gasto)
         throw new types_1.AppError("Gasto no encontrado", 404);
     return gasto;

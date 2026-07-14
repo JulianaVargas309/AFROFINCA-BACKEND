@@ -9,4 +9,42 @@
 * 🟢 You can import this file directly.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.EstadoVenta = exports.CategoriaGasto = exports.ActividadBitacora = exports.EstadoCultivo = exports.TipoCultivo = exports.Rol = void 0;
+exports.Rol = {
+    ADMIN: 'ADMIN',
+    FAMILIAR: 'FAMILIAR',
+    CONSULTA: 'CONSULTA'
+};
+exports.TipoCultivo = {
+    CAFE: 'CAFE',
+    CANA_AZUCAR: 'CANA_AZUCAR'
+};
+exports.EstadoCultivo = {
+    ACTIVO: 'ACTIVO',
+    COSECHADO: 'COSECHADO',
+    PERDIDO: 'PERDIDO'
+};
+exports.ActividadBitacora = {
+    FERTILIZACION: 'FERTILIZACION',
+    FUMIGACION: 'FUMIGACION',
+    PODA: 'PODA',
+    DESHIERBE: 'DESHIERBE',
+    COSECHA: 'COSECHA',
+    SIEMBRA: 'SIEMBRA',
+    MANTENIMIENTO: 'MANTENIMIENTO',
+    OTRO: 'OTRO'
+};
+exports.CategoriaGasto = {
+    INSUMOS: 'INSUMOS',
+    MANO_DE_OBRA: 'MANO_DE_OBRA',
+    MANTENIMIENTO: 'MANTENIMIENTO',
+    TRANSPORTE: 'TRANSPORTE',
+    ADMINISTRACION: 'ADMINISTRACION',
+    OTRO: 'OTRO'
+};
+exports.EstadoVenta = {
+    PENDIENTE: 'PENDIENTE',
+    COMPLETADA: 'COMPLETADA',
+    ANULADA: 'ANULADA'
+};
 //# sourceMappingURL=enums.js.map

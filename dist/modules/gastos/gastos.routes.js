@@ -42,8 +42,8 @@ const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
 router.get("/", gastosController.findAll);
 router.get("/:id", gastosController.findById);
-router.post("/", (0, validate_middleware_1.validate)(gastos_schema_1.createGastroSchema), gastosController.create);
-router.put("/:id", (0, validate_middleware_1.validate)(gastos_schema_1.updateGastroSchema), gastosController.update);
+router.post("/", (0, validate_middleware_1.validate)(gastos_schema_1.createGastoSchema), gastosController.create);
+router.put("/:id", (0, validate_middleware_1.validate)(gastos_schema_1.updateGastoSchema), gastosController.update);
 router.delete("/:id", gastosController.remove);
 exports.default = router;
 //# sourceMappingURL=gastos.routes.js.map

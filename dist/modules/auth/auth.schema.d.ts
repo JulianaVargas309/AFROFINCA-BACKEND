@@ -1,15 +1,14 @@
 import { z } from "zod";
 export declare const registerSchema: z.ZodObject<{
-    nombre: z.ZodString;
-    email: z.ZodString;
-    password: z.ZodString;
-    rol: z.ZodOptional<z.ZodEnum<{
-        admin: "admin";
-        encargado: "encargado";
-    }>>;
+    documento: z.ZodString;
+    rol: z.ZodDefault<z.ZodOptional<z.ZodEnum<{
+        ADMIN: "ADMIN";
+        FAMILIAR: "FAMILIAR";
+        CONSULTA: "CONSULTA";
+    }>>>;
 }, z.core.$strip>;
 export declare const loginSchema: z.ZodObject<{
-    email: z.ZodString;
+    documento: z.ZodString;
     password: z.ZodString;
 }, z.core.$strip>;
 export declare const refreshSchema: z.ZodObject<{

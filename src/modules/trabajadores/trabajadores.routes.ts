@@ -8,6 +8,7 @@ const router = Router()
 
 router.use(authenticate)
 
+router.get("/search", trabajadoresController.search)
 router.get("/", trabajadoresController.findAll)
 router.get("/:id", trabajadoresController.findById)
 router.post("/", validate(createTrabajadorSchema), trabajadoresController.create)

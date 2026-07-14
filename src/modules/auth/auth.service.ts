@@ -6,10 +6,17 @@ import { env } from "../../config/env"
 import { AppError } from "../../types"
 import { RegisterInput, LoginInput } from "./auth.schema"
 
-function generateAccessToken(user: { id: number; email: string; nombre: string; rol: string }) {
-  return jwt.sign(user, env.JWT_SECRET, {
-    expiresIn: env.JWT_EXPIRES_IN as any,
-  })
+function generateAccessToken(user: {
+  id: number
+  documento: string
+  nombre: string | null
+  rol: string
+}) {
+  return jwt.sign(
+    { id: user.id, documento: user.documento, nombre: user.nombre, rol: user.rol },
+    env.JWT_SECRET,
+    { expiresIn: env.JWT_EXPIRES_IN as any },
+  )
 }
 
 async function generateRefreshToken(userId: number) {
@@ -26,19 +33,24 @@ async function generateRefreshToken(userId: number) {
 
 export async function registerUser(input: RegisterInput) {
   const existing = await prisma.user.findUnique({
-    where: { email: input.email },
+    where: { documento: input.documento },
   })
   if (existing) {
-    throw new AppError("El email ya está registrado")
+    throw new AppError("El documento ya está registrado")
   }
 
-  const password = await bcrypt.hash(input.password, 10)
+  const password = await bcrypt.hash(input.documento, 10)
   const user = await prisma.user.create({
-    data: { ...input, password },
+    data: {
+      nombre: input.documento,
+      documento: input.documento,
+      password,
+      rol: input.rol,
+    },
     select: {
       id: true,
       nombre: true,
-      email: true,
+      documento: true,
       rol: true,
       activo: true,
       createdAt: true,
@@ -48,12 +60,16 @@ export async function registerUser(input: RegisterInput) {
   const accessToken = generateAccessToken(user)
   const refreshToken = await generateRefreshToken(user.id)
 
-  return { user, accessToken, refreshToken }
+  return {
+    user: { ...user, nombre: user.nombre ?? user.documento },
+    accessToken,
+    refreshToken,
+  }
 }
 
 export async function loginUser(input: LoginInput) {
   const user = await prisma.user.findUnique({
-    where: { email: input.email },
+    where: { documento: input.documento },
   })
   if (!user || !user.activo) {
     throw new AppError("Credenciales inválidas", 401)
@@ -71,7 +87,7 @@ export async function loginUser(input: LoginInput) {
     user: {
       id: user.id,
       nombre: user.nombre,
-      email: user.email,
+      documento: user.documento,
       rol: user.rol,
     },
     accessToken,
@@ -108,7 +124,7 @@ export async function refreshUserToken(refreshToken: string) {
     user: {
       id: stored.user.id,
       nombre: stored.user.nombre,
-      email: stored.user.email,
+      documento: stored.user.documento,
       rol: stored.user.rol,
     },
     accessToken,

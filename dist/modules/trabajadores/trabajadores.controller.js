@@ -38,6 +38,7 @@ exports.findById = findById;
 exports.create = create;
 exports.update = update;
 exports.remove = remove;
+exports.search = search;
 const trabajadoresService = __importStar(require("./trabajadores.service"));
 async function findAll(_req, res) {
     const trabajadores = await trabajadoresService.findAll();
@@ -61,5 +62,15 @@ async function remove(req, res) {
     const id = Number(req.params.id);
     const trabajador = await trabajadoresService.deactivateTrabajador(id);
     res.json({ success: true, data: trabajador });
+}
+async function search(req, res) {
+    const query = req.query.q;
+    if (!query) {
+        const trabajadores = await trabajadoresService.findAll();
+        res.json({ success: true, data: trabajadores });
+        return;
+    }
+    const trabajadores = await trabajadoresService.search(query);
+    res.json({ success: true, data: trabajadores });
 }
 //# sourceMappingURL=trabajadores.controller.js.map

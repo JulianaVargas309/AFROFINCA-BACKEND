@@ -5,4 +5,6 @@ export declare function findById(req: AuthRequest, res: Response): Promise<void>
 export declare function create(req: AuthRequest, res: Response): Promise<void>;
 export declare function update(req: AuthRequest, res: Response): Promise<void>;
 export declare function remove(req: AuthRequest, res: Response): Promise<void>;
+export declare function findByTrabajador(req: AuthRequest, res: Response): Promise<void>;
+export declare function updateEstado(req: AuthRequest, res: Response): Promise<void>;
 //# sourceMappingURL=jornales.controller.d.ts.map

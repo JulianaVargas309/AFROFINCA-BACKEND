@@ -2,10 +2,10 @@ import { RegisterInput, LoginInput } from "./auth.schema";
 export declare function registerUser(input: RegisterInput): Promise<{
     user: {
         nombre: string;
-        email: string;
-        rol: string;
-        createdAt: Date;
+        documento: string;
+        rol: import("../../generated/prisma/enums").Rol;
         id: number;
+        createdAt: Date;
         activo: boolean;
     };
     accessToken: string;
@@ -14,9 +14,9 @@ export declare function registerUser(input: RegisterInput): Promise<{
 export declare function loginUser(input: LoginInput): Promise<{
     user: {
         id: number;
-        nombre: string;
-        email: string;
-        rol: string;
+        nombre: string | null;
+        documento: string;
+        rol: import("../../generated/prisma/enums").Rol;
     };
     accessToken: string;
     refreshToken: string;
@@ -24,9 +24,9 @@ export declare function loginUser(input: LoginInput): Promise<{
 export declare function refreshUserToken(refreshToken: string): Promise<{
     user: {
         id: number;
-        nombre: string;
-        email: string;
-        rol: string;
+        nombre: string | null;
+        documento: string;
+        rol: import("../../generated/prisma/enums").Rol;
     };
     accessToken: string;
     refreshToken: string;

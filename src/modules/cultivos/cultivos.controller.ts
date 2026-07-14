@@ -3,8 +3,11 @@ import { AuthRequest } from "../../types"
 import * as cultivosService from "./cultivos.service"
 
 export async function findAll(req: AuthRequest, res: Response) {
-  const loteId = Number(req.query.loteId)
-  const cultivos = await cultivosService.findAll(loteId, req.user!.id)
+  const loteId = req.query.loteId ? Number(req.query.loteId) : undefined
+  const cultivos = await cultivosService.findAll(
+    loteId && !isNaN(loteId) ? loteId : undefined,
+    req.user!.id
+  )
   res.json({ success: true, data: cultivos })
 }
 

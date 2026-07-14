@@ -12,6 +12,6 @@ exports.createVentaSchema = zod_1.z.object({
     detalles: zod_1.z.array(exports.detalleVentaSchema).min(1),
 });
 exports.updateVentaSchema = zod_1.z.object({
-    estado: zod_1.z.enum(["pendiente", "completada", "anulada"]),
+    estado: zod_1.z.enum(["PENDIENTE", "COMPLETADA", "ANULADA"]),
 });
 //# sourceMappingURL=ventas.schema.js.map

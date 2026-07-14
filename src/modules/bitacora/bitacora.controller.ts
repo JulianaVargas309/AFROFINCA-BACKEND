@@ -4,9 +4,11 @@ import * as bitacoraService from "./bitacora.service"
 
 export async function findAll(req: AuthRequest, res: Response) {
   const { loteId, cultivoId, fechaDesde, fechaHasta, actividad, page, limit } = req.query
+  const parsedLoteId = loteId ? Number(loteId) : undefined
+  const parsedCultivoId = cultivoId ? Number(cultivoId) : undefined
   const result = await bitacoraService.findAll(req.user!.id, {
-    loteId: loteId ? Number(loteId) : undefined,
-    cultivoId: cultivoId ? Number(cultivoId) : undefined,
+    loteId: parsedLoteId && !isNaN(parsedLoteId) ? parsedLoteId : undefined,
+    cultivoId: parsedCultivoId && !isNaN(parsedCultivoId) ? parsedCultivoId : undefined,
     fechaDesde: fechaDesde as string | undefined,
     fechaHasta: fechaHasta as string | undefined,
     actividad: actividad as string | undefined,

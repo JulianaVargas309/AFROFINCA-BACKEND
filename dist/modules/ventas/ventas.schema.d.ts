@@ -14,9 +14,9 @@ export declare const createVentaSchema: z.ZodObject<{
 }, z.core.$strip>;
 export declare const updateVentaSchema: z.ZodObject<{
     estado: z.ZodEnum<{
-        pendiente: "pendiente";
-        completada: "completada";
-        anulada: "anulada";
+        PENDIENTE: "PENDIENTE";
+        COMPLETADA: "COMPLETADA";
+        ANULADA: "ANULADA";
     }>;
 }, z.core.$strip>;
 export type CreateVentaInput = z.infer<typeof createVentaSchema>;

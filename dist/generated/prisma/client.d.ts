@@ -91,4 +91,9 @@ export type Trabajador = Prisma.TrabajadorModel;
  *
  */
 export type Jornal = Prisma.JornalModel;
+/**
+ * Model Bitacora
+ *
+ */
+export type Bitacora = Prisma.BitacoraModel;
 //# sourceMappingURL=client.d.ts.map

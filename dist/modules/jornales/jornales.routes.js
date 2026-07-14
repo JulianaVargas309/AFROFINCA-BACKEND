@@ -41,9 +41,11 @@ const jornales_schema_1 = require("./jornales.schema");
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
 router.get("/", jornalesController.findAll);
+router.get("/trabajador/:trabajadorId", jornalesController.findByTrabajador);
 router.get("/:id", jornalesController.findById);
 router.post("/", (0, validate_middleware_1.validate)(jornales_schema_1.createJornalSchema), jornalesController.create);
 router.put("/:id", (0, validate_middleware_1.validate)(jornales_schema_1.updateJornalSchema), jornalesController.update);
+router.patch("/:id/estado", (0, validate_middleware_1.validate)(jornales_schema_1.updateEstadoSchema), jornalesController.updateEstado);
 router.delete("/:id", jornalesController.remove);
 exports.default = router;
 //# sourceMappingURL=jornales.routes.js.map

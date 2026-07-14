@@ -34,6 +34,7 @@ enum ActividadBitacora {
   COSECHA
   SIEMBRA
   MANTENIMIENTO
+  RIEGO
   OTRO
 }
 
@@ -52,24 +53,137 @@ enum EstadoVenta {
   ANULADA
 }
 
+enum EstadoJornal {
+  PENDIENTE
+  PAGADO
+  ANULADO
+}
+
+enum EstadoActividad {
+  PENDIENTE
+  EN_PROCESO
+  FINALIZADA
+  CANCELADA
+}
+
+enum Prioridad {
+  BAJA
+  MEDIA
+  ALTA
+  CRITICA
+}
+
+enum TipoEvento {
+  SIEMBRA
+  FERTILIZACION
+  RIEGO
+  FUMIGACION
+  PODA
+  COSECHA
+  COMPRA
+  PAGO
+  JORNAL
+  MANTENIMIENTO
+  OTRO
+}
+
+enum TipoNotificacion {
+  INVENTARIO_BAJO
+  ACTIVIDAD_PROXIMA
+  PRODUCTO_VENCIDO
+  JORNAL_PENDIENTE
+  COMPRA
+  COSECHA
+  RECORDATORIO
+  ALERTA
+}
+
+enum TipoMovimientoCaja {
+  INGRESO
+  EGRESO
+  TRASLADO
+}
+
+enum EstadoPresupuesto {
+  BORRADOR
+  APROBADO
+  EJECUTANDO
+  CERRADO
+}
+
 // ─── Models ──────────────────────────────────────────
 
-model User {
-  id        Int      @id @default(autoincrement())
-  nombre    String
-  email     String   @unique
-  password  String
-  rol       Rol      @default(FAMILIAR)
-  activo    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Role {
+  id          Int              @id @default(autoincrement())
+  nombre      String           @unique
+  descripcion String?
+  nivel       Int              @default(0)
+  activo      Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 
-  fincas        Finca[]
-  refreshTokens RefreshToken[]
-  movimientos   MovimientoInventario[]
-  ventas        Venta[]
-  gastos        Gasto[]
-  bitacoras     Bitacora[]
+  permissions RolePermission[]
+  users       User[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          Int              @id @default(autoincrement())
+  nombre      String           @unique
+  descripcion String?
+  modulo      String?
+  activo      Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+
+  roles RolePermission[]
+
+  @@map("permisos")
+}
+
+model RolePermission {
+  roleId       Int
+  permissionId Int
+  createdAt    DateTime @default(now())
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("roles_permisos")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  nombre     String   @default("Sin nombre")
+  apellido   String?
+  documento  String   @unique
+  correo     String?
+  telefono   String?
+  password   String
+  rol        Rol      @default(FAMILIAR)
+  foto       String?
+  ultimoAcceso DateTime?
+  activo     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  roleId Int?
+  role   Role?  @relation(fields: [roleId], references: [id])
+
+  fincas               Finca[]
+  refreshTokens        RefreshToken[]
+  movimientos          MovimientoInventario[]
+  ventas               Venta[]
+  gastos               Gasto[]
+  bitacoras            Bitacora[]
+  auditorias           AuditLog[]
+  compras              Compra[]
+  ajustesInventario    AjusteInventario[]
+  eventosCalendario    EventoCalendario[]
+  actividadesSeg       ActividadSeguimiento[]
+  notificaciones       Notificacion[]
+  movimientosCaja      MovimientoCaja[]
 
   @@map("usuarios")
 }
@@ -85,12 +199,584 @@ model RefreshToken {
   @@map("refresh_tokens")
 }
 
+// ─── Auditoría ───────────────────────────────────────
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  accion     String
+  entidad    String
+  entidadId  Int?
+  detalle    String?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entidad, entidadId])
+  @@index([createdAt])
+  @@map("auditoria")
+}
+
+// ─── Configuración ───────────────────────────────────
+
+model Configuracion {
+  id           Int     @id @default(autoincrement())
+  llave        String  @unique
+  valor        String
+  tipo         String  @default("string")
+  descripcion  String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("configuracion")
+}
+
+// ─── Producción ──────────────────────────────────────
+
+model Temporada {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  descripcion String?
+  fechaInicio DateTime
+  fechaFin    DateTime?
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  fincaId Int
+  finca   Finca @relation(fields: [fincaId], references: [id])
+
+  produccionHistorial ProduccionHistorial[]
+
+  @@map("temporadas")
+}
+
+model ProduccionHistorial {
+  id          Int      @id @default(autoincrement())
+  fecha       DateTime
+  cantidad    Float
+  unidad      String   @default("kg")
+  calidad     String?
+  destino     String?
+  observaciones String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  temporadaId Int
+  temporada   Temporada @relation(fields: [temporadaId], references: [id])
+  cultivoId   Int
+  cultivo     Cultivo   @relation(fields: [cultivoId], references: [id])
+  loteId      Int
+  lote        Lote      @relation(fields: [loteId], references: [id])
+
+  @@index([cultivoId])
+  @@index([loteId])
+  @@index([temporadaId])
+  @@map("produccion_historial")
+}
+
+model RendimientoLote {
+  id             Int      @id @default(autoincrement())
+  temporada      String?
+  areaCultivada  Float?
+  produccionTotal Float
+  rendimiento    Float?
+  unidad         String   @default("kg/ha")
+  observaciones  String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  loteId Int
+  lote   Lote @relation(fields: [loteId], references: [id])
+
+  @@index([loteId])
+  @@map("rendimiento_lotes")
+}
+
+model RendimientoCultivo {
+  id             Int      @id @default(autoincrement())
+  temporada      String?
+  areaCultivada  Float?
+  produccionTotal Float
+  rendimiento    Float?
+  unidad         String   @default("kg/ha")
+  observaciones  String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  cultivoId Int
+  cultivo   Cultivo @relation(fields: [cultivoId], references: [id])
+
+  @@index([cultivoId])
+  @@map("rendimiento_cultivos")
+}
+
+// ─── Inventario ──────────────────────────────────────
+
+model CategoriaProducto {
+  id          Int      @id @default(autoincrement())
+  nombre      String   @unique
+  descripcion String?
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  productos Producto[]
+
+  @@map("categorias_producto")
+}
+
+model Producto {
+  id             Int      @id @default(autoincrement())
+  nombre         String
+  descripcion    String?
+  categoriaId    Int?
+  categoriaRel   CategoriaProducto? @relation(fields: [categoriaId], references: [id])
+  categoria      String?
+  unidadMedida   String   @default("unidad")
+  stockActual    Float    @default(0)
+  stockMinimo    Float    @default(0)
+  precioUnitario Float?
+  fechaVencimiento DateTime?
+  activo         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  movimientos        MovimientoInventario[]
+  detalleVentas      DetalleVenta[]
+  bitacoras          Bitacora[]
+  detalleCompras     DetalleCompra[]
+  ajustesInventario  AjusteInventario[]
+  alertasInventario  AlertaInventario[]
+  actividadProducto  ActividadProducto[]
+
+  @@map("productos")
+}
+
+model MovimientoInventario {
+  id        Int      @id @default(autoincrement())
+  tipo      String
+  cantidad  Float
+  motivo    String?
+  fecha     DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  productoId Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@index([productoId, fecha])
+  @@map("movimientos_inventario")
+}
+
+model Compra {
+  id          Int      @id @default(autoincrement())
+  numeroFactura String?
+  fecha       DateTime @default(now())
+  total       Float
+  estado      String   @default("PENDIENTE")
+  observaciones String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  proveedorId Int?
+  proveedor   Proveedor? @relation(fields: [proveedorId], references: [id])
+  userId      Int
+  user        User       @relation(fields: [userId], references: [id])
+  detalles    DetalleCompra[]
+
+  @@index([userId, fecha])
+  @@map("compras")
+}
+
+model DetalleCompra {
+  id       Int   @id @default(autoincrement())
+  cantidad Float
+  precioUnitario Float
+  subtotal Float
+
+  compraId   Int
+  compra     Compra   @relation(fields: [compraId], references: [id], onDelete: Cascade)
+  productoId Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+
+  @@map("detalles_compra")
+}
+
+model AjusteInventario {
+  id          Int      @id @default(autoincrement())
+  tipo        String
+  cantidad    Float
+  motivo      String
+  fecha       DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  productoId Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@index([productoId])
+  @@map("ajustes_inventario")
+}
+
+model AlertaInventario {
+  id         Int      @id @default(autoincrement())
+  mensaje    String
+  tipo       String   @default("BAJO_STOCK")
+  leida      Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  productoId Int
+  producto   Producto @relation(fields: [productoId], references: [id])
+
+  @@index([leida])
+  @@index([productoId])
+  @@map("alertas_inventario")
+}
+
+// ─── Personal ────────────────────────────────────────
+
+model Trabajador {
+  id              Int      @id @default(autoincrement())
+  nombre          String
+  apellido        String?
+  documento       String   @unique
+  telefono        String?
+  correo          String?
+  direccion       String?
+  fechaNacimiento DateTime?
+  eps             String?
+  arl             String?
+  cargo           String?
+  salario         Float?
+  tipo            String   @default("temporal")
+  fechaIngreso    DateTime @default(now())
+  fechaSalida     DateTime?
+  observaciones   String?
+  foto            String?
+  activo          Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  jornales       Jornal[]
+  historialLaboral HistorialLaboral[]
+  asistencias    Asistencia[]
+  actividadesAsignadas ActividadAsignada[]
+
+  @@map("trabajadores")
+}
+
+model Jornal {
+  id          Int          @id @default(autoincrement())
+  fecha       DateTime
+  horaInicio  DateTime?
+  horaFin     DateTime?
+  horas       Float?
+  actividad   String?
+  tarea       String?
+  valorPagado Float?
+  montoPagado Float?
+  observaciones String?
+  estado      EstadoJornal @default(PENDIENTE)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  trabajadorId Int
+  trabajador   Trabajador @relation(fields: [trabajadorId], references: [id])
+  loteId       Int
+  lote         Lote       @relation(fields: [loteId], references: [id])
+  cultivoId    Int?
+  cultivo      Cultivo?   @relation(fields: [cultivoId], references: [id])
+
+  @@index([loteId, fecha])
+  @@index([trabajadorId])
+  @@map("jornales")
+}
+
+model HistorialLaboral {
+  id            Int      @id @default(autoincrement())
+  tipo          String
+  descripcion   String
+  fecha         DateTime @default(now())
+  observaciones String?
+  createdAt     DateTime @default(now())
+
+  trabajadorId Int
+  trabajador   Trabajador @relation(fields: [trabajadorId], references: [id])
+
+  @@index([trabajadorId])
+  @@map("historial_laboral")
+}
+
+model Asistencia {
+  id         Int      @id @default(autoincrement())
+  fecha      DateTime
+  horaEntrada DateTime?
+  horaSalida DateTime?
+  presente   Boolean  @default(true)
+  justificacion String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  trabajadorId Int
+  trabajador   Trabajador @relation(fields: [trabajadorId], references: [id])
+
+  @@unique([trabajadorId, fecha])
+  @@index([fecha])
+  @@map("asistencias")
+}
+
+model ActividadAsignada {
+  id          Int             @id @default(autoincrement())
+  titulo      String
+  descripcion String?
+  estado      EstadoActividad @default(PENDIENTE)
+  fechaAsignacion DateTime    @default(now())
+  fechaInicio DateTime?
+  fechaFin    DateTime?
+  prioridad   Prioridad       @default(MEDIA)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  trabajadorId Int
+  trabajador   Trabajador @relation(fields: [trabajadorId], references: [id])
+  loteId       Int?
+  lote         Lote?      @relation(fields: [loteId], references: [id])
+  cultivoId    Int?
+  cultivo      Cultivo?   @relation(fields: [cultivoId], references: [id])
+
+  @@index([trabajadorId])
+  @@index([estado])
+  @@map("actividades_asignadas")
+}
+
+// ─── Calendario Agrícola ─────────────────────────────
+
+model EventoCalendario {
+  id          Int        @id @default(autoincrement())
+  titulo      String
+  descripcion String?
+  tipo        TipoEvento
+  fechaInicio DateTime
+  fechaFin    DateTime?
+  todoElDia   Boolean    @default(false)
+  estado      String     @default("PENDIENTE")
+  prioridad   Prioridad  @default(MEDIA)
+  color       String?
+  ubicacion   String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  fincaId  Int?
+  finca    Finca?    @relation(fields: [fincaId], references: [id])
+  loteId   Int?
+  lote     Lote?     @relation(fields: [loteId], references: [id])
+  cultivoId Int?
+  cultivo  Cultivo?  @relation(fields: [cultivoId], references: [id])
+  userId   Int
+  user     User      @relation(fields: [userId], references: [id])
+
+  recordatorios Recordatorio[]
+
+  @@index([fechaInicio, fechaFin])
+  @@index([userId])
+  @@index([tipo])
+  @@map("eventos_calendario")
+}
+
+model Recordatorio {
+  id         Int      @id @default(autoincrement())
+  titulo     String
+  mensaje    String?
+  fecha      DateTime
+  enviado    Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  eventoId Int?
+  evento   EventoCalendario? @relation(fields: [eventoId], references: [id], onDelete: Cascade)
+  notificaciones Notificacion[]
+
+  @@index([fecha])
+  @@index([enviado])
+  @@map("recordatorios")
+}
+
+// ─── Seguimiento de Actividades ──────────────────────
+
+model ActividadSeguimiento {
+  id          Int             @id @default(autoincrement())
+  titulo      String
+  descripcion String?
+  estado      EstadoActividad @default(PENDIENTE)
+  fechaInicio DateTime?
+  fechaFin    DateTime?
+  tiempoInvertido Int?
+  costo       Float?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  responsableId Int
+  responsable   User      @relation(fields: [responsableId], references: [id])
+  loteId        Int?
+  lote          Lote?     @relation(fields: [loteId], references: [id])
+  cultivoId     Int?
+  cultivo       Cultivo?  @relation(fields: [cultivoId], references: [id])
+  fincaId       Int?
+  finca         Finca?    @relation(fields: [fincaId], references: [id])
+
+  evidencias     Evidencia[]
+  productosUtilizados ActividadProducto[]
+
+  @@index([estado])
+  @@index([responsableId])
+  @@map("actividades_seguimiento")
+}
+
+model Evidencia {
+  id          Int      @id @default(autoincrement())
+  url         String
+  tipo        String   @default("imagen")
+  descripcion String?
+  createdAt   DateTime @default(now())
+
+  actividadId Int
+  actividad   ActividadSeguimiento @relation(fields: [actividadId], references: [id], onDelete: Cascade)
+
+  @@map("evidencias")
+}
+
+model ActividadProducto {
+  id          Int   @id @default(autoincrement())
+  cantidad    Float
+  createdAt   DateTime @default(now())
+
+  actividadId Int
+  actividad   ActividadSeguimiento @relation(fields: [actividadId], references: [id], onDelete: Cascade)
+  productoId  Int
+  producto    Producto @relation(fields: [productoId], references: [id])
+
+  @@map("actividades_productos")
+}
+
+// ─── Finanzas ────────────────────────────────────────
+
+model Caja {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  saldoActual Float    @default(0)
+  descripcion String?
+  activo      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  movimientos MovimientoCaja[]
+
+  @@map("cajas")
+}
+
+model MovimientoCaja {
+  id          Int                @id @default(autoincrement())
+  tipo        TipoMovimientoCaja
+  monto       Float
+  concepto    String
+  referencia  String?
+  fecha       DateTime           @default(now())
+  createdAt   DateTime           @default(now())
+
+  cajaId Int
+  caja   Caja @relation(fields: [cajaId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  @@index([cajaId, fecha])
+  @@map("movimientos_caja")
+}
+
+model FlujoEfectivo {
+  id          Int      @id @default(autoincrement())
+  tipo        String
+  categoria   String?
+  monto       Float
+  descripcion String?
+  fecha       DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  @@index([fecha])
+  @@map("flujo_efectivo")
+}
+
+model Presupuesto {
+  id          Int                @id @default(autoincrement())
+  nombre      String
+  descripcion String?
+  montoTotal  Float
+  montoEjecutado Float           @default(0)
+  periodoInicio DateTime
+  periodoFin   DateTime
+  estado      EstadoPresupuesto  @default(BORRADOR)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  fincaId Int?
+  finca   Finca? @relation(fields: [fincaId], references: [id])
+
+  partidas PresupuestoPartida[]
+
+  @@map("presupuestos")
+}
+
+model PresupuestoPartida {
+  id          Int      @id @default(autoincrement())
+  concepto    String
+  montoPrevisto Float
+  montoEjecutado Float  @default(0)
+  categoria   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  presupuestoId Int
+  presupuesto   Presupuesto @relation(fields: [presupuestoId], references: [id], onDelete: Cascade)
+
+  @@map("presupuestos_partidas")
+}
+
+// ─── Notificaciones ──────────────────────────────────
+
+model Notificacion {
+  id         Int              @id @default(autoincrement())
+  titulo     String
+  mensaje    String?
+  tipo       TipoNotificacion
+  leida      Boolean          @default(false)
+  link       String?
+  createdAt  DateTime         @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  recordatorioId Int?
+  recordatorio   Recordatorio? @relation(fields: [recordatorioId], references: [id])
+
+  @@index([userId, leida])
+  @@index([createdAt])
+  @@map("notificaciones")
+}
+
+// ─── Existing Models (mantained) ─────────────────────
+
 model Finca {
   id          Int      @id @default(autoincrement())
   nombre      String
   ubicacion   String?
   hectareas   Float?
   descripcion String?
+  propietario String?
+  logo        String?
+  moneda      String   @default("COP")
   activo      Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -99,6 +785,10 @@ model Finca {
   user    User  @relation(fields: [userId], references: [id])
   lotes   Lote[]
   gastos  Gasto[]
+  temporadas Temporada[]
+  eventosCalendario EventoCalendario[]
+  presupuestos Presupuesto[]
+  actividadesSeg ActividadSeguimiento[]
 
   @@map("fincas")
 }
@@ -118,6 +808,11 @@ model Lote {
   bitacoras Bitacora[]
   jornales  Jornal[]
   gastos    Gasto[]
+  rendimientos RendimientoLote[]
+  produccionHistorial ProduccionHistorial[]
+  actividadesAsignadas ActividadAsignada[]
+  eventosCalendario EventoCalendario[]
+  actividadesSeg ActividadSeguimiento[]
 
   @@map("lotes")
 }
@@ -144,6 +839,12 @@ model Cultivo {
   lote      Lote        @relation(fields: [loteId], references: [id])
   gastos    Gasto[]
   bitacoras Bitacora[]
+  jornales  Jornal[]
+  produccionHistorial ProduccionHistorial[]
+  rendimientos RendimientoCultivo[]
+  actividadesAsignadas ActividadAsignada[]
+  eventosCalendario EventoCalendario[]
+  actividadesSeg ActividadSeguimiento[]
 
   @@map("cultivos")
 }
@@ -173,46 +874,10 @@ model Proveedor {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  gastos Gasto[]
+  gastos  Gasto[]
+  compras Compra[]
 
   @@map("proveedores")
-}
-
-model Producto {
-  id             Int      @id @default(autoincrement())
-  nombre         String
-  descripcion    String?
-  categoria      String?
-  unidadMedida   String   @default("unidad")
-  stockActual    Float    @default(0)
-  stockMinimo    Float    @default(0)
-  precioUnitario Float?
-  activo         Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  movimientos   MovimientoInventario[]
-  detalleVentas DetalleVenta[]
-  bitacoras     Bitacora[]
-
-  @@map("productos")
-}
-
-model MovimientoInventario {
-  id        Int      @id @default(autoincrement())
-  tipo      String
-  cantidad  Float
-  motivo    String?
-  fecha     DateTime @default(now())
-  createdAt DateTime @default(now())
-
-  productoId Int
-  producto   Producto @relation(fields: [productoId], references: [id])
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id])
-
-  @@index([productoId, fecha])
-  @@map("movimientos_inventario")
 }
 
 model Venta {
@@ -271,41 +936,6 @@ model Gasto {
   @@index([fincaId])
   @@index([loteId])
   @@map("gastos")
-}
-
-model Trabajador {
-  id          Int      @id @default(autoincrement())
-  nombre      String
-  telefono    String?
-  direccion   String?
-  tipo        String   @default("temporal")
-  salarioBase Float?
-  activo      Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  jornales Jornal[]
-
-  @@map("trabajadores")
-}
-
-model Jornal {
-  id          Int      @id @default(autoincrement())
-  fecha       DateTime
-  horas       Float?
-  tarea       String?
-  montoPagado Float?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  trabajadorId Int
-  trabajador   Trabajador @relation(fields: [trabajadorId], references: [id])
-  loteId       Int
-  lote         Lote       @relation(fields: [loteId], references: [id])
-
-  @@index([loteId, fecha])
-  @@index([trabajadorId])
-  @@map("jornales")
 }
 
 model Bitacora {

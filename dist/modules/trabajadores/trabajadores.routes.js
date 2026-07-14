@@ -40,6 +40,7 @@ const validate_middleware_1 = require("../../middleware/validate.middleware");
 const trabajadores_schema_1 = require("./trabajadores.schema");
 const router = (0, express_1.Router)();
 router.use(auth_middleware_1.authenticate);
+router.get("/search", trabajadoresController.search);
 router.get("/", trabajadoresController.findAll);
 router.get("/:id", trabajadoresController.findById);
 router.post("/", (0, validate_middleware_1.validate)(trabajadores_schema_1.createTrabajadorSchema), trabajadoresController.create);
