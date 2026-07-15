@@ -43,17 +43,18 @@ import { errorHandler } from "./middleware/error.middleware"
 
 const app = express()
 
+const corsOptions = {
+  origin: env.CORS_ORIGIN === "*" ? true : env.CORS_ORIGIN,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}
+
+app.use(cors(corsOptions))
+app.options("*", cors(corsOptions))
 app.use(helmet())
-app.use(
-  cors({
-    origin: env.CORS_ORIGIN === "*" ? true : env.CORS_ORIGIN,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-    credentials: true,
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  })
-)
 app.use(morgan("dev"))
 app.use(express.json({ limit: "50mb" }))
 
