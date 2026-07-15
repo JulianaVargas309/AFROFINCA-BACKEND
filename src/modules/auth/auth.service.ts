@@ -45,12 +45,16 @@ export async function registerUser(input: RegisterInput) {
       nombre: input.documento,
       documento: input.documento,
       password,
+      correo: input.correo || null,
+      telefono: input.telefono || null,
       rol: input.rol,
     },
     select: {
       id: true,
       nombre: true,
       documento: true,
+      correo: true,
+      telefono: true,
       rol: true,
       activo: true,
       createdAt: true,
@@ -80,6 +84,11 @@ export async function loginUser(input: LoginInput) {
     throw new AppError("Credenciales inválidas", 401)
   }
 
+  await prisma.user.update({
+    where: { id: user.id },
+    data: { ultimoAcceso: new Date() },
+  })
+
   const accessToken = generateAccessToken(user)
   const refreshToken = await generateRefreshToken(user.id)
 
@@ -88,7 +97,12 @@ export async function loginUser(input: LoginInput) {
       id: user.id,
       nombre: user.nombre,
       documento: user.documento,
+      correo: user.correo,
+      telefono: user.telefono,
+      ultimoAcceso: new Date().toISOString(),
       rol: user.rol,
+      activo: user.activo,
+      createdAt: user.createdAt,
     },
     accessToken,
     refreshToken,

@@ -2,7 +2,9 @@ import { z } from "zod"
 
 export const registerSchema = z.object({
   documento: z.string().min(6).max(12),
-  rol: z.enum(["ADMIN", "FAMILIAR", "CONSULTA"]).optional().default("FAMILIAR"),
+  correo: z.string().email().optional().or(z.literal("")),
+  telefono: z.string().max(20).optional(),
+  rol: z.enum(["ADMIN", "FAMILIAR", "TRABAJADOR", "CONSULTA"]).optional().default("FAMILIAR"),
 })
 
 export const loginSchema = z.object({

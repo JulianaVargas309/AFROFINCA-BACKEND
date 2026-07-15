@@ -4,7 +4,9 @@ export const createUserSchema = z.object({
   nombre: z.string().min(2).max(100).optional(),
   documento: z.string().min(1),
   password: z.string().min(6).max(100),
-  rol: z.enum(["ADMIN", "FAMILIAR", "CONSULTA"]).default("FAMILIAR"),
+  correo: z.string().email().optional().or(z.literal("")),
+  telefono: z.string().max(20).optional(),
+  rol: z.enum(["ADMIN", "FAMILIAR", "TRABAJADOR", "CONSULTA"]).default("FAMILIAR"),
 })
 
 export const updateUserSchema = z.object({
@@ -23,7 +25,7 @@ export const changePasswordSchema = z.object({
 })
 
 export const changeRolSchema = z.object({
-  rol: z.enum(["ADMIN", "FAMILIAR", "CONSULTA"]),
+  rol: z.enum(["ADMIN", "FAMILIAR", "TRABAJADOR", "CONSULTA"]),
   roleId: z.number().int().positive().optional(),
 })
 

@@ -1,12 +1,14 @@
 export enum Rol {
   ADMIN = "ADMIN",
   FAMILIAR = "FAMILIAR",
+  TRABAJADOR = "TRABAJADOR",
   CONSULTA = "CONSULTA",
 }
 
 export const ROLES_HIERARCHY: Record<Rol, number> = {
-  [Rol.ADMIN]: 3,
-  [Rol.FAMILIAR]: 2,
+  [Rol.ADMIN]: 4,
+  [Rol.FAMILIAR]: 3,
+  [Rol.TRABAJADOR]: 2,
   [Rol.CONSULTA]: 1,
 }
 
