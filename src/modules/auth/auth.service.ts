@@ -84,9 +84,12 @@ export async function loginUser(input: LoginInput) {
     throw new AppError("Credenciales inválidas", 401)
   }
 
+  // Opción A: actualizar y devolver el momento actual
+  const ahora = new Date()
+
   await prisma.user.update({
     where: { id: user.id },
-    data: { ultimoAcceso: new Date() },
+    data: { ultimoAcceso: ahora },
   })
 
   const accessToken = generateAccessToken(user)
@@ -99,7 +102,7 @@ export async function loginUser(input: LoginInput) {
       documento: user.documento,
       correo: user.correo,
       telefono: user.telefono,
-      ultimoAcceso: new Date().toISOString(),
+      ultimoAcceso: ahora.toISOString(),
       rol: user.rol,
       activo: user.activo,
       createdAt: user.createdAt,
@@ -139,7 +142,12 @@ export async function refreshUserToken(refreshToken: string) {
       id: stored.user.id,
       nombre: stored.user.nombre,
       documento: stored.user.documento,
+      correo: stored.user.correo,
+      telefono: stored.user.telefono,
+      ultimoAcceso: stored.user.ultimoAcceso?.toISOString() ?? null,
       rol: stored.user.rol,
+      activo: stored.user.activo,
+      createdAt: stored.user.createdAt,
     },
     accessToken,
     refreshToken: newRefreshToken,
